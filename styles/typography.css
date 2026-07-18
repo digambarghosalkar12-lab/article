@@ -1,0 +1,190 @@
+.h0 {
+  font-size: calc(64 * 100vw / var(--page-width));
+  letter-spacing: calc(2 * 100vw / var(--page-width));
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+@media only screen and (min-width: 768px) {
+  .h0 {
+    font-size: calc(140 * 100vw / var(--page-width));
+  }
+}
+
+.h1 {
+  font-size: calc(46 * 100vw / var(--page-width));
+  letter-spacing: calc(1 * 100vw / var(--page-width));
+  line-height: 0.87;
+  text-transform: uppercase;
+}
+
+@media only screen and (min-width: 768px) {
+  .h1 {
+    font-size: calc(116 * 100vw / var(--page-width));
+    letter-spacing: calc(2 * 100vw / var(--page-width));
+    line-height: 0.77;
+  }
+}
+
+.h2 {
+  font-size: calc(34 * 100vw / var(--page-width));
+  letter-spacing: calc(0.5 * 100vw / var(--page-width));
+  line-height: 0.88;
+  text-transform: uppercase;
+}
+
+@media only screen and (min-width: 768px) {
+  .h2 {
+    font-size: calc(76 * 100vw / var(--page-width));
+    line-height: 0.84;
+  }
+}
+
+.h3 {
+  font-size: calc(18 * 100vw / var(--page-width));
+  letter-spacing: 0;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+@media only screen and (min-width: 768px) {
+  .h3 {
+    font-size: calc(24 * 100vw / var(--page-width));
+    line-height: 1.08;
+  }
+}
+
+.t0 {
+  font-size: calc(26 * 100vw / var(--page-width));
+  line-height: 0.85;
+  text-transform: uppercase;
+}
+
+@media only screen and (min-width: 768px) {
+  .t0 {
+    font-size: calc(46 * 100vw / var(--page-width));
+    line-height: 0.82;
+  }
+}
+
+.t1 {
+  font-family: 'RomieMediumItalic';
+  font-size: calc(24 * 100vw / var(--page-width));
+  letter-spacing: 0;
+  line-height: 1.1667;
+}
+
+@media only screen and (min-width: 768px) {
+  .t1 {
+    font-size: calc(32 * 100vw / var(--page-width));
+    line-height: 1.25;
+  }
+}
+
+.t2 {
+  font-family: 'RomieMediumItalic';
+  font-size: calc(16 * 100vw / var(--page-width));
+  letter-spacing: 0;
+  line-height: 1.5;
+}
+
+@media only screen and (min-width: 768px) {
+  .t2 {
+    font-size: calc(20 * 100vw / var(--page-width));
+  }
+}
+
+.t3 {
+  font-size: calc(16 * 100vw / var(--page-width));
+  letter-spacing: 0;
+  line-height: 1.25;
+}
+
+@media only screen and (min-width: 768px) {
+  .t3 {
+    font-size: calc(20 * 100vw / var(--page-width));
+    line-height: 1.4;
+  }
+}
+
+.t4 {
+  font-size: calc(14 * 100vw / var(--page-width));
+  letter-spacing: calc(1.2 * 100vw / var(--page-width));
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+@media only screen and (min-width: 768px) {
+  .t4 {
+    font-size: calc(18 * 100vw / var(--page-width));
+    letter-spacing: calc(1.8 * 100vw / var(--page-width));
+  }
+}
+
+/**
+ * Not specified in the style guide but found in designs
+ */
+
+.t5 {
+  font-size: calc(18 * 100vw / var(--page-width));
+  letter-spacing: 0;
+  line-height: 0.7;
+}
+
+@media only screen and (min-width: 768px) {
+  .t5 {
+    font-size: calc(20 * 100vw / var(--page-width));
+    line-height: 1.25;
+  }
+}
+
+.t6 {
+  font-family: 'RomieMediumItalic';
+  font-size: calc(24 * 100vw / var(--page-width));
+  letter-spacing: 0;
+  line-height: 1.1667;
+}
+
+@media only screen and (min-width: 768px) {
+  .t6 {
+    font-size: calc(24 * 100vw / var(--page-width));
+  }
+}
+
+.t7 {
+  font-size: calc(13 * 100vw / var(--page-width));
+  letter-spacing: 0;
+  line-height: 0.7;
+  text-transform: uppercase;
+}
+
+@media only screen and (min-width: 768px) {
+  .t7 {
+    font-size: calc(24 * 100vw / var(--page-width));
+    line-height: 1;
+  }
+}
+
+.t8 {
+  font-size: calc(14 * 100vw / var(--page-width));
+  letter-spacing: 0;
+  line-height: 1.2;
+}
+
+@media only screen and (min-width: 768px) {
+  .t8 {
+    font-size: calc(14 * 100vw / var(--page-width));
+  }
+}
+
+.t9 {
+  font-size: calc(30 * 100vw / var(--page-width));
+  letter-spacing: 0;
+  line-height: 0.93;
+}
+
+@media only screen and (min-width: 768px) {
+  .t9 {
+    font-size: calc(30 * 100vw / var(--page-width));
+  }
+}

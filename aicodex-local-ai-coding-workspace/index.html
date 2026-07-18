@@ -1,0 +1,463 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Building a Local Codex-Like AI Coding Workspace on Mac | Digambar Ghosalkar</title>
+  <meta name="description" content="A practical article on building aicodex: a local Codex-like AI coding workspace for Mac using Ollama, Aider, Open WebUI, smart routing, safe MCP tools, Git hygiene, and project memory.">
+  <meta name="author" content="Digambar Ghosalkar">
+  <meta name="robots" content="index,follow">
+  <meta name="keywords" content="aicodex, local AI coding workspace, Codex alternative, Ollama, Aider, Open WebUI, MCP tools, Mac AI coding, local LLM coding agent">
+  <link rel="canonical" href="https://article.digambarghosalkar.com/aicodex-local-ai-coding-workspace/">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Digambar Ghosalkar">
+  <meta property="og:title" content="Building a Local Codex-Like AI Coding Workspace on Mac">
+  <meta property="og:description" content="How aicodex brings Ollama, Aider, Open WebUI, smart routing, safe MCP tools, Git hygiene, and project memory into one local Mac workflow.">
+  <meta property="og:url" content="https://article.digambarghosalkar.com/aicodex-local-ai-coding-workspace/">
+  <meta property="og:image" content="https://article.digambarghosalkar.com/assets/articles/covers/aicodex-local-ai-workspace.svg">
+  <meta property="og:image:width" content="900">
+  <meta property="og:image:height" content="900">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Building a Local Codex-Like AI Coding Workspace on Mac">
+  <meta name="twitter:description" content="A practical local AI coding workflow using Ollama, Aider, Open WebUI, smart routing, MCP tools, Git hygiene, and project memory.">
+  <meta name="twitter:image" content="https://article.digambarghosalkar.com/assets/articles/covers/aicodex-local-ai-workspace.svg">
+  <meta name="theme-color" content="#f7f5ef">
+  <link rel="icon" type="image/svg+xml" href="../assets/icon.svg">
+  <link rel="stylesheet" href="../styles/colors.css">
+  <link rel="stylesheet" href="../styles/fonts.css">
+  <link rel="stylesheet" href="../styles/typography.css">
+  <link rel="stylesheet" href="../styles/globals.css">
+  <style>
+    body {
+      background: #f7f5ef;
+      color: var(--color-dark);
+      min-height: 100vh;
+    }
+
+    .article-page {
+      box-sizing: border-box;
+      min-height: 100vh;
+      padding: calc(40 * 100vw / var(--page-width));
+    }
+
+    .article-nav {
+      align-items: center;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: calc(90 * 100vw / var(--page-width));
+    }
+
+    .article-nav a,
+    .article-back {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .article-repo-link {
+      align-items: center;
+      border: 1px solid rgba(8, 16, 18, 0.22);
+      color: var(--color-dark);
+      display: inline-flex;
+      gap: 0.55em;
+      justify-self: start;
+      padding: 0.72em 0.9em;
+      text-decoration: none;
+      transition:
+        border-color 0.2s ease,
+        transform 0.2s ease;
+    }
+
+    .article-repo-link:hover {
+      border-color: rgba(8, 16, 18, 0.64);
+      transform: translateY(-2px);
+    }
+
+    .article-repo-link svg {
+      display: block;
+      height: 1em;
+      width: 1em;
+    }
+
+    .article-hero {
+      display: grid;
+      gap: calc(32 * 100vw / var(--page-width));
+    }
+
+    .article-label,
+    .article-meta,
+    .article-section-label {
+      color: #6d786f;
+      text-transform: uppercase;
+    }
+
+    .article-title,
+    .article-lede,
+    .article-section h2,
+    .article-section p,
+    .article-section ul,
+    .article-section pre,
+    .article-figure {
+      margin: 0;
+    }
+
+    .article-title {
+      max-width: calc(1050 * 100vw / var(--page-width));
+    }
+
+    .article-lede {
+      max-width: calc(850 * 100vw / var(--page-width));
+    }
+
+    .article-cover {
+      aspect-ratio: 1280 / 420;
+      background: transparent;
+      display: block;
+      margin-top: calc(54 * 100vw / var(--page-width));
+      overflow: hidden;
+      width: 100%;
+    }
+
+    .article-cover img,
+    .article-figure img {
+      display: block;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+      width: 100%;
+    }
+
+    .article-layout {
+      display: grid;
+      gap: calc(60 * 100vw / var(--page-width));
+      margin-top: calc(80 * 100vw / var(--page-width));
+    }
+
+    .article-aside {
+      border-top: 1px solid rgba(8, 16, 18, 0.22);
+      display: grid;
+      gap: calc(18 * 100vw / var(--page-width));
+      padding-top: calc(20 * 100vw / var(--page-width));
+    }
+
+    .article-aside dl {
+      display: grid;
+      gap: calc(14 * 100vw / var(--page-width));
+      margin: 0;
+    }
+
+    .article-aside div {
+      border-top: 1px solid rgba(8, 16, 18, 0.12);
+      display: grid;
+      gap: calc(6 * 100vw / var(--page-width));
+      padding-top: calc(14 * 100vw / var(--page-width));
+    }
+
+    .article-aside dt {
+      color: #6d786f;
+      text-transform: uppercase;
+    }
+
+    .article-aside dd {
+      margin: 0;
+    }
+
+    .article-content {
+      display: grid;
+      gap: calc(56 * 100vw / var(--page-width));
+    }
+
+    .article-section {
+      border-top: 1px solid rgba(8, 16, 18, 0.22);
+      display: grid;
+      gap: calc(20 * 100vw / var(--page-width));
+      padding-top: calc(28 * 100vw / var(--page-width));
+    }
+
+    .article-section p,
+    .article-section li {
+      color: #3b4642;
+    }
+
+    .article-section ul {
+      display: grid;
+      gap: calc(12 * 100vw / var(--page-width));
+      list-style: none;
+      padding: 0;
+    }
+
+    .article-section li {
+      border-top: 1px solid rgba(8, 16, 18, 0.12);
+      padding-top: calc(12 * 100vw / var(--page-width));
+    }
+
+    .article-code {
+      background: #081012;
+      color: #f7f5ef;
+      overflow-x: auto;
+      padding: calc(22 * 100vw / var(--page-width));
+    }
+
+    .article-code code {
+      font-family: Menlo, Consolas, monospace;
+      font-size: calc(14 * 100vw / var(--page-width));
+      line-height: 1.6;
+    }
+
+    .article-figure {
+      background: transparent;
+      overflow: hidden;
+    }
+
+    .article-figure.architecture {
+      aspect-ratio: 1280 / 720;
+    }
+
+    .article-callout {
+      background: #e9e4d9;
+      display: grid;
+      gap: calc(12 * 100vw / var(--page-width));
+      padding: calc(24 * 100vw / var(--page-width));
+    }
+
+    .article-footer {
+      border-top: 1px solid rgba(8, 16, 18, 0.22);
+      margin-top: calc(70 * 100vw / var(--page-width));
+      padding-top: calc(26 * 100vw / var(--page-width));
+    }
+
+    @media only screen and (min-width: 768px) {
+      .article-page {
+        padding: calc(64 * 100vw / var(--page-width)) calc(136 * 100vw / var(--page-width));
+      }
+
+      .article-nav {
+        margin-bottom: calc(136 * 100vw / var(--page-width));
+      }
+
+      .article-layout {
+        grid-template-columns: minmax(220px, 0.34fr) minmax(0, 0.86fr);
+      }
+
+      .article-aside {
+        align-self: start;
+        position: sticky;
+        top: calc(42 * 100vw / var(--page-width));
+      }
+
+      .article-code code {
+        font-size: calc(15 * 100vw / var(--page-width));
+      }
+    }
+
+    @media only screen and (max-width: 767px) {
+      .article-page {
+        padding: 38px 22px;
+      }
+
+      .article-nav {
+        margin-bottom: 92px;
+      }
+
+      .article-cover {
+        aspect-ratio: 1 / 1;
+      }
+
+      .article-code {
+        padding: 18px;
+      }
+
+      .article-code code {
+        font-size: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="article-page">
+    <nav class="article-nav" aria-label="Article navigation">
+      <a class="t6 font-romie" href="https://digambarghosalkar.com/">articles</a>
+      <a class="t6 font-romie" href="https://digambarghosalkar.com/">home</a>
+    </nav>
+
+    <article>
+      <header class="article-hero">
+        <p class="label article-label">Local AI tooling</p>
+        <h1 class="h1 article-title">Building a Local Codex-Like AI Coding Workspace on Mac</h1>
+        <p class="t1 article-lede">
+          aicodex is a local-first AI coding command center for Mac. It combines
+          Ollama, Aider, Open WebUI, model routing, safe MCP tools, Git hygiene,
+          and project memory into one repeatable workflow.
+        </p>
+        <p class="t2 article-meta">Project article · Mac · Ollama · Aider · MCP · Project memory</p>
+        <a class="article-repo-link t2" href="https://github.com/digambarghosalkar12-lab/aicodex" rel="noopener noreferrer" target="_blank" aria-label="Open aicodex project on GitHub">
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56v-2.16c-3.2.7-3.87-1.38-3.87-1.38-.52-1.33-1.28-1.68-1.28-1.68-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.16 1.18A10.9 10.9 0 0 1 12 6.03c.98 0 1.96.13 2.88.39 2.19-1.49 3.15-1.18 3.15-1.18.63 1.58.24 2.75.12 3.04.74.8 1.18 1.82 1.18 3.08 0 4.41-2.69 5.39-5.25 5.67.42.36.79 1.07.79 2.16v3.16c0 .31.21.68.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/>
+          </svg>
+          View project on GitHub
+        </a>
+        <figure class="article-cover">
+          <img alt="aicodex banner showing a local Codex-like AI coding workspace for Mac" height="420" src="/assets/articles/covers/aicodex-banner.svg" width="1280">
+        </figure>
+      </header>
+
+      <div class="article-layout">
+        <aside class="article-aside">
+          <p class="label article-section-label">Article index</p>
+          <dl class="t2">
+            <div>
+              <dt>Purpose</dt>
+              <dd>Build a local Codex-like workflow without relying fully on a paid cloud coding agent.</dd>
+            </div>
+            <div>
+              <dt>Core stack</dt>
+              <dd>Ollama, Aider, Open WebUI, smart router, safe MCP, Git, and local project memory.</dd>
+            </div>
+            <div>
+              <dt>Best fit</dt>
+              <dd>Private repo work, local experiments, script generation, architecture review, and repeatable project workflows.</dd>
+            </div>
+          </dl>
+        </aside>
+
+        <div class="article-content">
+          <section class="article-section">
+            <p class="label article-section-label">01 · Why</p>
+            <h2 class="h2">Why build this locally?</h2>
+            <p class="t2">
+              Cloud coding agents are powerful, but they are not always the right fit for private experiments,
+              offline-friendly work, model-control testing, or projects where code should stay on your machine.
+              The question behind aicodex was simple: can a Mac run a practical Codex-like workflow locally?
+            </p>
+            <p class="t2">
+              The answer is not a perfect replacement for managed cloud agents. But it can become a very useful
+              local workspace where the project, models, rules, memory, and Git history remain under your control.
+            </p>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">02 · What it is</p>
+            <h2 class="h2">aicodex as a local command center</h2>
+            <p class="t2">
+              aicodex is a launcher and workflow wrapper. The main command, <code>aicodex run</code>, prepares
+              the selected project, starts the local AI services, opens a GUI, and can launch Aider for repo edits.
+            </p>
+            <ul class="t2">
+              <li><strong>Ollama</strong> runs local language and vision models.</li>
+              <li><strong>Aider</strong> acts as the repository editing agent with visible diffs.</li>
+              <li><strong>Open WebUI</strong> gives a browser-based chat interface.</li>
+              <li><strong>Smart Router</strong> selects a model based on the task type.</li>
+              <li><strong>Safe MCP tools</strong> expose controlled filesystem, Git, and shell access.</li>
+              <li><strong>Project memory</strong> keeps reusable context across sessions.</li>
+            </ul>
+          </section>
+
+          <figure class="article-figure architecture">
+            <img alt="aicodex architecture diagram showing Open WebUI, Aider, smart router, Ollama models, safe MCP tools, and project memory" height="720" src="/assets/articles/covers/aicodex-architecture.svg" width="1280">
+          </figure>
+
+          <section class="article-section">
+            <p class="label article-section-label">03 · Architecture</p>
+            <h2 class="h2">The workflow behind the launcher</h2>
+            <p class="t2">
+              When the setup is working, aicodex creates a predictable local loop: validate the tool, select a
+              project, check hygiene, restore or generate memory, start Ollama, start the router, open the GUI,
+              and optionally launch Aider.
+            </p>
+            <pre class="article-code"><code>aicodex run
+↓
+validate tool setup
+↓
+select project
+↓
+project hygiene + memory restore
+↓
+start Ollama + smart router + Open WebUI
+↓
+open project workspace
+↓
+archive memory on exit</code></pre>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">04 · Model routing</p>
+            <h2 class="h2">One model should not do every job</h2>
+            <p class="t2">
+              The router lets the GUI talk to a single local endpoint while still choosing different models for
+              different work. Code generation can go to a coding model, architecture review can go to a reasoning
+              model, screenshots can go to a vision model, and smaller jobs can use lighter fallbacks.
+            </p>
+            <pre class="article-code"><code>Open WebUI
+Base URL: http://127.0.0.1:5050/v1
+Model: smart-auto
+
+Code task      → Qwen coder model
+Architecture   → reasoning model
+Screenshot     → vision model
+Memory search  → embedding model</code></pre>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">05 · Safety</p>
+            <h2 class="h2">Project hygiene before AI touches code</h2>
+            <p class="t2">
+              The most important design choice is not the model. It is the safety wrapper around project work.
+              aicodex checks whether the project is a Git repo, whether there is a baseline commit, whether the
+              working tree is dirty, whether memory files exist, and whether obvious secret files are present.
+            </p>
+            <ul class="t2">
+              <li>Tool issues can trigger repair or reset of the tool itself.</li>
+              <li>Project issues create hygiene prompts instead of resetting the tool.</li>
+              <li>Safe MCP commands are allowlisted and dangerous commands are blocked.</li>
+              <li>Memory archives stay local and can be restored when reopening a project.</li>
+            </ul>
+            <div class="article-callout">
+              <p class="label article-section-label">Design note</p>
+              <p class="t2">
+                This is not a perfect sandbox, but it is a meaningful improvement over handing an AI unrestricted
+                shell access. The system is designed around local ownership, Git visibility, and narrower tool access.
+              </p>
+            </div>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">06 · Daily use</p>
+            <h2 class="h2">A practical local AI coding loop</h2>
+            <p class="t2">
+              The normal flow is intentionally simple: start the launcher, use the GUI for thinking and review,
+              use Aider for actual repo edits, inspect the diff, run tests, commit, and let project memory archive
+              when the session ends.
+            </p>
+            <pre class="article-code"><code>aicodex mode fast
+aicodex pull-models fast
+aicodex run
+
+# later, when stable
+aicodex kill
+aicodex mode balanced
+aicodex pull-models balanced
+aicodex run</code></pre>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">07 · What it does not replace</p>
+            <h2 class="h2">Local-first has tradeoffs</h2>
+            <p class="t2">
+              aicodex does not fully replace managed cloud coding agents, cloud sandboxes, enterprise workspace
+              controls, or polished multi-agent orchestration. It is strongest when the goal is private local coding,
+              learning how coding agents work, generating scripts, reviewing architecture, editing repos, and building
+              repeatable project workflows.
+            </p>
+            <p class="t2">
+              The value is control: your Mac, your models, your project, your Git history, and your local memory.
+            </p>
+          </section>
+        </div>
+      </div>
+
+      <footer class="article-footer">
+        <a class="article-back t1 font-romie" href="https://digambarghosalkar.com/">Back to articles</a>
+      </footer>
+    </article>
+  </main>
+</body>
+</html>

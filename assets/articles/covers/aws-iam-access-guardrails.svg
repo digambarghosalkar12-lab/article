@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="900" viewBox="0 0 900 900" role="img" aria-labelledby="title desc">
+  <title id="title">AWS IAM Access Guardrails</title>
+  <desc id="desc">Abstract square article cover with red carpet access lanes and identity checkpoints.</desc>
+  <rect width="900" height="900" fill="#08090b"/>
+  <path d="M330 900 L420 130 L480 130 L570 900 Z" fill="#80121f"/>
+  <path d="M180 705 H720" stroke="#d1a05f" stroke-width="10" stroke-linecap="round"/>
+  <path d="M220 575 H680" stroke="#d1a05f" stroke-width="8" stroke-linecap="round" opacity=".72"/>
+  <circle cx="450" cy="210" r="66" fill="#f7f5ef"/>
+  <path d="M450 170 v82 M409 211 h82" stroke="#08090b" stroke-width="18" stroke-linecap="round"/>
+  <circle cx="250" cy="705" r="32" fill="#f7f5ef"/>
+  <circle cx="650" cy="705" r="32" fill="#f7f5ef"/>
+  <text x="92" y="104" fill="#f7f5ef" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="700">AWS IAM</text>
+  <text x="92" y="842" fill="#f7f5ef" font-family="Arial, Helvetica, sans-serif" font-size="50" font-weight="700">ACCESS GUARDRAILS</text>
+</svg>

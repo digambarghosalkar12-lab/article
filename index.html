@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Articles | Digambar Ghosalkar</title>
+    <meta name="description" content="Index of articles from Digambar Ghosalkar on cloud delivery, endpoint operations, migration planning, IAM, security, and practical infrastructure decisions.">
+    <meta name="author" content="Digambar Ghosalkar">
+    <meta name="robots" content="index,follow">
+    <meta name="keywords" content="Digambar Ghosalkar, technical project manager, EUC architect, cloud infrastructure, AWS, IAM, Intune, Jamf, Microsoft Defender, endpoint security, migration leadership">
+    <link rel="canonical" href="https://article.digambarghosalkar.com/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Digambar Ghosalkar">
+    <meta property="og:title" content="Articles | Digambar Ghosalkar">
+    <meta property="og:description" content="Index of articles from Digambar Ghosalkar on cloud delivery, endpoint operations, migration planning, IAM, security, and practical infrastructure decisions.">
+    <meta property="og:url" content="https://article.digambarghosalkar.com/">
+    <meta property="og:image" content="https://article.digambarghosalkar.com/assets/seo/og-image.svg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Articles | Digambar Ghosalkar">
+    <meta name="twitter:description" content="Index of articles from Digambar Ghosalkar on cloud delivery, endpoint operations, migration planning, IAM, security, and practical infrastructure decisions.">
+    <meta name="twitter:image" content="https://article.digambarghosalkar.com/assets/seo/og-image.svg">
+    <meta name="theme-color" content="#f7f5ef">
+    <link rel="icon" type="image/svg+xml" href="assets/icon.svg">
+    <link rel="stylesheet" href="styles/colors.css">
+    <link rel="stylesheet" href="styles/fonts.css">
+    <link rel="stylesheet" href="styles/typography.css">
+    <link rel="stylesheet" href="styles/globals.css">
+    <style>
+      body {
+        background: #f7f5ef;
+        color: var(--color-dark);
+        min-height: 100vh;
+      }
+
+      .articles-page {
+        box-sizing: border-box;
+        min-height: 100vh;
+        padding: calc(40 * 100vw / var(--page-width));
+      }
+
+      .articles-nav {
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: calc(108 * 100vw / var(--page-width));
+      }
+
+      .articles-nav a,
+      .article-card {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .articles-header {
+        display: grid;
+        gap: calc(22 * 100vw / var(--page-width));
+        max-width: calc(880 * 100vw / var(--page-width));
+      }
+
+      .articles-header h1,
+      .articles-header p {
+        margin: 0;
+      }
+
+      .articles-label,
+      .article-meta {
+        color: #6d786f;
+        text-transform: uppercase;
+      }
+
+      .articles-grid {
+        display: grid;
+        gap: calc(28 * 100vw / var(--page-width));
+        list-style: none;
+        margin: calc(88 * 100vw / var(--page-width)) 0 0;
+        padding: 0;
+      }
+
+      .article-card {
+        border-top: 1px solid rgba(8, 16, 18, 0.22);
+        display: grid;
+        gap: calc(18 * 100vw / var(--page-width));
+        padding: calc(24 * 100vw / var(--page-width)) 0 calc(32 * 100vw / var(--page-width));
+      }
+
+      .article-cover {
+        aspect-ratio: 1 / 1;
+        background: transparent;
+        display: block;
+        overflow: hidden;
+        width: 100%;
+      }
+
+      .article-cover img {
+        display: block;
+        height: 100%;
+        object-fit: contain;
+        object-position: center;
+        width: 100%;
+      }
+
+      .article-content {
+        display: grid;
+        gap: calc(12 * 100vw / var(--page-width));
+      }
+
+      .article-content h2,
+      .article-content p {
+        margin: 0;
+      }
+
+      .article-summary {
+        color: #6d786f;
+      }
+
+      .article-arrow {
+        border-top: 1px solid rgba(8, 16, 18, 0.16);
+        display: flex;
+        justify-content: space-between;
+        padding-top: calc(14 * 100vw / var(--page-width));
+      }
+
+      .article-arrow span:last-child {
+        font-family: 'RomieMediumItalic';
+      }
+
+      @media only screen and (min-width: 768px) {
+        .articles-page {
+          padding: calc(64 * 100vw / var(--page-width)) calc(136 * 100vw / var(--page-width));
+        }
+
+        .articles-nav {
+          margin-bottom: calc(156 * 100vw / var(--page-width));
+        }
+
+        .articles-grid {
+          gap: calc(42 * 100vw / var(--page-width));
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          margin-top: calc(116 * 100vw / var(--page-width));
+        }
+
+        .article-card {
+          transition:
+            border-color 0.24s ease,
+            transform 0.24s ease;
+        }
+
+        .article-card:hover {
+          border-color: rgba(8, 16, 18, 0.58);
+          transform: translateY(calc(-8 * 100vw / var(--page-width)));
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="articles-page">
+      <nav class="articles-nav" aria-label="Articles navigation">
+        <a class="t6 font-romie" href="/">articles</a>
+        <a class="t6 font-romie" href="https://digambarghosalkar.com/">portfolio</a>
+      </nav>
+
+      <section class="articles-header">
+        <p class="label articles-label">Index of articles</p>
+        <h1 class="h1">Articles</h1>
+        <p class="t1">
+          Notes on cloud delivery, endpoint operations, migration planning, IAM,
+          security, and the practical decisions behind secure infrastructure work.
+        </p>
+      </section>
+
+      <ul class="articles-grid" aria-label="Article index">
+        <li data-updated="2026-07-12">
+          <a class="article-card" href="jamf-script-uploader/">
+            <span class="article-cover">
+              <img alt="" height="900" src="assets/articles/covers/jamf-script-uploader.svg" width="900">
+            </span>
+            <span class="article-content">
+              <span class="label article-meta">Recently added · Jamf automation · Jul 12, 2026</span>
+              <h2 class="h3">Jamf Script Uploader: API-Safe Script Deployment for Jamf Pro</h2>
+              <p class="t2 article-summary">A macOS shell utility for uploading scripts to Jamf Pro with OAuth client credentials, validation, timestamped names, and safer secret handling.</p>
+              <span class="article-arrow t2"><span>Open article</span><span>→</span></span>
+            </span>
+          </a>
+        </li>
+        <li data-updated="2026-07-12">
+          <a class="article-card" href="ai-service-desk-copilot-snapshot-platform/">
+            <span class="article-cover">
+              <img alt="" height="900" src="assets/articles/covers/ai-service-desk-copilot-snapshot.svg" width="900">
+            </span>
+            <span class="article-content">
+              <span class="label article-meta">Recently added · AI service desk · Jul 12, 2026</span>
+              <h2 class="h3">AI Service Desk + Infrastructure Snapshot Platform</h2>
+              <p class="t2 article-summary">A Microsoft Azure starter architecture for a Copilot-powered Level 1 service desk that reads approved knowledge and normalized infrastructure snapshots.</p>
+              <span class="article-arrow t2"><span>Open article</span><span>→</span></span>
+            </span>
+          </a>
+        </li>
+        <li data-updated="2026-07-11">
+          <a class="article-card" href="jamf-pro-heal-self-healing-workflow/">
+            <span class="article-cover">
+              <img alt="" height="900" src="assets/articles/covers/jamf-pro-heal-self-healing.svg" width="900">
+            </span>
+            <span class="article-content">
+              <span class="label article-meta">Recently added · Mac management · Jul 11, 2026</span>
+              <h2 class="h3">JAMF Pro Heal: A Safer Self-Healing Workflow for Managed Macs</h2>
+              <p class="t2 article-summary">A production-style Jamf Pro self-heal design that separates network issues from local Jamf/MDM failures before asking users to approve repair.</p>
+              <span class="article-arrow t2"><span>Open article</span><span>→</span></span>
+            </span>
+          </a>
+        </li>
+        <li data-updated="2026-07-11">
+          <a class="article-card" href="aicodex-local-ai-coding-workspace/">
+            <span class="article-cover">
+              <img alt="" height="900" src="assets/articles/covers/aicodex-local-ai-workspace.svg" width="900">
+            </span>
+            <span class="article-content">
+              <span class="label article-meta">Recently added · Local AI tooling · Jul 11, 2026</span>
+              <h2 class="h3">Building a Local Codex-Like AI Coding Workspace on Mac</h2>
+              <p class="t2 article-summary">A practical look at aicodex: a local-first Mac setup using Ollama, Aider, Open WebUI, smart routing, safe MCP tools, Git hygiene, and project memory.</p>
+              <span class="article-arrow t2"><span>Open article</span><span>→</span></span>
+            </span>
+          </a>
+        </li>
+        <li data-updated="2026-07-10">
+          <a class="article-card" href="euc-migration-playbook/">
+            <span class="article-cover">
+              <img alt="" height="900" src="assets/articles/covers/euc-migration-playbook.svg" width="900">
+            </span>
+            <span class="article-content">
+              <span class="label article-meta">Coming soon · Draft index</span>
+              <h2 class="h3">EUC Migration Playbook</h2>
+              <p class="t2 article-summary">A practical index for planning device readiness, enrollment, communication, and support during enterprise EUC migration work.</p>
+              <span class="article-arrow t2"><span>Open article</span><span>→</span></span>
+            </span>
+          </a>
+        </li>
+        <li data-updated="2026-07-10">
+          <a class="article-card" href="aws-iam-access-guardrails/">
+            <span class="article-cover">
+              <img alt="" height="900" src="assets/articles/covers/aws-iam-access-guardrails.svg" width="900">
+            </span>
+            <span class="article-content">
+              <span class="label article-meta">Coming soon · Draft index</span>
+              <h2 class="h3">AWS IAM Access Guardrails</h2>
+              <p class="t2 article-summary">A short guide for thinking through least privilege, access reviews, SSO, SCIM, and identity controls in AWS environments.</p>
+              <span class="article-arrow t2"><span>Open article</span><span>→</span></span>
+            </span>
+          </a>
+        </li>
+        <li data-updated="2026-07-10">
+          <a class="article-card" href="defender-rollout-field-notes/">
+            <span class="article-cover">
+              <img alt="" height="900" src="assets/articles/covers/defender-rollout-field-notes.svg" width="900">
+            </span>
+            <span class="article-content">
+              <span class="label article-meta">Coming soon · Draft index</span>
+              <h2 class="h3">Defender Rollout Field Notes</h2>
+              <p class="t2 article-summary">Operational notes for deployment rings, exclusions, alert ownership, and the handover rhythm behind endpoint security rollout.</p>
+              <span class="article-arrow t2"><span>Open article</span><span>→</span></span>
+            </span>
+          </a>
+        </li>
+      </ul>
+    </main>
+  </body>
+</html>

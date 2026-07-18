@@ -1,0 +1,503 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI Service Desk + Infrastructure Snapshot Platform | Digambar Ghosalkar</title>
+  <meta name="description" content="A practical article on an Azure and Microsoft Copilot Studio starter architecture for an AI Level 1 service desk backed by infrastructure snapshots, Azure SQL history, and approved knowledge sources.">
+  <meta name="author" content="Digambar Ghosalkar">
+  <meta name="robots" content="index,follow">
+  <meta name="keywords" content="AI Service Desk, Microsoft Copilot Studio, Azure Functions, Azure SQL, infrastructure snapshot, ServiceNow, Jira, SharePoint, Intune, Jamf, AI support desk">
+  <link rel="canonical" href="https://article.digambarghosalkar.com/ai-service-desk-copilot-snapshot-platform/">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Digambar Ghosalkar">
+  <meta property="og:title" content="AI Service Desk + Infrastructure Snapshot Platform">
+  <meta property="og:description" content="A two-project Microsoft Azure architecture for a Copilot-powered Level 1 service desk backed by normalized infrastructure snapshots.">
+  <meta property="og:url" content="https://article.digambarghosalkar.com/ai-service-desk-copilot-snapshot-platform/">
+  <meta property="og:image" content="https://article.digambarghosalkar.com/assets/articles/covers/ai-service-desk-copilot-snapshot.svg">
+  <meta property="og:image:width" content="900">
+  <meta property="og:image:height" content="900">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="AI Service Desk + Infrastructure Snapshot Platform">
+  <meta name="twitter:description" content="A Copilot Studio and Azure starter architecture for support conversations, approved knowledge, and infrastructure snapshot evidence.">
+  <meta name="twitter:image" content="https://article.digambarghosalkar.com/assets/articles/covers/ai-service-desk-copilot-snapshot.svg">
+  <meta name="theme-color" content="#f7f5ef">
+  <link rel="icon" type="image/svg+xml" href="../assets/icon.svg">
+  <link rel="stylesheet" href="../styles/colors.css">
+  <link rel="stylesheet" href="../styles/fonts.css">
+  <link rel="stylesheet" href="../styles/typography.css">
+  <link rel="stylesheet" href="../styles/globals.css">
+  <style>
+    body {
+      background: #f7f5ef;
+      color: var(--color-dark);
+      min-height: 100vh;
+    }
+
+    .article-page {
+      box-sizing: border-box;
+      min-height: 100vh;
+      padding: calc(40 * 100vw / var(--page-width));
+    }
+
+    .article-nav {
+      align-items: center;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: calc(90 * 100vw / var(--page-width));
+    }
+
+    .article-nav a,
+    .article-back {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .article-repo-link {
+      align-items: center;
+      border: 1px solid rgba(8, 16, 18, 0.22);
+      color: var(--color-dark);
+      display: inline-flex;
+      gap: 0.55em;
+      justify-self: start;
+      padding: 0.72em 0.9em;
+      text-decoration: none;
+      transition:
+        border-color 0.2s ease,
+        transform 0.2s ease;
+    }
+
+    .article-repo-link:hover {
+      border-color: rgba(8, 16, 18, 0.64);
+      transform: translateY(-2px);
+    }
+
+    .article-repo-link svg {
+      display: block;
+      height: 1em;
+      width: 1em;
+    }
+
+    .article-hero {
+      display: grid;
+      gap: calc(32 * 100vw / var(--page-width));
+    }
+
+    .article-label,
+    .article-meta,
+    .article-section-label {
+      color: #6d786f;
+      text-transform: uppercase;
+    }
+
+    .article-title,
+    .article-lede,
+    .article-section h2,
+    .article-section p,
+    .article-section ul,
+    .article-section pre,
+    .article-figure {
+      margin: 0;
+    }
+
+    .article-title {
+      max-width: calc(1080 * 100vw / var(--page-width));
+    }
+
+    .article-lede {
+      max-width: calc(880 * 100vw / var(--page-width));
+    }
+
+    .article-cover,
+    .article-figure {
+      background: transparent;
+      display: block;
+      overflow: hidden;
+      width: 100%;
+    }
+
+    .article-cover {
+      aspect-ratio: 1 / 1;
+      margin-top: calc(42 * 100vw / var(--page-width));
+      max-width: calc(760 * 100vw / var(--page-width));
+    }
+
+    .article-cover img {
+      display: block;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+      width: 100%;
+    }
+
+    .article-layout {
+      display: grid;
+      gap: calc(60 * 100vw / var(--page-width));
+      margin-top: calc(80 * 100vw / var(--page-width));
+    }
+
+    .article-aside {
+      border-top: 1px solid rgba(8, 16, 18, 0.22);
+      display: grid;
+      gap: calc(18 * 100vw / var(--page-width));
+      padding-top: calc(20 * 100vw / var(--page-width));
+    }
+
+    .article-aside dl {
+      display: grid;
+      gap: calc(14 * 100vw / var(--page-width));
+      margin: 0;
+    }
+
+    .article-aside div {
+      border-top: 1px solid rgba(8, 16, 18, 0.12);
+      display: grid;
+      gap: calc(6 * 100vw / var(--page-width));
+      padding-top: calc(14 * 100vw / var(--page-width));
+    }
+
+    .article-aside dt {
+      color: #6d786f;
+      text-transform: uppercase;
+    }
+
+    .article-aside dd {
+      margin: 0;
+    }
+
+    .article-content {
+      display: grid;
+      gap: calc(56 * 100vw / var(--page-width));
+    }
+
+    .article-section {
+      border-top: 1px solid rgba(8, 16, 18, 0.22);
+      display: grid;
+      gap: calc(20 * 100vw / var(--page-width));
+      padding-top: calc(28 * 100vw / var(--page-width));
+    }
+
+    .article-section p,
+    .article-section li {
+      color: #3b4642;
+    }
+
+    .article-section ul {
+      display: grid;
+      gap: calc(12 * 100vw / var(--page-width));
+      list-style: none;
+      padding: 0;
+    }
+
+    .article-section li {
+      border-top: 1px solid rgba(8, 16, 18, 0.12);
+      padding-top: calc(12 * 100vw / var(--page-width));
+    }
+
+    .article-code {
+      background: #081012;
+      color: #f7f5ef;
+      overflow-x: auto;
+      padding: calc(22 * 100vw / var(--page-width));
+    }
+
+    .article-code code {
+      font-family: Menlo, Consolas, monospace;
+      font-size: calc(14 * 100vw / var(--page-width));
+      line-height: 1.6;
+    }
+
+    .article-diagram {
+      background: #081012;
+      color: #f7f5ef;
+      display: grid;
+      gap: calc(20 * 100vw / var(--page-width));
+      padding: calc(28 * 100vw / var(--page-width));
+    }
+
+    .diagram-row {
+      display: grid;
+      gap: calc(14 * 100vw / var(--page-width));
+    }
+
+    .diagram-node {
+      border: 1px solid rgba(247, 245, 239, 0.24);
+      display: grid;
+      gap: calc(8 * 100vw / var(--page-width));
+      padding: calc(16 * 100vw / var(--page-width));
+    }
+
+    .diagram-node strong {
+      color: #f7f5ef;
+      text-transform: uppercase;
+    }
+
+    .diagram-node span {
+      color: rgba(247, 245, 239, 0.72);
+    }
+
+    .article-callout {
+      background: #e9e4d9;
+      display: grid;
+      gap: calc(12 * 100vw / var(--page-width));
+      padding: calc(24 * 100vw / var(--page-width));
+    }
+
+    .article-footer {
+      border-top: 1px solid rgba(8, 16, 18, 0.22);
+      margin-top: calc(70 * 100vw / var(--page-width));
+      padding-top: calc(26 * 100vw / var(--page-width));
+    }
+
+    @media only screen and (min-width: 768px) {
+      .article-page {
+        padding: calc(64 * 100vw / var(--page-width)) calc(136 * 100vw / var(--page-width));
+      }
+
+      .article-nav {
+        margin-bottom: calc(136 * 100vw / var(--page-width));
+      }
+
+      .article-layout {
+        grid-template-columns: minmax(220px, 0.34fr) minmax(0, 0.86fr);
+      }
+
+      .article-aside {
+        align-self: start;
+        position: sticky;
+        top: calc(42 * 100vw / var(--page-width));
+      }
+
+      .diagram-row {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .article-code code {
+        font-size: calc(15 * 100vw / var(--page-width));
+      }
+    }
+
+    @media only screen and (max-width: 767px) {
+      .article-page {
+        padding: 38px 22px;
+      }
+
+      .article-nav {
+        margin-bottom: 92px;
+      }
+
+      .article-cover {
+        max-width: none;
+      }
+
+      .article-code {
+        padding: 18px;
+      }
+
+      .article-code code {
+        font-size: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="article-page">
+    <nav class="article-nav" aria-label="Article navigation">
+      <a class="t6 font-romie" href="https://digambarghosalkar.com/">articles</a>
+      <a class="t6 font-romie" href="https://digambarghosalkar.com/">home</a>
+    </nav>
+
+    <article>
+      <header class="article-hero">
+        <p class="label article-label">AI service desk</p>
+        <h1 class="h1 article-title">AI Service Desk + Infrastructure Snapshot Platform</h1>
+        <p class="t1 article-lede">
+          This project is a Microsoft Azure starter architecture for a configuration-aware Level 1 service desk.
+          The design keeps the Copilot-facing agent separate from the infrastructure collector, so the AI can use
+          approved evidence without holding every platform credential.
+        </p>
+        <p class="t2 article-meta">Project article · Microsoft Copilot Studio · Azure Functions · Azure SQL · Infra snapshots</p>
+        <a class="article-repo-link t2" href="https://github.com/digambarghosalkar12-lab/Ai-Service-Desk-Microsoft-Copilot-Sub-needed-" rel="noopener noreferrer" target="_blank" aria-label="Open AI Service Desk project on GitHub">
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56v-2.16c-3.2.7-3.87-1.38-3.87-1.38-.52-1.33-1.28-1.68-1.28-1.68-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.16 1.18A10.9 10.9 0 0 1 12 6.03c.98 0 1.96.13 2.88.39 2.19-1.49 3.15-1.18 3.15-1.18.63 1.58.24 2.75.12 3.04.74.8 1.18 1.82 1.18 3.08 0 4.41-2.69 5.39-5.25 5.67.42.36.79 1.07.79 2.16v3.16c0 .31.21.68.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/>
+          </svg>
+          View project on GitHub
+        </a>
+        <figure class="article-cover">
+          <img alt="AI Service Desk and Infrastructure Snapshot Platform square cover" height="900" src="/assets/articles/covers/ai-service-desk-copilot-snapshot.svg" width="900">
+        </figure>
+      </header>
+
+      <div class="article-layout">
+        <aside class="article-aside">
+          <p class="label article-section-label">Article index</p>
+          <dl class="t2">
+            <div>
+              <dt>Goal</dt>
+              <dd>Build an AI Level 1 service desk that can reason from approved knowledge and normalized infrastructure state.</dd>
+            </div>
+            <div>
+              <dt>Split</dt>
+              <dd>Project 1 handles Copilot and support conversation. Project 2 owns infrastructure snapshots and history.</dd>
+            </div>
+            <div>
+              <dt>Guardrail</dt>
+              <dd>The AI calls a controlled Infra Database API instead of directly holding credentials for Jamf, Intune, Defender, Qualys, and other platforms.</dd>
+            </div>
+          </dl>
+        </aside>
+
+        <div class="article-content">
+          <section class="article-section">
+            <p class="label article-section-label">01 · Intent</p>
+            <h2 class="h2">A support agent needs evidence, not direct keys to everything</h2>
+            <p class="t2">
+              The project starts with a practical service desk problem. A user might say, “My VPN is not working,”
+              but a useful answer needs more than generic troubleshooting. The agent may need approved knowledge,
+              device state, policy assignments, security-agent health, and history.
+            </p>
+            <p class="t2">
+              Instead of letting the AI call every vendor API directly, this architecture places an evidence layer
+              between the conversation and the infrastructure platforms.
+            </p>
+          </section>
+
+          <section class="article-diagram" aria-label="Two project architecture diagram">
+            <div class="diagram-row">
+              <div class="diagram-node">
+                <strong>AI Service Desk</strong>
+                <span>Copilot Studio, SharePoint knowledge, ITSM sources, vendor documentation, and conversation flow.</span>
+              </div>
+              <div class="diagram-node">
+                <strong>Infra Snapshot API</strong>
+                <span>A controlled API that returns normalized device, policy, difference, freshness, and history evidence.</span>
+              </div>
+              <div class="diagram-node">
+                <strong>Snapshot Platform</strong>
+                <span>Scheduled collectors, raw blob archive, Azure SQL current state, temporal history, and retention cleanup.</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">02 · Why two projects</p>
+            <h2 class="h2">Conversation and collection have different risk profiles</h2>
+            <p class="t2">
+              A service desk agent and a large infrastructure collector do not need to be the same workload.
+              The agent needs fast, explainable evidence. The collector needs credentials, pagination, throttling,
+              retry logic, raw response storage, data normalization, and operational history.
+            </p>
+            <ul class="t2">
+              <li><strong>Security:</strong> Copilot does not receive every infrastructure platform credential.</li>
+              <li><strong>Reliability:</strong> the last successful snapshot remains useful during vendor outages.</li>
+              <li><strong>Performance:</strong> support flows read a fast database instead of waiting for multiple live APIs.</li>
+              <li><strong>Ownership:</strong> infra teams own collectors; automation or ITSM teams own the agent experience.</li>
+            </ul>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">03 · Project 1</p>
+            <h2 class="h2">AI Service Desk foundation</h2>
+            <p class="t2">
+              The AI Service Desk deployment script creates the Azure and Power Platform foundation: resource group,
+              Key Vault, private storage, configuration container, Function App, managed identity, Entra security
+              group, and a Power Platform sandbox when the Power Platform CLI is available.
+            </p>
+            <pre class="article-code"><code>cd ai-service-desk
+chmod +x deploy-ai-service-desk.sh
+./deploy-ai-service-desk.sh
+
+# foundation only:
+# Copilot Studio topics, SharePoint grounding,
+# screenshot model integration, and ITSM flows
+# are intentionally future implementation steps.</code></pre>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">04 · Project 2</p>
+            <h2 class="h2">Infrastructure Snapshot Platform</h2>
+            <p class="t2">
+              The snapshot platform is designed to collect weekend snapshots from systems such as Jamf, Intune,
+              Defender, Qualys, CyberArk, Forescout, Zscaler, and Symantec DLP. It stores original responses in
+              Blob Storage, normalized current state in Azure SQL, and temporal history for comparison.
+            </p>
+            <pre class="article-code"><code>cd infra-snapshot-platform
+chmod +x deploy-infra-snapshot.sh
+
+export SQL_ADMIN_PASSWORD='Use-A-Temporary-Strong-Password'
+./deploy-infra-snapshot.sh</code></pre>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">05 · History model</p>
+            <h2 class="h2">Current state plus 62-day memory</h2>
+            <p class="t2">
+              The database schema creates current tables for devices, policies, and assignments with system-versioned
+              temporal history. It also tracks source systems, snapshot runs, checkpoints, raw object references,
+              configuration changes, and live refresh requests.
+            </p>
+            <ul class="t2">
+              <li><strong>Devices:</strong> current device identity, user, platform, compliance, management status, and check-in.</li>
+              <li><strong>Policies:</strong> current policy name, type, scope, enabled state, and payload reference.</li>
+              <li><strong>Assignments:</strong> include/exclude targets and policy-object relationships.</li>
+              <li><strong>ConfigurationChanges:</strong> detected differences with optional retention hold.</li>
+            </ul>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">06 · Controlled freshness</p>
+            <h2 class="h2">Read snapshots first, refresh live only when needed</h2>
+            <p class="t2">
+              The snapshot database is a fast operational cache, not the final source of truth. A support case can
+              use stored evidence when it is fresh enough, then request live refresh only for a specific user, device,
+              or policy when the situation requires it.
+            </p>
+            <div class="article-callout">
+              <p class="label article-section-label">Design guardrail</p>
+              <p class="t2">
+                The Function App currently returns connector placeholder responses by design. It deploys the scheduling,
+                storage, SQL, and orchestration foundation without inventing vendor-specific permissions or API behavior.
+              </p>
+            </div>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">07 · Security model</p>
+            <h2 class="h2">A safer AI boundary</h2>
+            <p class="t2">
+              The security principle is read-only first. Secrets belong in Azure Key Vault, not JSON files, shell scripts,
+              Git, or Copilot instructions. The AI should call approved API operations, not every original platform.
+              Sensitive fields should be removed before data reaches the agent.
+            </p>
+            <ul class="t2">
+              <li>No raw secrets in configuration files.</li>
+              <li>Managed identity where supported.</li>
+              <li>Live refresh protected with stronger authorization and auditing.</li>
+              <li>Separate DEV, TEST, and PROD environments.</li>
+              <li>The original management platform remains authoritative.</li>
+            </ul>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">08 · Deployment path</p>
+            <h2 class="h2">Build the evidence layer before the agent depends on it</h2>
+            <p class="t2">
+              The recommended order is to deploy the snapshot platform, apply the SQL schema, configure one connector,
+              run a test snapshot, validate database and history, protect the Infra API, then connect the AI Service
+              Desk foundation to that evidence layer.
+            </p>
+            <p class="t2">
+              This is a foundation starter, not a finished Copilot Studio solution. That is the right boundary for
+              this stage: infrastructure first, approved evidence next, then the user-facing conversation design.
+            </p>
+          </section>
+        </div>
+      </div>
+
+      <footer class="article-footer">
+        <a class="article-back t1 font-romie" href="https://digambarghosalkar.com/">Back to articles</a>
+      </footer>
+    </article>
+  </main>
+</body>
+</html>

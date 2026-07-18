@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="900" viewBox="0 0 900 900" role="img" aria-labelledby="title desc">
+  <title id="title">JAMF Pro Heal self-healing workflow</title>
+  <desc id="desc">Square article cover for a Jamf Pro self-healing workflow for managed Macs.</desc>
+  <rect width="900" height="900" fill="#f7f5ef"/>
+  <circle cx="450" cy="418" r="255" fill="#092f4d"/>
+  <circle cx="450" cy="418" r="188" fill="none" stroke="#37b8df" stroke-width="18"/>
+  <circle cx="450" cy="418" r="104" fill="#f7f5ef"/>
+  <path d="M402 414 l38 40 74 -86" fill="none" stroke="#092f4d" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M206 642 C310 718 592 718 696 642" fill="none" stroke="#6d786f" stroke-width="16" stroke-linecap="round"/>
+  <path d="M204 204 L306 306 M696 204 L594 306" stroke="#d1a05f" stroke-width="18" stroke-linecap="round"/>
+  <rect x="144" y="130" width="136" height="80" rx="10" fill="#081012"/>
+  <rect x="620" y="130" width="136" height="80" rx="10" fill="#081012"/>
+  <rect x="346" y="698" width="208" height="86" rx="10" fill="#081012"/>
+  <text x="92" y="104" fill="#081012" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="700">JAMF PRO HEAL</text>
+  <text x="92" y="842" fill="#081012" font-family="Arial, Helvetica, sans-serif" font-size="46" font-weight="700">SELF-HEALING MACS</text>
+</svg>

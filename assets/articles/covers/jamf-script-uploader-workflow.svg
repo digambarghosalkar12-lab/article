@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="420" viewBox="0 0 1400 420">
+  <defs><marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#64748b"/></marker></defs>
+  <rect width="1400" height="420" rx="24" fill="#f8fafc"/>
+  <text x="700" y="55" text-anchor="middle" font-family="Arial" font-size="32" font-weight="700" fill="#0f172a">Upload Workflow</text>
+  <g font-family="Arial">
+    <g><circle cx="110" cy="205" r="62" fill="#dbeafe" stroke="#2563eb" stroke-width="3"/><text x="110" y="197" text-anchor="middle" font-size="24" font-weight="700" fill="#1e3a8a">1</text><text x="110" y="228" text-anchor="middle" font-size="15" fill="#1e3a8a">Credentials</text></g>
+    <g><circle cx="345" cy="205" r="62" fill="#ede9fe" stroke="#7c3aed" stroke-width="3"/><text x="345" y="197" text-anchor="middle" font-size="24" font-weight="700" fill="#4c1d95">2</text><text x="345" y="228" text-anchor="middle" font-size="15" fill="#4c1d95">Script type</text></g>
+    <g><circle cx="580" cy="205" r="62" fill="#fef3c7" stroke="#d97706" stroke-width="3"/><text x="580" y="197" text-anchor="middle" font-size="24" font-weight="700" fill="#92400e">3</text><text x="580" y="228" text-anchor="middle" font-size="15" fill="#92400e">Choose file</text></g>
+    <g><circle cx="815" cy="205" r="62" fill="#fee2e2" stroke="#dc2626" stroke-width="3"/><text x="815" y="197" text-anchor="middle" font-size="24" font-weight="700" fill="#991b1b">4</text><text x="815" y="228" text-anchor="middle" font-size="15" fill="#991b1b">Enter name</text></g>
+    <g><circle cx="1050" cy="205" r="62" fill="#cffafe" stroke="#0891b2" stroke-width="3"/><text x="1050" y="197" text-anchor="middle" font-size="24" font-weight="700" fill="#164e63">5</text><text x="1050" y="228" text-anchor="middle" font-size="15" fill="#164e63">Upload</text></g>
+    <g><circle cx="1285" cy="205" r="62" fill="#dcfce7" stroke="#16a34a" stroke-width="3"/><text x="1285" y="197" text-anchor="middle" font-size="24" font-weight="700" fill="#14532d">6</text><text x="1285" y="228" text-anchor="middle" font-size="15" fill="#14532d">Result</text></g>
+  </g>
+  <g stroke="#64748b" stroke-width="4" marker-end="url(#a)"><line x1="180" y1="205" x2="270" y2="205"/><line x1="415" y1="205" x2="505" y2="205"/><line x1="650" y1="205" x2="740" y2="205"/><line x1="885" y1="205" x2="975" y2="205"/><line x1="1120" y1="205" x2="1210" y2="205"/></g>
+  <text x="700" y="340" text-anchor="middle" font-family="Menlo, monospace" font-size="21" fill="#334155">Example: Install_Company_App_20260711_231501</text>
+</svg>

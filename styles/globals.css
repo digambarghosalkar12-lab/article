@@ -1,0 +1,188 @@
+:root {
+  --nav-height: 64;
+  --nav-height-lg: 108;
+  --page-lg-width: 1680;
+  --page-width: 375;
+}
+
+/**
+ TODO: change `--page-lg-width` usage to `--page-width` and then remove
+ variable after deprecated.
+*/
+@media only screen and (min-width: 768px) {
+  :root {
+    --page-width: var(--page-lg-width);
+  }
+}
+
+/* TODO: move to defaults and globals files */
+* {
+  border: 0;
+  margin: 0;
+}
+
+html {
+  background-color: var(--color-light);
+  color: var(--color-dark);
+  font-family: 'FoundersGroteskRegular';
+}
+
+html,
+body {
+  margin: 0;
+}
+
+html {
+  /* Same as `.t3` */
+  font-size: calc(14 * 100vw / var(--page-width));
+  letter-spacing: 0;
+  line-height: 1.25;
+}
+
+@media only screen and (min-width: 768px) {
+  html {
+    font-size: calc(18 * 100vw / var(--page-lg-width));
+    line-height: 1.4;
+  }
+}
+
+h1,
+h2 {
+  font-weight: normal;
+}
+
+p {
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+ul {
+  margin-bottom: calc(14 * 100vw / var(--page-width));
+}
+
+@media only screen and (min-width: 768px) {
+  h1,
+  h2,
+  h3,
+  h4,
+  p,
+  ul {
+    margin-bottom: calc(16 * 100vw / var(--page-lg-width));
+  }
+}
+
+.lowercase {
+  text-transform: lowercase;
+}
+
+.block {
+  display: block;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.flex {
+  display: flex;
+}
+
+.no-underline {
+  text-decoration-line: none;
+}
+
+.break-word {
+  word-break: break-word;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+@media only screen and (min-width: 768px) {
+  .lg\:text-left {
+    text-align: left;
+  }
+}
+
+/* Flex */
+.self-start {
+  align-self: flex-start;
+}
+
+.self-end {
+  align-self: flex-end;
+}
+
+.self-center {
+  align-self: center;
+}
+
+/* Visibility */
+.invisible {
+  display: none;
+  visibility: hidden;
+}
+
+@media only screen and (min-width: 768px) {
+  /* Overwrites conflicts with rules such as image parallax */
+  .lg\:invisible {
+    display: none !important;
+    visibility: hidden;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .lg\:visible {
+    display: block;
+    visibility: visible;
+  }
+}
+
+/*
+ * Text
+ */
+
+.label {
+  font-size: calc(14 * 100vw / var(--page-width));
+  letter-spacing: calc(1.2 * 100vw / var(--page-width));
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+@media only screen and (min-width: 768px) {
+  .label {
+    font-size: calc(18 * 100vw / var(--page-width));
+    letter-spacing: calc(1.8 * 100vw / var(--page-width));
+  }
+}
+
+/* PAGES */
+#main {
+  min-height: 100vh;
+  /* Set position and index in order to overlap sticky footer. */
+  position: relative;
+  z-index: 1;
+}
+
+/* Copy CTA */
+
+[data-email] {
+  background-color: transparent;
+  cursor: pointer;
+  display: block;
+  padding: 0;
+}
+
+footer [data-email] {
+  display: inline-block;
+  font-size: inherit;
+}

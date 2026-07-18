@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Digambar Ghosalkar portfolio preview</title>
+  <desc id="desc">Technical project management, EUC, cloud, IAM, and endpoint security portfolio.</desc>
+  <rect width="1200" height="630" fill="#f7f5ef"/>
+  <path d="M90 84h1020M90 560h1020" stroke="#081012" stroke-width="2"/>
+  <text x="90" y="190" fill="#081012" font-family="Arial, Helvetica, sans-serif" font-size="88" font-weight="700">DIGAMBAR</text>
+  <text x="90" y="292" fill="#081012" font-family="Arial, Helvetica, sans-serif" font-size="88" font-weight="700">GHOSALKAR</text>
+  <text x="90" y="390" fill="#6d786f" font-family="Arial, Helvetica, sans-serif" font-size="40">Technical Project Management | EUC | Cloud | IAM | Security</text>
+  <text x="90" y="508" fill="#081012" font-family="Arial, Helvetica, sans-serif" font-size="34">Secure enterprise delivery portfolio</text>
+</svg>

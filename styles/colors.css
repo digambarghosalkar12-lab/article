@@ -1,0 +1,86 @@
+:root {
+  --color-accent-grass: #ff463d;
+  --color-accent-mud: #a88f99;
+  --color-accent-sky: #9d5cc8;
+  --color-accent-sun: #ffad00;
+  --color-alt-bg: #5a0f2d;
+  --color-dark: #081012;
+  --color-light: #ffffff;
+  --color-main-bg: #4a0b24;
+  --color-work-euc: #123230;
+  --color-work-cloud: #172d70;
+  --color-work-security: #22282a;
+  --color-work-mac: #082845;
+  --color-work-iam: #2d153f;
+}
+
+.color-accent-grass {
+  color: var(--color-accent-grass);
+}
+
+.color-accent-mud {
+  color: var(--color-accent-mud);
+}
+
+.color-accent-sky {
+  color: var(--color-accent-sky);
+}
+
+.color-accent-sun {
+  color: var(--color-accent-sun);
+}
+
+.color-alt-bg {
+  color: var(--color-alt-bg);
+}
+
+.color-dark {
+  color: var(--color-dark);
+}
+
+.color-light {
+  color: var(--color-light);
+}
+
+.color-main-bg {
+  color: var(--color-main-bg);
+}
+
+.bg-color-accent-grass {
+  background-color: var(--color-accent-grass);
+}
+
+.bg-color-accent-mud {
+  background-color: var(--color-accent-mud);
+}
+
+.bg-color-accent-sky {
+  background-color: var(--color-accent-sky);
+}
+
+.bg-color-accent-sun {
+  background-color: var(--color-accent-sun);
+}
+
+.bg-color-alt-bg {
+  background-color: var(--color-alt-bg);
+}
+
+.bg-color-dark {
+  background-color: var(--color-dark);
+}
+
+.bg-color-light {
+  background-color: var(--color-light);
+}
+
+.bg-color-main-bg {
+  background-color: var(--color-main-bg);
+}
+
+/* Using `.focus` for both hover and focus state since there
+is no strong use case to use different class names. */
+.focus\:color-accent-sun:hover,
+.focus\:color-accent-sun:focus {
+  color: var(--color-accent-sun);
+}

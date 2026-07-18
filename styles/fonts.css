@@ -1,0 +1,23 @@
+@font-face {
+  font-display: swap;
+  font-family: 'FoundersGroteskRegular';
+  font-style: normal;
+  font-weight: normal;
+  src: url('../assets/fonts/founders-grotesk-regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'RomieMediumItalic';
+  font-style: normal;
+  font-weight: normal;
+  src: url('../assets/fonts/Romie-MediumItalic.woff') format('woff');
+}
+
+.font-romie {
+  font-family: 'RomieMediumItalic';
+}
+
+.font-founders {
+  font-family: 'FoundersGroteskRegular';
+}

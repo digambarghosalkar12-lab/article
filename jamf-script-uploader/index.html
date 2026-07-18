@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jamf Script Uploader: API-Safe Script Deployment for Jamf Pro | Digambar Ghosalkar</title>
+  <meta name="description" content="A project article on Jamf Script Uploader, a macOS shell utility that uploads scripts to Jamf Pro through OAuth client credentials, validation, timestamped names, and safer secret handling.">
+  <meta name="author" content="Digambar Ghosalkar">
+  <meta name="robots" content="index,follow">
+  <meta name="keywords" content="Jamf Script Uploader, Jamf Pro, Jamf API, OAuth client credentials, macOS scripts, Jamf automation, endpoint management, API role, Create Scripts">
+  <link rel="canonical" href="https://article.digambarghosalkar.com/jamf-script-uploader/">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Digambar Ghosalkar">
+  <meta property="og:title" content="Jamf Script Uploader: API-Safe Script Deployment for Jamf Pro">
+  <meta property="og:description" content="How a small macOS shell tool makes Jamf Pro script uploads safer with OAuth, validation, timestamped names, and least-privilege API roles.">
+  <meta property="og:url" content="https://article.digambarghosalkar.com/jamf-script-uploader/">
+  <meta property="og:image" content="https://article.digambarghosalkar.com/assets/articles/covers/jamf-script-uploader.svg">
+  <meta property="og:image:width" content="900">
+  <meta property="og:image:height" content="900">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Jamf Script Uploader: API-Safe Script Deployment for Jamf Pro">
+  <meta name="twitter:description" content="A macOS Jamf Pro utility for safer script upload through OAuth client credentials, validation, and clean operator feedback.">
+  <meta name="twitter:image" content="https://article.digambarghosalkar.com/assets/articles/covers/jamf-script-uploader.svg">
+  <meta name="theme-color" content="#f7f5ef">
+  <link rel="icon" type="image/svg+xml" href="../assets/icon.svg">
+  <link rel="stylesheet" href="../styles/colors.css">
+  <link rel="stylesheet" href="../styles/fonts.css">
+  <link rel="stylesheet" href="../styles/typography.css">
+  <link rel="stylesheet" href="../styles/globals.css">
+  <style>
+    body { background: #f7f5ef; color: var(--color-dark); min-height: 100vh; }
+    .article-page { box-sizing: border-box; min-height: 100vh; padding: calc(40 * 100vw / var(--page-width)); }
+    .article-nav { align-items: center; display: flex; justify-content: space-between; margin-bottom: calc(90 * 100vw / var(--page-width)); }
+    .article-nav a, .article-back, .article-repo-link { color: inherit; text-decoration: none; }
+    .article-repo-link { align-items: center; border: 1px solid rgba(8,16,18,.22); display: inline-flex; gap: .55em; justify-self: start; padding: .72em .9em; transition: border-color .2s ease, transform .2s ease; }
+    .article-repo-link:hover { border-color: rgba(8,16,18,.64); transform: translateY(-2px); }
+    .article-repo-link svg { display: block; height: 1em; width: 1em; }
+    .article-hero, .article-content, .article-section, .article-aside, .article-aside dl { display: grid; }
+    .article-hero { gap: calc(32 * 100vw / var(--page-width)); }
+    .article-label, .article-meta, .article-section-label, .article-aside dt { color: #6d786f; text-transform: uppercase; }
+    .article-title, .article-lede, .article-section h2, .article-section p, .article-section ul, .article-section pre, .article-figure { margin: 0; }
+    .article-title { max-width: calc(1080 * 100vw / var(--page-width)); }
+    .article-lede { max-width: calc(880 * 100vw / var(--page-width)); }
+    .article-cover, .article-figure { background: transparent; display: block; overflow: hidden; width: 100%; }
+    .article-cover { aspect-ratio: 1 / 1; margin-top: calc(42 * 100vw / var(--page-width)); max-width: calc(760 * 100vw / var(--page-width)); }
+    .article-cover img, .article-figure img { display: block; height: 100%; object-fit: contain; object-position: center; width: 100%; }
+    .article-layout { display: grid; gap: calc(60 * 100vw / var(--page-width)); margin-top: calc(80 * 100vw / var(--page-width)); }
+    .article-aside { border-top: 1px solid rgba(8,16,18,.22); gap: calc(18 * 100vw / var(--page-width)); padding-top: calc(20 * 100vw / var(--page-width)); }
+    .article-aside dl { gap: calc(14 * 100vw / var(--page-width)); margin: 0; }
+    .article-aside div { border-top: 1px solid rgba(8,16,18,.12); display: grid; gap: calc(6 * 100vw / var(--page-width)); padding-top: calc(14 * 100vw / var(--page-width)); }
+    .article-aside dd { margin: 0; }
+    .article-content { gap: calc(56 * 100vw / var(--page-width)); }
+    .article-section { border-top: 1px solid rgba(8,16,18,.22); gap: calc(20 * 100vw / var(--page-width)); padding-top: calc(28 * 100vw / var(--page-width)); }
+    .article-section p, .article-section li { color: #3b4642; }
+    .article-section ul { display: grid; gap: calc(12 * 100vw / var(--page-width)); list-style: none; padding: 0; }
+    .article-section li { border-top: 1px solid rgba(8,16,18,.12); padding-top: calc(12 * 100vw / var(--page-width)); }
+    .article-code { background: #081012; color: #f7f5ef; overflow-x: auto; padding: calc(22 * 100vw / var(--page-width)); }
+    .article-code code { font-family: Menlo, Consolas, monospace; font-size: calc(14 * 100vw / var(--page-width)); line-height: 1.6; }
+    .article-figure.diagram { aspect-ratio: 1280 / 720; }
+    .article-callout { background: #e9e4d9; display: grid; gap: calc(12 * 100vw / var(--page-width)); padding: calc(24 * 100vw / var(--page-width)); }
+    .article-footer { border-top: 1px solid rgba(8,16,18,.22); margin-top: calc(70 * 100vw / var(--page-width)); padding-top: calc(26 * 100vw / var(--page-width)); }
+    @media only screen and (min-width: 768px) {
+      .article-page { padding: calc(64 * 100vw / var(--page-width)) calc(136 * 100vw / var(--page-width)); }
+      .article-nav { margin-bottom: calc(136 * 100vw / var(--page-width)); }
+      .article-layout { grid-template-columns: minmax(220px, .34fr) minmax(0, .86fr); }
+      .article-aside { align-self: start; position: sticky; top: calc(42 * 100vw / var(--page-width)); }
+      .article-code code { font-size: calc(15 * 100vw / var(--page-width)); }
+    }
+    @media only screen and (max-width: 767px) {
+      .article-page { padding: 38px 22px; }
+      .article-nav { margin-bottom: 92px; }
+      .article-cover { max-width: none; }
+      .article-code { padding: 18px; }
+      .article-code code { font-size: 12px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="article-page">
+    <nav class="article-nav" aria-label="Article navigation">
+      <a class="t6 font-romie" href="https://digambarghosalkar.com/">articles</a>
+      <a class="t6 font-romie" href="https://digambarghosalkar.com/">home</a>
+    </nav>
+
+    <article>
+      <header class="article-hero">
+        <p class="label article-label">Jamf automation</p>
+        <h1 class="h1 article-title">Jamf Script Uploader: API-Safe Script Deployment for Jamf Pro</h1>
+        <p class="t1 article-lede">
+          Jamf Script Uploader is a focused macOS shell utility for administrators who need to upload scripts into Jamf Pro without turning a simple operational task into a risky copy-paste routine.
+        </p>
+        <p class="t2 article-meta">Project article · Jamf Pro · OAuth · macOS shell · API Client · script upload</p>
+        <a class="article-repo-link t2" href="https://github.com/digambarghosalkar12-lab/jamf-script-uploader" rel="noopener noreferrer" target="_blank" aria-label="Open Jamf Script Uploader project on GitHub">
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56v-2.16c-3.2.7-3.87-1.38-3.87-1.38-.52-1.33-1.28-1.68-1.28-1.68-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.16 1.18A10.9 10.9 0 0 1 12 6.03c.98 0 1.96.13 2.88.39 2.19-1.49 3.15-1.18 3.15-1.18.63 1.58.24 2.75.12 3.04.74.8 1.18 1.82 1.18 3.08 0 4.41-2.69 5.39-5.25 5.67.42.36.79 1.07.79 2.16v3.16c0 .31.21.68.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
+          View project on GitHub
+        </a>
+        <figure class="article-cover">
+          <img alt="Jamf Script Uploader square cover with terminal, API token, and upload path" height="900" src="/assets/articles/covers/jamf-script-uploader.svg" width="900">
+        </figure>
+      </header>
+
+      <div class="article-layout">
+        <aside class="article-aside">
+          <p class="label article-section-label">Article index</p>
+          <dl class="t2">
+            <div><dt>Problem</dt><dd>Uploading scripts manually can create naming conflicts, unclear failures, and unsafe credential habits.</dd></div>
+            <div><dt>Approach</dt><dd>Prompt for credentials at runtime, validate the selected file, timestamp the Jamf name, and upload through the API.</dd></div>
+            <div><dt>Stack</dt><dd>bash, curl, plutil, base64, sed, osascript, Jamf OAuth, and the Classic Scripts endpoint.</dd></div>
+          </dl>
+        </aside>
+
+        <div class="article-content">
+          <section class="article-section">
+            <p class="label article-section-label">01 · Why</p>
+            <h2 class="h2">A small tool for a repeatable admin task</h2>
+            <p class="t2">
+              Jamf Pro script upload is often part of day-to-day endpoint operations: packaging a remediation script, placing it in Jamf, and then attaching it to a policy. The task is simple, but the surrounding details matter. A wrong script type, reused name, missing permission, or copied secret can slow down the work or create avoidable risk.
+            </p>
+            <p class="t2">
+              Jamf Script Uploader wraps that flow into one interactive macOS utility. It asks for the Jamf tenant, API Client ID, and Client Secret, lets the admin choose a local script, validates the file, appends a timestamp, uploads it, and returns the Jamf script name and ID when Jamf provides one.
+            </p>
+          </section>
+
+          <figure class="article-figure diagram">
+            <img alt="Jamf Script Uploader architecture diagram" height="720" src="/assets/articles/covers/jamf-script-uploader-architecture.svg" width="1280">
+          </figure>
+
+          <section class="article-section">
+            <p class="label article-section-label">02 · Flow</p>
+            <h2 class="h2">Credentials in, validated script out</h2>
+            <p class="t2">
+              The workflow is intentionally direct. The administrator enters a Jamf Pro base URL, authenticates with OAuth client credentials, chooses a script type, selects the local file, and gives the script a display name. The tool creates a final name using a local timestamp in <code>YYYYMMDD_HHMMSS</code> format so repeated uploads do not collide.
+            </p>
+            <pre class="article-code"><code>Jamf Pro URL
+API Client ID and Client Secret
+Script type: Shell, Bash, Zsh, Python, Perl, or Ruby
+Local file selection
+Display name + timestamp
+Upload to Jamf Pro
+Return final name and Jamf script ID</code></pre>
+          </section>
+
+          <figure class="article-figure diagram">
+            <img alt="Jamf Script Uploader workflow diagram" height="720" src="/assets/articles/covers/jamf-script-uploader-workflow.svg" width="1280">
+          </figure>
+
+          <section class="article-section">
+            <p class="label article-section-label">03 · Security</p>
+            <h2 class="h2">Runtime secrets, least privilege, and HTTPS by default</h2>
+            <p class="t2">
+              The security choices are practical. The Client Secret is requested when the script runs, terminal echo is disabled for the secret prompt, credentials are not written to a configuration file, the Jamf URL must use HTTPS, and sensitive variables are cleared on exit.
+            </p>
+            <ul class="t2">
+              <li>Use a dedicated Jamf API Client instead of a broad administrator account.</li>
+              <li>Assign only the API Role permissions needed for scripts: <strong>Create Scripts</strong>, with <strong>Read Scripts</strong> recommended for verification.</li>
+              <li>For unattended use, retrieve secrets from an approved vault or CI secret store rather than hardcoding them.</li>
+            </ul>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">04 · API design</p>
+            <h2 class="h2">Modern token flow, classic script creation endpoint</h2>
+            <p class="t2">
+              The tool uses Jamf Pro OAuth client credentials to obtain a bearer token, then submits a Classic API script object to create the script. The request includes a name, filename, priority, category, blank optional metadata, and Base64-encoded script contents.
+            </p>
+            <pre class="article-code"><code>POST /api/v1/oauth/token
+grant_type=client_credentials
+
+POST /JSSResource/scripts/id/0
+Authorization: Bearer token
+Content-Type: application/xml</code></pre>
+            <p class="t2">
+              Upload defaults are deliberately conservative: category is <code>None</code>, priority is <code>After</code>, info and notes are blank, and parameters 4 through 11 are left empty.
+            </p>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">05 · Validation</p>
+            <h2 class="h2">A quick check before the API call</h2>
+            <p class="t2">
+              Before uploading, the selected type must match the file extension or the first-line shebang. Shell, Bash, Zsh, Python, Perl, and Ruby are supported selections. The tool also checks that the selected file exists and is readable before encoding and sending it.
+            </p>
+            <div class="article-callout">
+              <p class="label article-section-label">Operator note</p>
+              <p class="t2">
+                Jamf stores the script content. It does not install Python, Perl, Ruby, or any missing interpreter on target Macs. The selected type helps validate the source file and create the Jamf filename, but the fleet still needs the right runtime.
+              </p>
+            </div>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">06 · Troubleshooting</p>
+            <h2 class="h2">Clear failures beat silent upload problems</h2>
+            <p class="t2">
+              The utility reports HTTP status codes and Jamf response bodies so admins can see whether the issue is authentication, authorization, URL format, certificate trust, proxy behavior, or file validation.
+            </p>
+            <ul class="t2">
+              <li><strong>401</strong> usually points to a wrong Client ID, stale Client Secret, disabled API Client, or incorrect tenant.</li>
+              <li><strong>403</strong> means the API Client authenticated but the API Role does not have permission to create scripts.</li>
+              <li><strong>404</strong> often means the user entered a path instead of the Jamf base URL.</li>
+              <li>SSL errors should be fixed through certificate, proxy, and trust review rather than insecure curl flags in production.</li>
+            </ul>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">07 · What this solves</p>
+            <h2 class="h2">Safer script deployment without a heavy platform</h2>
+            <p class="t2">
+              The value of this project is its shape: small enough to audit, narrow enough to understand, and useful enough for daily Jamf work. It removes repetitive upload friction while keeping the sensitive pieces visible and controlled.
+            </p>
+            <p class="t2">
+              For endpoint teams, that means cleaner script names, predictable upload defaults, least-privilege API access, and a clear success result that can be recorded in change notes or deployment tickets.
+            </p>
+          </section>
+        </div>
+      </div>
+
+      <footer class="article-footer">
+        <a class="article-back t1 font-romie" href="https://digambarghosalkar.com/">Back to articles</a>
+      </footer>
+    </article>
+  </main>
+</body>
+</html>
