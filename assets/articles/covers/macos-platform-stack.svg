@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-labelledby="title desc">
+  <title id="title">Mac enterprise platform stack</title>
+  <desc id="desc">A layered map showing Apple, Apple Business Manager, Jamf Pro, Microsoft 365 E7, and AppleCare working together for enterprise Mac management.</desc>
+  <rect width="1280" height="720" fill="#f7f5ef"/>
+  <path d="M0 610 C180 540 290 650 458 572 C650 482 790 622 984 548 C1110 498 1180 520 1280 468 L1280 720 L0 720 Z" fill="#e9e4d9"/>
+  <text x="80" y="88" fill="#081012" font-family="Inter, Arial, sans-serif" font-size="38" font-weight="800">Mac enterprise platform</text>
+  <text x="82" y="126" fill="#53635e" font-family="Inter, Arial, sans-serif" font-size="20">Use each platform for the job it is strongest at.</text>
+  <g transform="translate(90 178)">
+    <rect width="210" height="350" rx="22" fill="#ffffff" stroke="#d7d0c1"/>
+    <circle cx="105" cy="74" r="38" fill="#101820"/>
+    <text x="105" y="84" text-anchor="middle" fill="#fff" font-family="Inter, Arial, sans-serif" font-size="32" font-weight="800">A</text>
+    <text x="105" y="142" text-anchor="middle" fill="#081012" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="800">Apple</text>
+    <text x="105" y="182" text-anchor="middle" fill="#53635e" font-family="Inter, Arial, sans-serif" font-size="17">Hardware</text>
+    <text x="105" y="212" text-anchor="middle" fill="#53635e" font-family="Inter, Arial, sans-serif" font-size="17">macOS security</text>
+    <text x="105" y="242" text-anchor="middle" fill="#53635e" font-family="Inter, Arial, sans-serif" font-size="17">Secure Enclave</text>
+    <text x="105" y="272" text-anchor="middle" fill="#53635e" font-family="Inter, Arial, sans-serif" font-size="17">FileVault</text>
+  </g>
+  <g transform="translate(320 178)">
+    <rect width="210" height="350" rx="22" fill="#fffaf0" stroke="#d7d0c1"/>
+    <circle cx="105" cy="74" r="38" fill="#1d4ed8"/>
+    <text x="105" y="83" text-anchor="middle" fill="#fff" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="800">ABM</text>
+    <text x="105" y="142" text-anchor="middle" fill="#081012" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="800">Business</text>
+    <text x="105" y="172" text-anchor="middle" fill="#081012" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="800">Manager</text>
+    <text x="105" y="212" text-anchor="middle" fill="#53635e" font-family="Inter, Arial, sans-serif" font-size="17">Ownership</text>
+    <text x="105" y="242" text-anchor="middle" fill="#53635e" font-family="Inter, Arial, sans-serif" font-size="17">ADE</text>
+    <text x="105" y="272" text-anchor="middle" fill="#53635e" font-family="Inter, Arial, sans-serif" font-size="17">App licensing</text>
+  </g>
+  <g transform="translate(550 178)">
+    <rect width="210" height="350" rx="22" fill="#eef8f5" stroke="#d7d0c1"/>
+    <circle cx="105" cy="74" r="38" fill="#15936b"/>
+    <text x="105" y="84" text-anchor="middle" fill="#fff" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="800">J</text>
+    <text x="105" y="142" text-anchor="middle" fill="#081012" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="800">Jamf Pro</text>
+    <text x="105" y="182" text-anchor="middle" fill="#53635e" font-family="Inter, Arial, sans-serif" font-size="17">Lifecycle</text>
+    <text x="105" y="212" text-anchor="middle" fill="#53635e" font-family="Inter, Arial, sans-serif" font-size="17">Policies</text>
+    <text x="105" y="242" text-anchor="middle" fill="#53635e" font-family="Inter, Arial, sans-serif" font-size="17">Self Service</text>
+    <text x="105" y="272" text-anchor="middle" fill="#53635e" font-family="Inter, Arial, sans-serif" font-size="17">Compliance</text>
+  </g>
+  <g transform="translate(780 178)">
+    <rect width="210" height="350" rx="22" fill="#edf5ff" stroke="#d7d0c1"/>
+    <circle cx="105" cy="74" r="38" fill="#2563eb"/>
+    <text x="105" y="84" text-anchor="middle" fill="#fff" font-family="Inter, Arial, sans-serif" font-size="25" font-weight="800">E7</text>
+    <text x="105" y="142" text-anchor="middle" fill="#081012" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="800">Microsoft</text>
+    <text x="105" y="172" text-anchor="middle" fill="#081012" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="800">365 E7</text>
+    <text x="105" y="212" text-anchor="middle" fill="#53635e" font-family="Inter, Arial, sans-serif" font-size="17">Productivity</text>
+    <text x="105" y="242" text-anchor="middle" fill="#53635e" font-family="Inter, Arial, sans-serif" font-size="17">Entra</text>
+    <text x="105" y="272" text-anchor="middle" fill="#53635e" font-family="Inter, Arial, sans-serif" font-size="17">Defender</text>
+    <text x="105" y="302" text-anchor="middle" fill="#53635e" font-family="Inter, Arial, sans-serif" font-size="17">Purview + AI</text>
+  </g>
+  <g transform="translate(1010 178)">
+    <rect width="210" height="350" rx="22" fill="#fff3e8" stroke="#d7d0c1"/>
+    <circle cx="105" cy="74" r="38" fill="#d97706"/>
+    <text x="105" y="84" text-anchor="middle" fill="#fff" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="800">+</text>
+    <text x="105" y="142" text-anchor="middle" fill="#081012" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="800">AppleCare</text>
+    <text x="105" y="182" text-anchor="middle" fill="#53635e" font-family="Inter, Arial, sans-serif" font-size="17">Repair</text>
+    <text x="105" y="212" text-anchor="middle" fill="#53635e" font-family="Inter, Arial, sans-serif" font-size="17">Replacement</text>
+    <text x="105" y="242" text-anchor="middle" fill="#53635e" font-family="Inter, Arial, sans-serif" font-size="17">Continuity</text>
+  </g>
+  <path d="M198 558 H1082" stroke="#b7aa92" stroke-width="4" stroke-linecap="round"/>
+  <text x="640" y="628" text-anchor="middle" fill="#081012" font-family="Inter, Arial, sans-serif" font-size="26" font-weight="800">Secure endpoint + managed lifecycle + enterprise identity + productivity + support</text>
+</svg>

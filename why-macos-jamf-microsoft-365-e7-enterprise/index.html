@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Why macOS Is a Strong Enterprise Platform with Jamf and Microsoft 365 E7 | Digambar Ghosalkar</title>
+  <meta name="description" content="Why macOS, Jamf, Apple Business Manager, AppleCare, and Microsoft 365 E7 can create a secure, lower-friction enterprise platform across onboarding, identity, endpoint security, DLP, support, and TCO.">
+  <meta name="author" content="Digambar Ghosalkar">
+  <meta name="robots" content="index,follow">
+  <meta name="keywords" content="macOS enterprise, Jamf Pro, Microsoft 365 E7, Apple Business Manager, AppleCare for Enterprise, Mac TCO, Platform SSO, Microsoft Entra, Defender for Endpoint Mac, Microsoft Purview macOS, Conditional Access, Mac onboarding">
+  <link rel="canonical" href="https://article.digambarghosalkar.com/why-macos-jamf-microsoft-365-e7-enterprise/">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Digambar Ghosalkar">
+  <meta property="og:title" content="Why macOS Is a Strong Enterprise Platform with Jamf and Microsoft 365 E7">
+  <meta property="og:description" content="A practical enterprise view of Mac TCO, zero-touch onboarding, Jamf management, Microsoft 365 E7, Defender, Purview, Entra Conditional Access, and AppleCare.">
+  <meta property="og:url" content="https://article.digambarghosalkar.com/why-macos-jamf-microsoft-365-e7-enterprise/">
+  <meta property="og:image" content="https://article.digambarghosalkar.com/assets/articles/covers/macos-enterprise-platform-hero.png">
+  <meta property="og:image:width" content="1672">
+  <meta property="og:image:height" content="941">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Why macOS Is a Strong Enterprise Platform with Jamf and Microsoft 365 E7">
+  <meta name="twitter:description" content="How Mac becomes an enterprise operating model when Apple, Jamf, and Microsoft 365 E7 are designed together.">
+  <meta name="twitter:image" content="https://article.digambarghosalkar.com/assets/articles/covers/macos-enterprise-platform-hero.png">
+  <meta name="theme-color" content="#f7f5ef">
+  <link rel="icon" type="image/svg+xml" href="../assets/icon.svg?v=dg-20260718-2">
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png?v=dg-20260718-2">
+  <link rel="shortcut icon" href="../favicon.ico?v=dg-20260718-2">
+  <link rel="apple-touch-icon" sizes="180x180" href="../assets/apple-touch-icon.png?v=dg-20260718-2">
+  <link rel="stylesheet" href="../styles/colors.css">
+  <link rel="stylesheet" href="../styles/fonts.css">
+  <link rel="stylesheet" href="../styles/typography.css">
+  <link rel="stylesheet" href="../styles/globals.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Why macOS Is a Strong Enterprise Platform with Jamf and Microsoft 365 E7",
+    "description": "Why macOS, Jamf, Apple Business Manager, AppleCare, and Microsoft 365 E7 can create a secure, lower-friction enterprise platform across onboarding, identity, endpoint security, DLP, support, and TCO.",
+    "image": "https://article.digambarghosalkar.com/assets/articles/covers/macos-enterprise-platform-hero.png",
+    "author": {
+      "@type": "Person",
+      "name": "Digambar Ghosalkar"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Digambar Ghosalkar"
+    },
+    "datePublished": "2026-07-27",
+    "dateModified": "2026-07-27",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://article.digambarghosalkar.com/why-macos-jamf-microsoft-365-e7-enterprise/"
+    }
+  }
+  </script>
+  <style>
+    body { background: #f7f5ef; color: var(--color-dark); min-height: 100vh; }
+    .article-page { box-sizing: border-box; min-height: 100vh; padding: calc(40 * 100vw / var(--page-width)); }
+    .article-nav { align-items: center; display: flex; justify-content: space-between; margin-bottom: calc(90 * 100vw / var(--page-width)); }
+    .article-nav a, .article-back { color: inherit; text-decoration: none; }
+    .article-hero, .article-content, .article-section, .article-aside, .article-aside dl { display: grid; }
+    .article-hero { gap: calc(32 * 100vw / var(--page-width)); }
+    .article-label, .article-meta, .article-section-label, .article-aside dt { color: #6d786f; text-transform: uppercase; }
+    .article-title, .article-lede, .article-section h2, .article-section p, .article-section ul, .article-section pre, .article-figure { margin: 0; }
+    .article-title { max-width: calc(1120 * 100vw / var(--page-width)); }
+    .article-lede { max-width: calc(920 * 100vw / var(--page-width)); }
+    .article-cover, .article-figure { background: transparent; display: block; overflow: hidden; width: 100%; }
+    .article-cover { aspect-ratio: 1672 / 941; margin-top: calc(42 * 100vw / var(--page-width)); max-width: calc(1040 * 100vw / var(--page-width)); }
+    .article-cover img, .article-figure img { display: block; height: 100%; object-fit: contain; object-position: center; width: 100%; }
+    .article-layout { display: grid; gap: calc(60 * 100vw / var(--page-width)); margin-top: calc(80 * 100vw / var(--page-width)); }
+    .article-aside { border-top: 1px solid rgba(8,16,18,.22); gap: calc(18 * 100vw / var(--page-width)); padding-top: calc(20 * 100vw / var(--page-width)); }
+    .article-aside dl { gap: calc(14 * 100vw / var(--page-width)); margin: 0; }
+    .article-aside div { border-top: 1px solid rgba(8,16,18,.12); display: grid; gap: calc(6 * 100vw / var(--page-width)); padding-top: calc(14 * 100vw / var(--page-width)); }
+    .article-aside dd { margin: 0; }
+    .article-content { gap: calc(56 * 100vw / var(--page-width)); }
+    .article-section { border-top: 1px solid rgba(8,16,18,.22); gap: calc(20 * 100vw / var(--page-width)); padding-top: calc(28 * 100vw / var(--page-width)); }
+    .article-section p, .article-section li { color: #3b4642; }
+    .article-section ul { display: grid; gap: calc(12 * 100vw / var(--page-width)); list-style: none; padding: 0; }
+    .article-section li { border-top: 1px solid rgba(8,16,18,.12); padding-top: calc(12 * 100vw / var(--page-width)); }
+    .article-figure.diagram { aspect-ratio: 16 / 9; border: 1px solid rgba(8,16,18,.12); margin-top: calc(8 * 100vw / var(--page-width)); }
+    .article-callout { background: #e9e4d9; display: grid; gap: calc(12 * 100vw / var(--page-width)); padding: calc(24 * 100vw / var(--page-width)); }
+    .article-code { background: #081012; color: #f7f5ef; overflow-x: auto; padding: calc(22 * 100vw / var(--page-width)); }
+    .article-code code { font-family: Menlo, Consolas, monospace; font-size: calc(14 * 100vw / var(--page-width)); line-height: 1.6; }
+    .article-grid-list { display: grid; gap: calc(16 * 100vw / var(--page-width)); grid-template-columns: 1fr; list-style: none; padding: 0; }
+    .article-grid-list li { background: #fffaf0; border: 1px solid rgba(8,16,18,.14); padding: calc(18 * 100vw / var(--page-width)); }
+    .article-grid-list strong { color: #081012; display: block; margin-bottom: calc(6 * 100vw / var(--page-width)); }
+    .article-resource-list li { display: grid; gap: calc(6 * 100vw / var(--page-width)); }
+    .article-resource-list a { color: #123230; font-weight: 700; text-decoration-color: rgba(209,160,95,.7); text-decoration-thickness: .12em; text-underline-offset: .18em; }
+    .article-resource-list span { color: #5d6862; }
+    .article-footer { border-top: 1px solid rgba(8,16,18,.22); margin-top: calc(70 * 100vw / var(--page-width)); padding-top: calc(26 * 100vw / var(--page-width)); }
+    code { background: rgba(8,16,18,.08); padding: .1em .3em; }
+    @media only screen and (min-width: 768px) {
+      .article-page { padding: calc(64 * 100vw / var(--page-width)) calc(136 * 100vw / var(--page-width)); }
+      .article-nav { margin-bottom: calc(136 * 100vw / var(--page-width)); }
+      .article-layout { grid-template-columns: minmax(220px, .34fr) minmax(0, .86fr); }
+      .article-aside { align-self: start; position: sticky; top: calc(42 * 100vw / var(--page-width)); }
+      .article-code code { font-size: calc(15 * 100vw / var(--page-width)); }
+      .article-grid-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media only screen and (max-width: 767px) {
+      .article-page { padding: 38px 22px; }
+      .article-nav { margin-bottom: 92px; }
+      .article-cover { max-width: none; }
+      .article-code { padding: 18px; }
+      .article-code code { font-size: 12px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="article-page">
+    <nav class="article-nav" aria-label="Article navigation">
+      <a class="t6 font-romie" href="../index.html">articles</a>
+      <a class="t6 font-romie" href="https://digambarghosalkar.com/">home</a>
+    </nav>
+
+    <article>
+      <header class="article-hero">
+        <p class="label article-label">macOS enterprise platform</p>
+        <h1 class="h1 article-title">Why macOS Is a Strong Enterprise Platform with Jamf and Microsoft 365 E7</h1>
+        <p class="t1 article-lede">
+          macOS should not be judged only by the purchase price of the laptop. When Mac is combined with Apple Business Manager, Jamf Pro, AppleCare for Enterprise, and Microsoft 365 E7, it becomes a complete endpoint operating model: zero-touch onboarding, strong native security, deep Apple management, enterprise identity, data protection, threat response, AI productivity, and measurable support reduction.
+        </p>
+        <p class="t2 article-meta">Project article · macOS · Jamf Pro · Apple Business Manager · Microsoft 365 E7 · Entra · Defender · Purview · AppleCare</p>
+        <figure class="article-cover">
+          <img alt="Enterprise office team using Mac laptops with an endpoint management dashboard in the background" height="941" src="../assets/articles/covers/macos-enterprise-platform-hero.png" width="1672">
+        </figure>
+      </header>
+
+      <div class="article-layout">
+        <aside class="article-aside">
+          <p class="label article-section-label">Article index</p>
+          <dl class="t2">
+            <div><dt>Business case</dt><dd>Look beyond hardware cost and measure deployment, support, security, downtime, lifecycle, and residual value.</dd></div>
+            <div><dt>Platform</dt><dd>Apple gives the endpoint, Jamf manages the Apple lifecycle, and Microsoft provides identity, security, productivity, compliance, and AI.</dd></div>
+            <div><dt>Operations</dt><dd>Zero-touch onboarding, Self Service, Conditional Access, Defender, Purview, patching, and AppleCare reduce friction.</dd></div>
+          </dl>
+        </aside>
+
+        <div class="article-content">
+          <section class="article-section">
+            <p class="label article-section-label">01 · The real question</p>
+            <h2 class="h2">Mac is not only a premium device conversation</h2>
+            <p class="t2">
+              In many organizations, Mac is discussed as if the only number that matters is the purchase price. That is too narrow. Enterprise endpoint cost includes deployment effort, service desk tickets, security tooling, identity integration, patching, downtime, repair experience, user productivity, and residual value at refresh.
+            </p>
+            <p class="t2">
+              A Mac program becomes stronger when it is designed as a platform: Apple hardware and macOS security at the base, Apple Business Manager for ownership and automated enrollment, Jamf Pro for Apple lifecycle management, Microsoft 365 E7 for productivity, identity, security, compliance, and AI, and AppleCare for Enterprise for support continuity.
+            </p>
+            <figure class="article-figure diagram">
+              <img alt="Mac enterprise platform stack showing Apple, Apple Business Manager, Jamf Pro, Microsoft 365 E7, and AppleCare responsibilities" height="720" src="../assets/articles/covers/macos-platform-stack.svg" width="1280">
+            </figure>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">02 · Total cost</p>
+            <h2 class="h2">TCO explains why the cheapest laptop may not be the cheapest endpoint</h2>
+            <p class="t2">
+              The total cost of ownership model should include hardware, deployment, management, software, security, support, downtime, and residual value. A device that costs less upfront can still become expensive if it requires more manual build time, more support effort, more security exceptions, more downtime, and lower resale or redeployment value.
+            </p>
+            <pre class="article-code"><code>Endpoint TCO =
+Hardware cost
++ Deployment cost
++ Management cost
++ Software cost
++ Security cost
++ Support cost
++ Downtime cost
+- Residual value</code></pre>
+            <p class="t2">
+              Mac can improve the model when zero-touch provisioning removes build queues, Jamf reduces repeat support tasks, Apple silicon extends useful life, AppleCare reduces repair friction, and the hardware keeps meaningful residual value. The final number still depends on the organization, but the evaluation should be lifecycle-based rather than sticker-price based.
+            </p>
+            <figure class="article-figure diagram">
+              <img alt="Mac total cost of ownership model showing lifecycle costs and residual value" height="720" src="../assets/articles/covers/macos-tco-model.svg" width="1280">
+            </figure>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">03 · Zero touch</p>
+            <h2 class="h2">A modern Mac should arrive ready to become corporate-owned and secure</h2>
+            <p class="t2">
+              Apple Business Manager and Automated Device Enrollment make the onboarding story simple: the Mac can ship directly to the employee, and when the user opens it, the device knows the organization owns it. Jamf then enrolls the Mac, applies configuration, installs required software, configures security controls, and presents approved tools through Self Service.
+            </p>
+            <p class="t2">
+              This model reduces dependency on imaging rooms, manual desk-side builds, and server-side timing. The employee gets a cleaner first-day experience, while IT gets a device that is enrolled, encrypted, configured, inventoried, and ready for compliance evaluation.
+            </p>
+            <figure class="article-figure diagram">
+              <img alt="Zero-touch Mac onboarding flow from shipped device through ABM, Jamf, Entra sign-in, and security readiness" height="720" src="../assets/articles/covers/macos-zero-touch-flow.svg" width="1280">
+            </figure>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">04 · User experience with control</p>
+            <h2 class="h2">Good employee experience does not mean weak governance</h2>
+            <p class="t2">
+              Mac can give employees a polished daily experience without sacrificing control. Platform SSO and Microsoft Entra can reduce repeated sign-in friction. Touch ID can improve authentication convenience. Jamf Self Service can let users install approved apps, repair common issues, refresh certificates, configure printers, or run health checks without opening a ticket.
+            </p>
+            <p class="t2">
+              Temporary admin workflows are also important. Instead of making users permanent administrators, organizations can grant time-limited privilege for approved actions, log the elevation, and remove it automatically. That keeps employees productive while avoiding a permanently over-privileged fleet.
+            </p>
+            <ul class="t2 article-grid-list">
+              <li><strong>For employees</strong>Faster onboarding, fewer password prompts, better battery life, Touch ID, approved self-service actions, and less waiting for IT.</li>
+              <li><strong>For IT</strong>Consistent configuration, inventory, automation, smart groups, remediation policies, patch visibility, and reduced repetitive tickets.</li>
+            </ul>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">05 · Native security</p>
+            <h2 class="h2">Apple gives the endpoint a strong security foundation</h2>
+            <p class="t2">
+              Apple controls the hardware, firmware, operating system, security architecture, and management frameworks. That integration matters. macOS provides a strong baseline with Secure Enclave, secure boot, signed system volume, FileVault, Gatekeeper, XProtect, notarization, System Integrity Protection, Transparency Consent and Control, system extensions, network extensions, Rapid Security Responses, and managed software updates.
+            </p>
+            <p class="t2">
+              Jamf turns that foundation into enforceable fleet policy. It can require FileVault, escrow and rotate keys, enforce passwords and firewall settings, approve system extensions, configure PPPC permissions, deploy certificates, apply restrictions, enforce OS versions, remediate drift, and lock or erase devices when needed.
+            </p>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">06 · Jamf and Intune</p>
+            <h2 class="h2">The best model is integration, not a forced either-or argument</h2>
+            <p class="t2">
+              Microsoft Intune can manage Macs and remains very valuable for cross-platform strategy, Microsoft app protection, Conditional Access, Defender deployment, Entra registration, and unified endpoint reporting. For simple Mac requirements, Intune may be enough.
+            </p>
+            <p class="t2">
+              Jamf is often stronger when the Apple estate is large, complex, security-sensitive, or heavily automated. Its Apple-first depth appears in detailed inventory, smart groups, extension attributes, scripting, policies, remediation workflows, macOS packaging, Self Service customization, FileVault workflows, declarative device management, OS enforcement, Apple-specific controls, logs, API automation, and pre-stage workflows.
+            </p>
+            <p class="t2">
+              A mature enterprise pattern is Jamf for deep Apple management and Microsoft for identity, productivity, security operations, compliance, and cross-platform access decisions.
+            </p>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">07 · Microsoft 365 E7</p>
+            <h2 class="h2">E7 can reduce disconnected tooling when it is actually adopted</h2>
+            <p class="t2">
+              Microsoft 365 E7 brings together Microsoft 365 E5 capabilities with Copilot, Agent 365, Entra Suite, advanced productivity apps, security, identity, compliance, and AI-agent governance. For a Mac program, that means Microsoft can remain the enterprise productivity and control plane while Mac becomes the endpoint platform.
+            </p>
+            <p class="t2">
+              The value is not just license bundling. It is reducing tool sprawl. Separate products for email, collaboration, identity, MFA, Conditional Access, EDR, vulnerability management, DLP, compliance, AI assistance, and AI governance create renewals, agents, consoles, integrations, alerts, training, APIs, and troubleshooting overhead. Consolidation only saves money when redundant tools are retired and included capabilities are deployed properly.
+            </p>
+            <ul class="t2">
+              <li>Microsoft Entra for identity, MFA, Platform SSO, device registration, federation, and Conditional Access.</li>
+              <li>Microsoft Defender for Endpoint on Mac for endpoint protection, behavior monitoring, vulnerability management, EDR, and response actions.</li>
+              <li>Microsoft Purview for sensitivity labels, endpoint DLP, information governance, audit, compliance, and insider-risk controls.</li>
+              <li>Microsoft 365 apps, Teams, OneDrive, SharePoint, Edge, and Copilot for daily productivity on macOS.</li>
+            </ul>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">08 · Access control</p>
+            <h2 class="h2">Compliance becomes the gate to business data</h2>
+            <p class="t2">
+              The strongest Mac architecture connects local compliance to cloud access. Jamf evaluates device posture. Defender evaluates endpoint risk. Purview protects data. Entra Conditional Access decides whether the user and device should reach Microsoft 365 and other protected applications.
+            </p>
+            <p class="t2">
+              This allows practical controls: block access if the Mac is unmanaged, FileVault is disabled, the OS is unsupported, Defender is unhealthy, security software is missing, or sign-in risk is elevated. The result is a cleaner model: a Mac is trusted because its posture is proven, not because it is inside the company.
+            </p>
+            <figure class="article-figure diagram">
+              <img alt="Mac security and access flow showing Jamf posture, Microsoft signals, Conditional Access, and allow or block decisions" height="720" src="../assets/articles/covers/macos-security-access-flow.svg" width="1280">
+            </figure>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">09 · Patch and app lifecycle</p>
+            <h2 class="h2">A Mac fleet needs disciplined application management</h2>
+            <p class="t2">
+              Enterprise Mac management is not finished after enrollment. Third-party application patching must be operationalized for Chrome, Edge, Zoom, Slack, VS Code, Java, Python, Docker, VPN clients, security tools, browser extensions, and developer utilities. A mature flow detects versions, compares them with an approved baseline, tests in pilot rings, rolls out to production, notifies users, enforces deadlines, reports failures, retries remediation, and escalates devices that remain unhealthy.
+            </p>
+            <p class="t2">
+              Jamf Smart Groups make this practical. Devices can move automatically based on OS version, encryption state, security-agent health, certificate status, app version, storage, department, ownership, compliance, or custom extension attributes. Those groups can then trigger updates, remediation, prompts, certificate repair, Defender reinstall, FileVault key rotation, or escalation.
+            </p>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">10 · Support and continuity</p>
+            <h2 class="h2">Repair experience also belongs in the business case</h2>
+            <p class="t2">
+              Downtime has a cost. AppleCare for Enterprise can reduce operational disruption where the service model fits the organization. Faster repair, replacement, and enterprise support can reduce the need for large spare pools, complex shipping processes, and extended employee downtime.
+            </p>
+            <p class="t2">
+              Replacement workflows also become simpler when the environment is cloud-backed. Lock or erase the old Mac, ship a replacement, let the user sign in, allow Jamf to apply configuration, reinstall Microsoft 365 apps, restore OneDrive data, reapply security controls, and get the employee working again without a traditional device image.
+            </p>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">11 · Roadmap</p>
+            <h2 class="h2">Roll out the platform in phases</h2>
+            <p class="t2">
+              A credible Mac strategy should be phased. Start with assessment, then build the foundation, then connect identity and access, then deploy security, then mature app lifecycle, then improve user experience, then consolidate tools, and finally measure continuously.
+            </p>
+            <pre class="article-code"><code>Practical rollout path
+1. Assess Mac-suitable roles, apps, current endpoint cost, and compliance needs
+2. Configure Apple Business Manager, ADE, Jamf enrollment, FileVault, and baselines
+3. Add Entra registration, Platform SSO, MFA, Conditional Access, and compliance flow
+4. Deploy Defender, Purview, PPPC, system extensions, DLP, and response workflows
+5. Build Self Service, patch policies, pilot rings, production rings, and OS enforcement
+6. Add temporary admin workflows, repair workflows, user guidance, and health checks
+7. Retire duplicate agents and measure support, security, user, and cost outcomes</code></pre>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">12 · Balanced decision</p>
+            <h2 class="h2">Mac is powerful, but it should still be role-based</h2>
+            <p class="t2">
+              A good enterprise strategy does not force Mac everywhere. Windows may still be the better platform for legacy Windows-only applications, engineering tools, manufacturing systems, finance apps, certain peripherals, traditional Group Policy dependencies, or highly cost-sensitive shared-device cases.
+            </p>
+            <p class="t2">
+              The strongest conclusion is balanced: use Mac where it improves security, user experience, developer or creative workflow, operational efficiency, support reduction, and lifecycle value. Use Windows where application compatibility or business requirements make it stronger. Govern the mixed environment centrally through Microsoft Entra, Defender, Purview, Conditional Access, and a clear endpoint operating model.
+            </p>
+            <div class="article-callout">
+              <p class="t2">
+                The strongest design is not Apple versus Microsoft or Jamf versus Intune. It is Apple for the endpoint, Jamf for Apple lifecycle management, and Microsoft for productivity, identity, security, compliance, and AI.
+              </p>
+            </div>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">Useful links</p>
+            <h2 class="h2">References and implementation utilities</h2>
+            <ul class="t2 article-resource-list">
+              <li><a href="https://support.apple.com/en-in/guide/deployment/dep73069dd57/web">Apple Automated Device Enrollment</a><span>Apple deployment guide for automated enrollment flows.</span></li>
+              <li><a href="https://support.apple.com/en-in/guide/deployment/dep7bbb05313/web">Apple Platform SSO</a><span>Apple guidance for platform single sign-on on managed Mac.</span></li>
+              <li><a href="https://learn.microsoft.com/en-us/entra/identity-platform/apple-sso-plugin">Microsoft Enterprise SSO plug-in for Apple devices</a><span>Microsoft identity integration guidance for Apple platforms.</span></li>
+              <li><a href="https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-endpoint-mac">Microsoft Defender for Endpoint on Mac</a><span>Microsoft deployment and operation guidance for Defender on macOS.</span></li>
+              <li><a href="https://learn.microsoft.com/en-us/purview/device-onboarding-offboarding-macos-jamfpro">Onboard macOS devices into Microsoft Purview using Jamf Pro</a><span>Microsoft Purview endpoint DLP onboarding guidance for Jamf-managed Macs.</span></li>
+              <li><a href="https://www.jamf.com/products/jamf-pro/">Jamf Pro</a><span>Apple device management, application deployment, inventory, policies, and remediation platform.</span></li>
+              <li><a href="https://www.apple.com/in/support/professional/enterprise/">AppleCare for Enterprise</a><span>Apple enterprise support and service continuity information.</span></li>
+            </ul>
+          </section>
+        </div>
+      </div>
+    </article>
+
+    <footer class="article-footer">
+      <a class="t2 article-back" href="../index.html">Back to articles</a>
+    </footer>
+  </main>
+</body>
+</html>
