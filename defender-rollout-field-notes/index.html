@@ -58,6 +58,9 @@
     .article-code { background: #081012; color: #f7f5ef; overflow-x: auto; padding: calc(22 * 100vw / var(--page-width)); }
     .article-code code { font-family: Menlo, Consolas, monospace; font-size: calc(14 * 100vw / var(--page-width)); line-height: 1.6; }
     .article-callout { background: #e9e4d9; display: grid; gap: calc(12 * 100vw / var(--page-width)); padding: calc(24 * 100vw / var(--page-width)); }
+    .article-grid-list { display: grid; gap: calc(16 * 100vw / var(--page-width)); grid-template-columns: 1fr; list-style: none; padding: 0; }
+    .article-grid-list li { background: #fffaf0; border: 1px solid rgba(8,16,18,.14); padding: calc(18 * 100vw / var(--page-width)); }
+    .article-grid-list strong { color: #081012; display: block; margin-bottom: calc(6 * 100vw / var(--page-width)); }
     .article-footer { border-top: 1px solid rgba(8,16,18,.22); margin-top: calc(70 * 100vw / var(--page-width)); padding-top: calc(26 * 100vw / var(--page-width)); }
     code { background: rgba(8,16,18,.08); padding: .1em .3em; }
     @media only screen and (min-width: 768px) {
@@ -66,6 +69,7 @@
       .article-layout { grid-template-columns: minmax(220px, .34fr) minmax(0, .86fr); }
       .article-aside { align-self: start; position: sticky; top: calc(42 * 100vw / var(--page-width)); }
       .article-code code { font-size: calc(15 * 100vw / var(--page-width)); }
+      .article-grid-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
     @media only screen and (max-width: 767px) {
       .article-page { padding: 38px 22px; }
@@ -141,6 +145,9 @@
               <li>Defender Vulnerability Management and Defender for Cloud to reduce exposure across devices and cloud workloads.</li>
               <li>Microsoft Sentinel integration for SIEM, SOAR, automation, hunting, and incident orchestration.</li>
             </ul>
+            <p class="t2">
+              This ecosystem matters because attackers do not stay in one control plane. A phishing email can become credential theft, a risky sign-in, lateral movement, cloud app abuse, endpoint persistence, and data exposure. Defender onboarding is strongest when these signals are connected before the first serious incident.
+            </p>
           </section>
 
           <section class="article-section">
@@ -152,6 +159,15 @@
             <p class="t2">
               The value is not simply collecting more logs. The value is reconstructing the attack timeline so analysts can see what happened before the alert, what the user did, which device was affected, whether identity activity changed, and whether the attack touched email or cloud services.
             </p>
+            <figure class="article-figure diagram">
+              <img alt="Defender telemetry map showing endpoint, identity, email, cloud apps, network, and cloud workload signals correlating into Defender XDR incidents" height="720" src="../assets/articles/covers/defender-telemetry-map.svg" width="1280">
+            </figure>
+            <ul class="t2 article-grid-list">
+              <li><strong>Endpoint telemetry</strong>Process execution, file creation and deletion, registry changes, PowerShell and script activity, USB activity, installed apps, and device inventory.</li>
+              <li><strong>Identity telemetry</strong>User authentication, risky sign-ins, session activity, account behavior, privilege use, and identity-related events.</li>
+              <li><strong>Email telemetry</strong>Sender reputation, phishing attempts, malicious attachments, unsafe URLs, mailbox activity, and campaign patterns.</li>
+              <li><strong>Cloud and browser telemetry</strong>Cloud application access, OAuth app activity, browser events, network connections, IPs, URLs, and domain activity.</li>
+            </ul>
           </section>
 
           <section class="article-section">
@@ -163,6 +179,12 @@
             <p class="t2">
               This is where Defender XDR becomes useful operationally. Instead of creating separate alerts across endpoint, identity, email, and cloud tools, it can correlate signals into an incident so security teams understand scope and priority faster.
             </p>
+            <ul class="t2">
+              <li>Device reputation and exposure score help decide whether an alert matters more on one asset than another.</li>
+              <li>User risk and behavior analytics help separate normal activity from suspicious identity movement.</li>
+              <li>Threat intelligence, cloud intelligence, and known IOCs help validate whether activity matches active campaigns.</li>
+              <li>Historical activity and MITRE ATT&CK mapping help analysts understand technique, sequence, and likely intent.</li>
+            </ul>
           </section>
 
           <section class="article-section">
@@ -180,6 +202,9 @@ Trigger Conditional Access policies
 Remove phishing emails and malicious attachments
 Block senders, URLs, domains, IP addresses, and hashes
 Disable malicious OAuth applications and risky sharing links</code></pre>
+            <figure class="article-figure diagram">
+              <img alt="Defender response matrix showing endpoint, identity, email, network, and cloud remediation actions" height="720" src="../assets/articles/covers/defender-response-matrix.svg" width="1280">
+            </figure>
           </section>
 
           <section class="article-section">
@@ -195,6 +220,9 @@ Disable malicious OAuth applications and risky sharing links</code></pre>
               <li>Tamper Protection, Credential Guard, Exploit Protection, application control, and BitLocker recommendations.</li>
               <li>Secure Score and Exposure Score to measure posture and prioritize hardening.</li>
             </ul>
+            <p class="t2">
+              The protection layer should also cover malware, trojans, worms, rootkits, fileless attacks, ransomware, zero-day behavior, malicious executable launches, Office macro abuse, Office child processes, WMI abuse, PSExec misuse, and credential theft attempts. This is how Defender moves from reactive response into preventive posture improvement.
+            </p>
           </section>
 
           <section class="article-section">
@@ -206,6 +234,12 @@ Disable malicious OAuth applications and risky sharing links</code></pre>
             <p class="t2">
               This turns vulnerability management into an operational workflow rather than a static report. Security, EUC, application owners, and infrastructure teams can align remediation around risk, exposure, and business impact.
             </p>
+            <ul class="t2">
+              <li>Prioritize exposed internet-facing devices and high-value assets before lower-risk endpoints.</li>
+              <li>Separate operating system patching, browser patching, application patching, and configuration hardening into owned work queues.</li>
+              <li>Use Secure Score and Exposure Score trends to show whether the environment is getting safer over time.</li>
+              <li>Track unsupported operating systems and high-risk applications as migration or removal work, not just security findings.</li>
+            </ul>
           </section>
 
           <section class="article-section">
@@ -217,6 +251,14 @@ Disable malicious OAuth applications and risky sharing links</code></pre>
             <p class="t2">
               Advanced Hunting adds the proactive layer. Analysts can use KQL to hunt for suspicious PowerShell, credential theft, lateral movement, registry persistence, browser attacks, USB activity, file modifications, email events, and network activity before those patterns become major incidents.
             </p>
+            <pre class="article-code"><code>High-value hunting themes
+Suspicious or encoded PowerShell execution
+Credential theft and unusual authentication patterns
+Lateral movement and remote execution attempts
+Registry persistence and unauthorized software installation
+Sensitive file access and mass file modification
+USB activity on high-risk devices
+Browser abuse, malicious URLs, and cloud app anomalies</code></pre>
           </section>
 
           <section class="article-section">
@@ -240,6 +282,9 @@ Disable malicious OAuth applications and risky sharing links</code></pre>
             <p class="t2">
               These integrations make onboarding more valuable because alerts can become action: create incidents, notify SOC teams, isolate devices, collect evidence, disable accounts, revoke sessions, block malicious infrastructure, launch remediation scripts, and trigger custom playbooks.
             </p>
+            <figure class="article-figure diagram">
+              <img alt="Defender automation integration map showing Sentinel, Logic Apps, ServiceNow, Jira, Teams, Graph API, Intune, Jamf Pro, Entra ID, and cloud services" height="720" src="../assets/articles/covers/defender-automation-integrations.svg" width="1280">
+            </figure>
           </section>
 
           <section class="article-section">

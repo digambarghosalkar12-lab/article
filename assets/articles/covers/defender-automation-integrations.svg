@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-labelledby="title desc">
+  <title id="title">Defender automation integrations</title>
+  <desc id="desc">A visual map of Defender integrations with Sentinel, Logic Apps, ServiceNow, Jira, Teams, Graph API, Intune, Jamf Pro, Entra ID, and cloud services.</desc>
+  <rect width="1280" height="720" fill="#081012"/>
+  <style>
+    .title{font:700 34px Arial,Helvetica,sans-serif;fill:#f7f5ef}
+    .sub{font:400 18px Arial,Helvetica,sans-serif;fill:#c9c3b6}
+    .hub{fill:#d1a05f;stroke:#f7f5ef;stroke-width:3}
+    .node{fill:#123230;stroke:#d1a05f;stroke-width:2}
+    .h{font:700 20px Arial,Helvetica,sans-serif;fill:#081012}
+    .p{font:400 15px Arial,Helvetica,sans-serif;fill:#081012}
+    .nh{font:700 16px Arial,Helvetica,sans-serif;fill:#f7f5ef}
+    .np{font:400 13px Arial,Helvetica,sans-serif;fill:#e9e4d9}
+    .line{stroke:#d1a05f;stroke-width:3;stroke-linecap:round;opacity:.8}
+  </style>
+  <text x="60" y="62" class="title">Automation turns alerts into action</text>
+  <text x="60" y="96" class="sub">Defender onboarding should connect detection to ITSM, SOC communication, identity, endpoint management, and SOAR playbooks.</text>
+
+  <circle cx="640" cy="350" r="118" class="hub"/>
+  <text x="640" y="330" text-anchor="middle" class="h">Defender</text>
+  <text x="640" y="358" text-anchor="middle" class="p">incident and response</text>
+  <text x="640" y="382" text-anchor="middle" class="p">operating loop</text>
+
+  <rect x="80" y="150" width="210" height="78" rx="18" class="node"/>
+  <text x="110" y="184" class="nh">Microsoft Sentinel</text>
+  <text x="110" y="208" class="np">SIEM and SOAR</text>
+  <rect x="80" y="315" width="210" height="78" rx="18" class="node"/>
+  <text x="110" y="349" class="nh">Logic Apps</text>
+  <text x="110" y="373" class="np">playbook automation</text>
+  <rect x="80" y="480" width="210" height="78" rx="18" class="node"/>
+  <text x="110" y="514" class="nh">ServiceNow / Jira</text>
+  <text x="110" y="538" class="np">ticket and ownership</text>
+
+  <rect x="985" y="150" width="210" height="78" rx="18" class="node"/>
+  <text x="1015" y="184" class="nh">Teams</text>
+  <text x="1015" y="208" class="np">SOC notification</text>
+  <rect x="985" y="315" width="210" height="78" rx="18" class="node"/>
+  <text x="1015" y="349" class="nh">Graph API</text>
+  <text x="1015" y="373" class="np">custom response</text>
+  <rect x="985" y="480" width="210" height="78" rx="18" class="node"/>
+  <text x="1015" y="514" class="nh">Intune / Jamf Pro</text>
+  <text x="1015" y="538" class="np">endpoint action</text>
+
+  <rect x="460" y="100" width="360" height="70" rx="18" class="node"/>
+  <text x="490" y="134" class="nh">Entra ID and Conditional Access</text>
+  <text x="490" y="156" class="np">disable account, revoke sessions, enforce policy</text>
+  <rect x="460" y="552" width="360" height="70" rx="18" class="node"/>
+  <text x="490" y="586" class="nh">Power Automate and cloud services</text>
+  <text x="490" y="608" class="np">notifications, evidence collection, remediation workflows</text>
+
+  <line x1="290" y1="189" x2="540" y2="300" class="line"/>
+  <line x1="290" y1="354" x2="522" y2="354" class="line"/>
+  <line x1="290" y1="519" x2="540" y2="400" class="line"/>
+  <line x1="985" y1="189" x2="740" y2="300" class="line"/>
+  <line x1="985" y1="354" x2="758" y2="354" class="line"/>
+  <line x1="985" y1="519" x2="740" y2="400" class="line"/>
+  <line x1="640" y1="170" x2="640" y2="232" class="line"/>
+  <line x1="640" y1="468" x2="640" y2="552" class="line"/>
+</svg>

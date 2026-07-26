@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-labelledby="title desc">
+  <title id="title">Defender telemetry map</title>
+  <desc id="desc">A visual map of Defender telemetry sources and how they become unified incidents.</desc>
+  <rect width="1280" height="720" fill="#081012"/>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0 0 10 5 0 10z" fill="#d1a05f"/>
+    </marker>
+  </defs>
+  <style>
+    .title{font:700 34px Arial,Helvetica,sans-serif;fill:#f7f5ef}
+    .sub{font:400 18px Arial,Helvetica,sans-serif;fill:#c9c3b6}
+    .source{fill:#123230;stroke:#d1a05f;stroke-width:2}
+    .hub{fill:#d1a05f;stroke:#f7f5ef;stroke-width:3}
+    .h{font:700 18px Arial,Helvetica,sans-serif;fill:#f7f5ef}
+    .p{font:400 14px Arial,Helvetica,sans-serif;fill:#e9e4d9}
+    .darkH{font:700 22px Arial,Helvetica,sans-serif;fill:#081012}
+    .darkP{font:400 15px Arial,Helvetica,sans-serif;fill:#081012}
+    .line{fill:none;stroke:#d1a05f;stroke-width:3;stroke-linecap:round;marker-end:url(#arrow);opacity:.9}
+  </style>
+  <text x="60" y="62" class="title">Telemetry becomes investigation context</text>
+  <text x="60" y="96" class="sub">Defender is stronger when endpoint, identity, email, cloud, and browser signals converge into one incident story.</text>
+
+  <rect x="70" y="150" width="230" height="92" rx="18" class="source"/>
+  <text x="100" y="187" class="h">Endpoint</text>
+  <text x="100" y="215" class="p">Processes, files, registry,</text>
+  <text x="100" y="236" class="p">scripts, USB, inventory</text>
+
+  <rect x="70" y="292" width="230" height="92" rx="18" class="source"/>
+  <text x="100" y="329" class="h">Identity</text>
+  <text x="100" y="357" class="p">Authentication, user risk,</text>
+  <text x="100" y="378" class="p">sessions, account behavior</text>
+
+  <rect x="70" y="434" width="230" height="92" rx="18" class="source"/>
+  <text x="100" y="471" class="h">Email</text>
+  <text x="100" y="499" class="p">Phishing, attachments,</text>
+  <text x="100" y="520" class="p">URLs, senders, campaigns</text>
+
+  <rect x="980" y="150" width="230" height="92" rx="18" class="source"/>
+  <text x="1010" y="187" class="h">Cloud apps</text>
+  <text x="1010" y="215" class="p">SaaS access, sharing,</text>
+  <text x="1010" y="236" class="p">OAuth apps, risky activity</text>
+
+  <rect x="980" y="292" width="230" height="92" rx="18" class="source"/>
+  <text x="1010" y="329" class="h">Network</text>
+  <text x="1010" y="357" class="p">Connections, IPs, URLs,</text>
+  <text x="1010" y="378" class="p">domains, browser events</text>
+
+  <rect x="980" y="434" width="230" height="92" rx="18" class="source"/>
+  <text x="1010" y="471" class="h">Cloud workloads</text>
+  <text x="1010" y="499" class="p">Azure, servers, exposure,</text>
+  <text x="1010" y="520" class="p">misconfiguration signals</text>
+
+  <circle cx="640" cy="338" r="128" class="hub"/>
+  <text x="640" y="314" text-anchor="middle" class="darkH">Defender XDR</text>
+  <text x="640" y="345" text-anchor="middle" class="darkP">correlates signals into</text>
+  <text x="640" y="369" text-anchor="middle" class="darkP">one unified incident</text>
+
+  <path d="M300 196C405 196 465 244 528 289" class="line"/>
+  <path d="M300 338H512" class="line"/>
+  <path d="M300 480C405 480 465 432 528 387" class="line"/>
+  <path d="M980 196C875 196 815 244 752 289" class="line"/>
+  <path d="M980 338H768" class="line"/>
+  <path d="M980 480C875 480 815 432 752 387" class="line"/>
+
+  <text x="407" y="617" class="p">Result: faster scope, stronger prioritization, clearer response ownership, and better post-incident hardening.</text>
+</svg>
