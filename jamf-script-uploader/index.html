@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Jamf Script Uploader: API-Safe Script Deployment for Jamf Pro | Digambar Ghosalkar</title>
-  <meta name="description" content="A project article on Jamf Script Uploader, a macOS shell utility that uploads scripts to Jamf Pro through OAuth client credentials, validation, timestamped names, and safer secret handling.">
+  <meta name="description" content="A project article on Jamf Script Uploader v1.1, a macOS shell utility that uploads scripts to Jamf Pro through OAuth client credentials, validation, timestamped names, optional parameter labels, and safer secret handling.">
   <meta name="author" content="Digambar Ghosalkar">
   <meta name="robots" content="index,follow">
   <meta name="keywords" content="Jamf Script Uploader, Jamf Pro, Jamf API, OAuth client credentials, macOS scripts, Jamf automation, endpoint management, API role, Create Scripts">
@@ -12,14 +12,14 @@
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="Digambar Ghosalkar">
   <meta property="og:title" content="Jamf Script Uploader: API-Safe Script Deployment for Jamf Pro">
-  <meta property="og:description" content="How a small macOS shell tool makes Jamf Pro script uploads safer with OAuth, validation, timestamped names, and least-privilege API roles.">
+  <meta property="og:description" content="How a small macOS shell tool makes Jamf Pro script uploads safer with OAuth, validation, timestamped names, optional parameter labels, and least-privilege API roles.">
   <meta property="og:url" content="https://article.digambarghosalkar.com/jamf-script-uploader/">
   <meta property="og:image" content="https://article.digambarghosalkar.com/assets/articles/covers/jamf-script-uploader.svg">
   <meta property="og:image:width" content="900">
   <meta property="og:image:height" content="900">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Jamf Script Uploader: API-Safe Script Deployment for Jamf Pro">
-  <meta name="twitter:description" content="A macOS Jamf Pro utility for safer script upload through OAuth client credentials, validation, and clean operator feedback.">
+  <meta name="twitter:description" content="A macOS Jamf Pro utility for safer script upload through OAuth client credentials, validation, optional Jamf parameter labels, and clean operator feedback.">
   <meta name="twitter:image" content="https://article.digambarghosalkar.com/assets/articles/covers/jamf-script-uploader.svg">
   <meta name="theme-color" content="#f7f5ef">
   <link rel="icon" type="image/svg+xml" href="../assets/icon.svg">
@@ -27,6 +27,29 @@
   <link rel="stylesheet" href="../styles/fonts.css">
   <link rel="stylesheet" href="../styles/typography.css">
   <link rel="stylesheet" href="../styles/globals.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Jamf Script Uploader: API-Safe Script Deployment for Jamf Pro",
+    "description": "A project article on Jamf Script Uploader v1.1, a macOS shell utility that uploads scripts to Jamf Pro through OAuth client credentials, validation, timestamped names, optional parameter labels, and safer secret handling.",
+    "image": "https://article.digambarghosalkar.com/assets/articles/covers/jamf-script-uploader.svg",
+    "author": {
+      "@type": "Person",
+      "name": "Digambar Ghosalkar"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Digambar Ghosalkar"
+    },
+    "datePublished": "2026-07-12",
+    "dateModified": "2026-07-27",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://article.digambarghosalkar.com/jamf-script-uploader/"
+    }
+  }
+  </script>
   <style>
     body { background: #f7f5ef; color: var(--color-dark); min-height: 100vh; }
     .article-page { box-sizing: border-box; min-height: 100vh; padding: calc(40 * 100vw / var(--page-width)); }
@@ -78,7 +101,7 @@
 <body>
   <main class="article-page">
     <nav class="article-nav" aria-label="Article navigation">
-      <a class="t6 font-romie" href="https://digambarghosalkar.com/">articles</a>
+      <a class="t6 font-romie" href="../index.html">articles</a>
       <a class="t6 font-romie" href="https://digambarghosalkar.com/">home</a>
     </nav>
 
@@ -87,9 +110,9 @@
         <p class="label article-label">Jamf automation</p>
         <h1 class="h1 article-title">Jamf Script Uploader: API-Safe Script Deployment for Jamf Pro</h1>
         <p class="t1 article-lede">
-          Jamf Script Uploader is a focused macOS shell utility for administrators who need to upload scripts into Jamf Pro without turning a simple operational task into a risky copy-paste routine.
+          Jamf Script Uploader is a focused macOS shell utility for administrators who need to upload scripts into Jamf Pro without turning a simple operational task into a risky copy-paste routine. Version 1.1 adds optional Jamf parameter-label configuration, so scripts that expect values from parameters 4 through 11 can be documented during upload.
         </p>
-        <p class="t2 article-meta">Project article · Jamf Pro · OAuth · macOS shell · API Client · script upload</p>
+        <p class="t2 article-meta">Project article · Jamf Pro · OAuth · macOS shell · API Client · script upload · v1.1.0</p>
         <a class="article-repo-link t2" href="https://github.com/digambarghosalkar12-lab/jamf-script-uploader" rel="noopener noreferrer" target="_blank" aria-label="Open Jamf Script Uploader project on GitHub">
           <svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56v-2.16c-3.2.7-3.87-1.38-3.87-1.38-.52-1.33-1.28-1.68-1.28-1.68-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.16 1.18A10.9 10.9 0 0 1 12 6.03c.98 0 1.96.13 2.88.39 2.19-1.49 3.15-1.18 3.15-1.18.63 1.58.24 2.75.12 3.04.74.8 1.18 1.82 1.18 3.08 0 4.41-2.69 5.39-5.25 5.67.42.36.79 1.07.79 2.16v3.16c0 .31.21.68.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
           View project on GitHub
@@ -104,7 +127,7 @@
           <p class="label article-section-label">Article index</p>
           <dl class="t2">
             <div><dt>Problem</dt><dd>Uploading scripts manually can create naming conflicts, unclear failures, and unsafe credential habits.</dd></div>
-            <div><dt>Approach</dt><dd>Prompt for credentials at runtime, validate the selected file, timestamp the Jamf name, and upload through the API.</dd></div>
+            <div><dt>Approach</dt><dd>Prompt for credentials at runtime, validate the selected file, collect optional parameter labels, timestamp the Jamf name, and upload through the API.</dd></div>
             <div><dt>Stack</dt><dd>bash, curl, plutil, base64, sed, osascript, Jamf OAuth, and the Classic Scripts endpoint.</dd></div>
           </dl>
         </aside>
@@ -117,7 +140,7 @@
               Jamf Pro script upload is often part of day-to-day endpoint operations: packaging a remediation script, placing it in Jamf, and then attaching it to a policy. The task is simple, but the surrounding details matter. A wrong script type, reused name, missing permission, or copied secret can slow down the work or create avoidable risk.
             </p>
             <p class="t2">
-              Jamf Script Uploader wraps that flow into one interactive macOS utility. It asks for the Jamf tenant, API Client ID, and Client Secret, lets the admin choose a local script, validates the file, appends a timestamp, uploads it, and returns the Jamf script name and ID when Jamf provides one.
+              Jamf Script Uploader wraps that flow into one interactive macOS utility. It asks for the Jamf tenant, API Client ID, and Client Secret, lets the admin choose a local script, validates the file, optionally collects Jamf parameter labels, appends a timestamp, uploads it, and returns the Jamf script name and ID when Jamf provides one.
             </p>
           </section>
 
@@ -136,8 +159,12 @@ API Client ID and Client Secret
 Script type: Shell, Bash, Zsh, Python, Perl, or Ruby
 Local file selection
 Display name + timestamp
+Optional parameter labels: N or last parameter number 4-11
 Upload to Jamf Pro
 Return final name and Jamf script ID</code></pre>
+            <p class="t2">
+              The v1.1 flow adds one important operator choice: enter <code>N</code> for no parameters, or enter the highest Jamf parameter number from <code>4</code> through <code>11</code>. If the admin enters <code>6</code>, the uploader asks for labels for <code>$4</code>, <code>$5</code>, and <code>$6</code>; the remaining parameter fields stay blank.
+            </p>
           </section>
 
           <figure class="article-figure diagram">
@@ -161,7 +188,7 @@ Return final name and Jamf script ID</code></pre>
             <p class="label article-section-label">04 · API design</p>
             <h2 class="h2">Modern token flow, classic script creation endpoint</h2>
             <p class="t2">
-              The tool uses Jamf Pro OAuth client credentials to obtain a bearer token, then submits a Classic API script object to create the script. The request includes a name, filename, priority, category, blank optional metadata, and Base64-encoded script contents.
+              The tool uses Jamf Pro OAuth client credentials to obtain a bearer token, then submits a Classic API script object to create the script. The request includes a name, filename, priority, category, optional parameter labels, blank optional metadata, and Base64-encoded script contents.
             </p>
             <pre class="article-code"><code>POST /api/v1/oauth/token
 grant_type=client_credentials
@@ -170,7 +197,7 @@ POST /JSSResource/scripts/id/0
 Authorization: Bearer token
 Content-Type: application/xml</code></pre>
             <p class="t2">
-              Upload defaults are deliberately conservative: category is <code>None</code>, priority is <code>After</code>, info and notes are blank, and parameters 4 through 11 are left empty.
+              Upload defaults are deliberately conservative: category is <code>None</code>, priority is <code>After</code>, and info and notes are blank. Parameters 4 through 11 are blank when the admin selects <code>N</code>, or filled only for the selected parameter range.
             </p>
           </section>
 
@@ -189,7 +216,23 @@ Content-Type: application/xml</code></pre>
           </section>
 
           <section class="article-section">
-            <p class="label article-section-label">06 · Troubleshooting</p>
+            <p class="label article-section-label">06 · Parameter labels</p>
+            <h2 class="h2">Document script inputs at upload time</h2>
+            <p class="t2">
+              Jamf script parameters are easy to leave vague when scripts are uploaded in a hurry. Version 1.1 makes the uploader ask whether parameter labels should be added, then writes those labels into the Jamf script XML. This helps the next administrator understand what a policy should pass to the script without opening the script body first.
+            </p>
+            <pre class="article-code"><code>Optional Jamf parameters
+N      = leave parameters 4-11 blank
+4      = prompt for parameter $4
+6      = prompt for parameters $4, $5, and $6
+11     = prompt for parameters $4 through $11</code></pre>
+            <p class="t2">
+              The success output now reports whether no parameters were configured or which range was populated, making the upload result easier to capture in a change record.
+            </p>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">07 · Troubleshooting</p>
             <h2 class="h2">Clear failures beat silent upload problems</h2>
             <p class="t2">
               The utility reports HTTP status codes and Jamf response bodies so admins can see whether the issue is authentication, authorization, URL format, certificate trust, proxy behavior, or file validation.
@@ -203,20 +246,20 @@ Content-Type: application/xml</code></pre>
           </section>
 
           <section class="article-section">
-            <p class="label article-section-label">07 · What this solves</p>
+            <p class="label article-section-label">08 · What this solves</p>
             <h2 class="h2">Safer script deployment without a heavy platform</h2>
             <p class="t2">
               The value of this project is its shape: small enough to audit, narrow enough to understand, and useful enough for daily Jamf work. It removes repetitive upload friction while keeping the sensitive pieces visible and controlled.
             </p>
             <p class="t2">
-              For endpoint teams, that means cleaner script names, predictable upload defaults, least-privilege API access, and a clear success result that can be recorded in change notes or deployment tickets.
+              For endpoint teams, that means cleaner script names, predictable upload defaults, least-privilege API access, optional parameter documentation, and a clear success result that can be recorded in change notes or deployment tickets.
             </p>
           </section>
         </div>
       </div>
 
       <footer class="article-footer">
-        <a class="article-back t1 font-romie" href="https://digambarghosalkar.com/">Back to articles</a>
+        <a class="article-back t1 font-romie" href="../index.html">Back to articles</a>
       </footer>
     </article>
   </main>
