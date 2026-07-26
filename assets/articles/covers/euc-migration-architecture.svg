@@ -1,51 +1,69 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-labelledby="title desc">
   <title id="title">Local-first EUC migration architecture</title>
-  <desc id="desc">Diagram showing staged local assets, LaunchDaemon monitoring, old Jamf removal, new MDM enrollment, and local validation.</desc>
+  <desc id="desc">A clean architecture diagram showing pre-staged assets, a local daemon, old MDM removal, new MDM enrollment, Swift Dialog guidance, and validation.</desc>
   <rect width="1280" height="720" fill="#f7f5ef"/>
+  <defs>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="14" stdDeviation="16" flood-color="#081012" flood-opacity=".12"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 10 5 0 10z" fill="#123230"/>
+    </marker>
+  </defs>
   <style>
     .title{font:700 34px Arial,Helvetica,sans-serif;fill:#081012}
     .sub{font:400 18px Arial,Helvetica,sans-serif;fill:#59645d}
-    .box{fill:#fffaf0;stroke:#123230;stroke-width:3}
-    .dark{fill:#123230}
-    .gold{fill:#d1a05f}
-    .txt{font:700 22px Arial,Helvetica,sans-serif;fill:#081012}
-    .small{font:400 17px Arial,Helvetica,sans-serif;fill:#3b4642}
-    .white{fill:#f7f5ef}
-    .line{fill:none;stroke:#123230;stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
-    .dash{fill:none;stroke:#6d786f;stroke-width:3;stroke-dasharray:10 10;stroke-linecap:round}
+    .box{fill:#fffaf0;stroke:#123230;stroke-width:2.5;filter:url(#shadow)}
+    .soft{fill:#e9e4d9;stroke:#d1a05f;stroke-width:2.5;filter:url(#shadow)}
+    .dark{fill:#123230;filter:url(#shadow)}
+    .h{font:700 21px Arial,Helvetica,sans-serif;fill:#081012}
+    .p{font:400 15px Arial,Helvetica,sans-serif;fill:#3b4642}
+    .whiteH{font:700 20px Arial,Helvetica,sans-serif;fill:#f7f5ef}
+    .whiteP{font:400 15px Arial,Helvetica,sans-serif;fill:#e9e4d9}
+    .line{fill:none;stroke:#123230;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;marker-end:url(#arrow)}
+    .dash{fill:none;stroke:#6d786f;stroke-width:3;stroke-dasharray:9 11;stroke-linecap:round}
   </style>
   <text x="60" y="62" class="title">Local-first macOS MDM migration</text>
   <text x="60" y="96" class="sub">The Mac carries the migration engine locally, so the workflow survives after the old MDM channel is removed.</text>
 
-  <rect x="60" y="160" width="250" height="142" rx="14" class="box"/>
-  <text x="88" y="205" class="txt">Pre-stage</text>
-  <text x="88" y="238" class="small">Scripts, dialog assets,</text>
-  <text x="88" y="264" class="small">API config, LaunchDaemon</text>
+  <rect x="60" y="158" width="280" height="150" rx="18" class="box"/>
+  <text x="92" y="205" class="h">Pre-stage locally</text>
+  <text x="92" y="238" class="p">Scripts, dialog assets, API</text>
+  <text x="92" y="262" class="p">settings, launchd items, and</text>
+  <text x="92" y="286" class="p">recovery instructions.</text>
 
-  <rect x="390" y="160" width="250" height="142" rx="14" class="box"/>
-  <text x="418" y="205" class="txt">Local daemon</text>
-  <text x="418" y="238" class="small">Runs independently</text>
-  <text x="418" y="264" class="small">and monitors state</text>
+  <rect x="405" y="158" width="280" height="150" rx="18" class="box"/>
+  <text x="437" y="205" class="h">Local daemon</text>
+  <text x="437" y="238" class="p">Runs outside Jamf dependency</text>
+  <text x="437" y="262" class="p">and watches each migration</text>
+  <text x="437" y="286" class="p">state independently.</text>
 
-  <rect x="720" y="160" width="250" height="142" rx="14" class="box"/>
-  <text x="748" y="205" class="txt">MDM bridge</text>
-  <text x="748" y="238" class="small">Remove old Jamf MDM</text>
-  <text x="748" y="264" class="small">start new enrollment</text>
+  <rect x="750" y="158" width="280" height="150" rx="18" class="box"/>
+  <text x="782" y="205" class="h">MDM bridge</text>
+  <text x="782" y="238" class="p">Remove old Jamf profile, then</text>
+  <text x="782" y="262" class="p">guide the device into the new</text>
+  <text x="782" y="286" class="p">MDM enrollment path.</text>
 
-  <rect x="970" y="430" width="250" height="142" rx="14" class="box"/>
-  <text x="998" y="475" class="txt">Validated Mac</text>
-  <text x="998" y="508" class="small">Profiles, FileVault,</text>
-  <text x="998" y="534" class="small">bootstrap token, users</text>
+  <rect x="910" y="456" width="290" height="150" rx="18" class="box"/>
+  <text x="942" y="503" class="h">Validated Mac</text>
+  <text x="942" y="536" class="p">Profiles, FileVault, bootstrap</text>
+  <text x="942" y="560" class="p">token, and local user state are</text>
+  <text x="942" y="584" class="p">confirmed before completion.</text>
 
-  <path d="M310 231h80M640 231h80M845 302c0 115 80 199 125 199" class="line"/>
-  <path d="M515 302v260c0 44 35 79 79 79h415" class="dash"/>
-  <circle cx="515" cy="558" r="54" class="dark"/>
-  <text x="515" y="552" text-anchor="middle" class="white" style="font:700 18px Arial">retry</text>
-  <text x="515" y="576" text-anchor="middle" class="white" style="font:700 18px Arial">loop</text>
+  <rect x="100" y="456" width="300" height="150" rx="18" class="soft"/>
+  <text x="132" y="503" class="h">Swift Dialog UX</text>
+  <text x="132" y="536" class="p">Shows progress, requests auth,</text>
+  <text x="132" y="560" class="p">and gives the user a clear next</text>
+  <text x="132" y="584" class="p">step during the handoff.</text>
 
-  <rect x="100" y="430" width="280" height="142" rx="14" fill="#e9e4d9" stroke="#d1a05f" stroke-width="3"/>
-  <text x="128" y="475" class="txt">Swift Dialog</text>
-  <text x="128" y="508" class="small">Guides the user, requests</text>
-  <text x="128" y="534" class="small">auth, shows progress</text>
-  <path d="M380 501h82" class="line"/>
+  <circle cx="586" cy="531" r="70" class="dark"/>
+  <text x="586" y="519" text-anchor="middle" class="whiteH">Retry loop</text>
+  <text x="586" y="548" text-anchor="middle" class="whiteP">state driven</text>
+
+  <path d="M340 233h63" class="line"/>
+  <path d="M685 233h63" class="line"/>
+  <path d="M890 308c0 98 53 148 117 148" class="line"/>
+  <path d="M400 531h114" class="line"/>
+  <path d="M656 531h252" class="line"/>
+  <path d="M586 461V336c0-56 45-103 101-103h61" class="dash"/>
 </svg>

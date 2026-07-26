@@ -1,45 +1,63 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-labelledby="title desc">
   <title id="title">EUC migration state machine</title>
-  <desc id="desc">State machine for macOS MDM migration validation using profiles, FileVault, bootstrap token, and local user checks.</desc>
+  <desc id="desc">A state machine for validating macOS MDM migration readiness, enrollment, security repair, local user state, and completion.</desc>
   <rect width="1280" height="720" fill="#081012"/>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 10 5 0 10z" fill="#d1a05f"/>
+    </marker>
+  </defs>
   <style>
     .title{font:700 34px Arial,Helvetica,sans-serif;fill:#f7f5ef}
     .sub{font:400 18px Arial,Helvetica,sans-serif;fill:#c9c3b6}
-    .box{fill:#123230;stroke:#d1a05f;stroke-width:3}
-    .ok{fill:#d1a05f}
-    .txt{font:700 22px Arial,Helvetica,sans-serif;fill:#f7f5ef}
-    .small{font:400 17px Arial,Helvetica,sans-serif;fill:#e9e4d9}
-    .dark{fill:#081012}
-    .line{fill:none;stroke:#d1a05f;stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
+    .box{fill:#123230;stroke:#d1a05f;stroke-width:2.5}
+    .done{fill:#d1a05f;stroke:#f7f5ef;stroke-width:2.5}
+    .h{font:700 20px Arial,Helvetica,sans-serif;fill:#f7f5ef}
+    .p{font:400 15px Arial,Helvetica,sans-serif;fill:#e9e4d9}
+    .darkH{font:700 20px Arial,Helvetica,sans-serif;fill:#081012}
+    .darkP{font:400 15px Arial,Helvetica,sans-serif;fill:#081012}
+    .line{fill:none;stroke:#d1a05f;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;marker-end:url(#arrow)}
+    .muted{fill:none;stroke:#6d786f;stroke-width:3;stroke-linecap:round;stroke-dasharray:10 12}
+    .note{font:400 17px Arial,Helvetica,sans-serif;fill:#c9c3b6}
   </style>
   <text x="60" y="62" class="title">Migration validation state machine</text>
-  <text x="60" y="96" class="sub">The daemon advances only when local state proves the device is ready.</text>
+  <text x="60" y="96" class="sub">The daemon advances only when local evidence proves the device is ready for the next state.</text>
 
-  <rect x="70" y="170" width="220" height="116" rx="14" class="box"/>
-  <text x="100" y="214" class="txt">Ready</text>
-  <text x="100" y="247" class="small">assets staged locally</text>
+  <rect x="60" y="164" width="215" height="132" rx="18" class="box"/>
+  <text x="92" y="209" class="h">Ready</text>
+  <text x="92" y="242" class="p">Assets staged</text>
+  <text x="92" y="265" class="p">and checks prepared</text>
 
-  <rect x="370" y="170" width="220" height="116" rx="14" class="box"/>
-  <text x="400" y="214" class="txt">Old MDM</text>
-  <text x="400" y="247" class="small">removed safely</text>
+  <rect x="335" y="164" width="215" height="132" rx="18" class="box"/>
+  <text x="367" y="209" class="h">Old MDM</text>
+  <text x="367" y="242" class="p">Profile removed</text>
+  <text x="367" y="265" class="p">only after readiness</text>
 
-  <rect x="670" y="170" width="220" height="116" rx="14" class="box"/>
-  <text x="700" y="214" class="txt">Enroll</text>
-  <text x="700" y="247" class="small">new MDM profile seen</text>
+  <rect x="610" y="164" width="215" height="132" rx="18" class="box"/>
+  <text x="642" y="209" class="h">Enroll</text>
+  <text x="642" y="242" class="p">New MDM profile</text>
+  <text x="642" y="265" class="p">detected locally</text>
 
-  <rect x="970" y="170" width="220" height="116" rx="14" class="box"/>
-  <text x="1000" y="214" class="txt">Secure</text>
-  <text x="1000" y="247" class="small">keys and tokens escrowed</text>
+  <rect x="885" y="164" width="250" height="132" rx="18" class="box"/>
+  <text x="917" y="209" class="h">Security repair</text>
+  <text x="917" y="242" class="p">FileVault key and</text>
+  <text x="917" y="265" class="p">bootstrap token escrow</text>
 
-  <rect x="370" y="440" width="220" height="116" rx="14" class="box"/>
-  <text x="400" y="484" class="txt">User state</text>
-  <text x="400" y="517" class="small">Secure Token, admin, FV</text>
+  <rect x="320" y="430" width="260" height="132" rx="18" class="box"/>
+  <text x="352" y="475" class="h">Local user state</text>
+  <text x="352" y="508" class="p">Secure Token, admin</text>
+  <text x="352" y="531" class="p">rights, FileVault user</text>
 
-  <rect x="670" y="440" width="220" height="116" rx="14" class="ok"/>
-  <text x="700" y="484" class="dark" style="font:700 22px Arial">Complete</text>
-  <text x="700" y="517" class="dark" style="font:400 17px Arial">managed and recoverable</text>
+  <rect x="700" y="430" width="260" height="132" rx="18" class="done"/>
+  <text x="732" y="475" class="darkH">Complete</text>
+  <text x="732" y="508" class="darkP">Managed, recoverable,</text>
+  <text x="732" y="531" class="darkP">and ready for support</text>
 
-  <path d="M290 228h80M590 228h80M890 228h80M1080 286v110c0 56-44 102-100 102h-90M590 498h80" class="line"/>
-  <path d="M480 440V320c0-53 43-96 96-96h94" class="line" opacity=".45"/>
-  <text x="90" y="642" class="small">If any state fails, the daemon stays active, prompts the user when needed, and retries validation.</text>
+  <path d="M275 230h58" class="line"/>
+  <path d="M550 230h58" class="line"/>
+  <path d="M825 230h58" class="line"/>
+  <path d="M1010 296v82c0 65-52 118-117 118h-3" class="line"/>
+  <path d="M580 496h118" class="line"/>
+  <path d="M450 430V330c0-55 45-100 100-100h58" class="muted"/>
+  <text x="80" y="642" class="note">Failure does not mean the workflow ends. The daemon stays active, prompts the user when needed, and retries validation.</text>
 </svg>

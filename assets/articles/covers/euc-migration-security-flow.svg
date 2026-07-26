@@ -1,49 +1,69 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-labelledby="title desc">
   <title id="title">FileVault and bootstrap token security flow</title>
-  <desc id="desc">Diagram showing old Jamf FileVault recovery key retrieval, new MDM escrow, bootstrap token re-escrow, and local user validation.</desc>
+  <desc id="desc">A security handoff diagram for Jamf FileVault recovery key retrieval, new MDM escrow, bootstrap token re-escrow, and local user validation.</desc>
   <rect width="1280" height="720" fill="#f7f5ef"/>
+  <defs>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="14" stdDeviation="16" flood-color="#081012" flood-opacity=".12"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 10 5 0 10z" fill="#123230"/>
+    </marker>
+  </defs>
   <style>
     .title{font:700 34px Arial,Helvetica,sans-serif;fill:#081012}
     .sub{font:400 18px Arial,Helvetica,sans-serif;fill:#59645d}
-    .box{fill:#fffaf0;stroke:#123230;stroke-width:3}
-    .green{fill:#123230}
-    .gold{fill:#d1a05f}
-    .txt{font:700 22px Arial,Helvetica,sans-serif;fill:#081012}
-    .small{font:400 17px Arial,Helvetica,sans-serif;fill:#3b4642}
-    .white{fill:#f7f5ef}
-    .line{fill:none;stroke:#123230;stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
+    .box{fill:#fffaf0;stroke:#123230;stroke-width:2.5;filter:url(#shadow)}
+    .gold{fill:#d1a05f;stroke:#123230;stroke-width:2.5;filter:url(#shadow)}
+    .green{fill:#123230;filter:url(#shadow)}
+    .h{font:700 20px Arial,Helvetica,sans-serif;fill:#081012}
+    .p{font:400 15px Arial,Helvetica,sans-serif;fill:#3b4642}
+    .whiteH{font:700 20px Arial,Helvetica,sans-serif;fill:#f7f5ef}
+    .whiteP{font:400 15px Arial,Helvetica,sans-serif;fill:#e9e4d9}
+    .line{fill:none;stroke:#123230;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;marker-end:url(#arrow)}
   </style>
   <text x="60" y="62" class="title">Security handoff during migration</text>
   <text x="60" y="96" class="sub">Recovery and authorization state are transferred and revalidated before the Mac is marked complete.</text>
 
-  <rect x="70" y="170" width="250" height="132" rx="14" class="box"/>
-  <text x="100" y="213" class="txt">Old Jamf MDM</text>
-  <text x="100" y="246" class="small">FileVault PRK retrieved</text>
-  <text x="100" y="272" class="small">through controlled API</text>
+  <rect x="60" y="162" width="280" height="150" rx="18" class="box"/>
+  <text x="92" y="209" class="h">Old Jamf MDM</text>
+  <text x="92" y="242" class="p">FileVault personal recovery</text>
+  <text x="92" y="266" class="p">key is retrieved through a</text>
+  <text x="92" y="290" class="p">controlled API workflow.</text>
 
-  <rect x="405" y="170" width="250" height="132" rx="14" class="box"/>
-  <text x="435" y="213" class="txt">Local daemon</text>
-  <text x="435" y="246" class="small">holds migration state</text>
-  <text x="435" y="272" class="small">and validates outcomes</text>
+  <rect x="405" y="162" width="280" height="150" rx="18" class="box"/>
+  <text x="437" y="209" class="h">Local daemon</text>
+  <text x="437" y="242" class="p">Keeps migration state, retry</text>
+  <text x="437" y="266" class="p">logic, logs, and validation</text>
+  <text x="437" y="290" class="p">outside server dependency.</text>
 
-  <rect x="740" y="170" width="250" height="132" rx="14" class="box"/>
-  <text x="770" y="213" class="txt">New MDM</text>
-  <text x="770" y="246" class="small">escrow recovery key</text>
-  <text x="770" y="272" class="small">and management state</text>
+  <rect x="750" y="162" width="280" height="150" rx="18" class="box"/>
+  <text x="782" y="209" class="h">New MDM</text>
+  <text x="782" y="242" class="p">Receives recovery escrow,</text>
+  <text x="782" y="266" class="p">management profile state,</text>
+  <text x="782" y="290" class="p">and final inventory signals.</text>
 
-  <rect x="405" y="440" width="250" height="132" rx="14" class="box"/>
-  <text x="435" y="483" class="txt">profiles binary</text>
-  <text x="435" y="516" class="small">bootstrap token status</text>
-  <text x="435" y="542" class="small">enrollment validation</text>
+  <rect x="305" y="450" width="300" height="150" rx="18" class="box"/>
+  <text x="337" y="497" class="h">profiles binary</text>
+  <text x="337" y="530" class="p">Checks enrollment status and</text>
+  <text x="337" y="554" class="p">re-escrows bootstrap token</text>
+  <text x="337" y="578" class="p">after new enrollment.</text>
 
-  <rect x="740" y="440" width="250" height="132" rx="14" class="gold"/>
-  <text x="770" y="483" class="txt">Local user</text>
-  <text x="770" y="516" class="small">Secure Token, admin,</text>
-  <text x="770" y="542" class="small">FileVault readiness</text>
+  <rect x="690" y="450" width="300" height="150" rx="18" class="gold"/>
+  <text x="722" y="497" class="h">Local user checks</text>
+  <text x="722" y="530" class="p">Secure Token, admin rights,</text>
+  <text x="722" y="554" class="p">FileVault user readiness,</text>
+  <text x="722" y="578" class="p">and prompted repair.</text>
 
-  <path d="M320 236h85M655 236h85M865 302v138M655 506h85" class="line"/>
-  <circle cx="1080" cy="236" r="76" class="green"/>
-  <text x="1080" y="225" text-anchor="middle" class="white" style="font:700 20px Arial">recoverable</text>
-  <text x="1080" y="253" text-anchor="middle" class="white" style="font:700 20px Arial">managed Mac</text>
-  <path d="M990 236h14" class="line"/>
+  <circle cx="1110" cy="237" r="82" class="green"/>
+  <text x="1110" y="223" text-anchor="middle" class="whiteH">Recoverable</text>
+  <text x="1110" y="251" text-anchor="middle" class="whiteH">managed Mac</text>
+  <text x="1110" y="277" text-anchor="middle" class="whiteP">verified locally</text>
+
+  <path d="M340 237h63" class="line"/>
+  <path d="M685 237h63" class="line"/>
+  <path d="M1030 237h3" class="line"/>
+  <path d="M545 312v136" class="line"/>
+  <path d="M605 525h83" class="line"/>
+  <path d="M840 450V312" class="line"/>
 </svg>
