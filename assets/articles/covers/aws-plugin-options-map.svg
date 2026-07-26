@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-labelledby="title desc">
+  <title id="title">AWS plug-in options map</title>
+  <desc id="desc">A structured map showing when to add AWS options for compute, integration, identity, edge, secrets, observability, and documentation as the platform grows.</desc>
+  <rect width="1280" height="720" fill="#081012"/>
+  <style>
+    .title{font:700 34px Arial,Helvetica,sans-serif;fill:#f7f5ef}
+    .sub{font:400 18px Arial,Helvetica,sans-serif;fill:#c9c3b6}
+    .lane{fill:#123230;stroke:#d1a05f;stroke-width:2}
+    .stage{fill:#f7f5ef;stroke:#d1a05f;stroke-width:2}
+    .stage2{fill:#d1a05f;stroke:#f7f5ef;stroke-width:2}
+    .h{font:700 19px Arial,Helvetica,sans-serif;fill:#f7f5ef}
+    .p{font:400 14px Arial,Helvetica,sans-serif;fill:#e9e4d9}
+    .dh{font:700 18px Arial,Helvetica,sans-serif;fill:#081012}
+    .dp{font:400 14px Arial,Helvetica,sans-serif;fill:#081012}
+    .line{stroke:#d1a05f;stroke-width:3;stroke-linecap:round}
+  </style>
+  <text x="60" y="62" class="title">What to plug in as AWS grows</text>
+  <text x="60" y="96" class="sub">Each option should answer a pressure point: traffic, release speed, risk, cost, compliance, or support visibility.</text>
+
+  <rect x="70" y="145" width="230" height="430" rx="18" class="lane"/>
+  <text x="100" y="190" class="h">Foundation</text>
+  <text x="100" y="225" class="p">Use when the product</text>
+  <text x="100" y="247" class="p">is new but must survive</text>
+  <text x="100" y="269" class="p">basic failure.</text>
+  <rect x="100" y="322" width="170" height="64" rx="14" class="stage"/>
+  <text x="125" y="348" class="dh">ALB + ASG</text>
+  <text x="125" y="371" class="dp">2 AZ baseline</text>
+  <rect x="100" y="414" width="170" height="64" rx="14" class="stage"/>
+  <text x="125" y="440" class="dh">Database</text>
+  <text x="125" y="463" class="dp">backup, replica</text>
+
+  <rect x="335" y="145" width="230" height="430" rx="18" class="lane"/>
+  <text x="365" y="190" class="h">Scale compute</text>
+  <text x="365" y="225" class="p">Use when deployment</text>
+  <text x="365" y="247" class="p">boundaries and scaling</text>
+  <text x="365" y="269" class="p">patterns separate.</text>
+  <rect x="365" y="322" width="170" height="64" rx="14" class="stage"/>
+  <text x="390" y="348" class="dh">ECS Fargate</text>
+  <text x="390" y="371" class="dp">container services</text>
+  <rect x="365" y="414" width="170" height="64" rx="14" class="stage"/>
+  <text x="390" y="440" class="dh">Blue/green</text>
+  <text x="390" y="463" class="dp">safer releases</text>
+
+  <rect x="600" y="145" width="230" height="430" rx="18" class="lane"/>
+  <text x="630" y="190" class="h">Decouple</text>
+  <text x="630" y="225" class="p">Use when work can</text>
+  <text x="630" y="247" class="p">be async, bursty, or</text>
+  <text x="630" y="269" class="p">event triggered.</text>
+  <rect x="630" y="322" width="170" height="64" rx="14" class="stage2"/>
+  <text x="655" y="348" class="dh">Lambda</text>
+  <text x="655" y="371" class="dp">event compute</text>
+  <rect x="630" y="414" width="170" height="64" rx="14" class="stage2"/>
+  <text x="655" y="440" class="dh">SNS / SQS</text>
+  <text x="655" y="463" class="dp">fanout, buffer</text>
+
+  <rect x="865" y="145" width="230" height="430" rx="18" class="lane"/>
+  <text x="895" y="190" class="h">Govern</text>
+  <text x="895" y="225" class="p">Use before accounts,</text>
+  <text x="895" y="247" class="p">teams, and data access</text>
+  <text x="895" y="269" class="p">spread too far.</text>
+  <rect x="895" y="322" width="170" height="64" rx="14" class="stage"/>
+  <text x="920" y="348" class="dh">OUs + SCPs</text>
+  <text x="920" y="371" class="dp">guardrails</text>
+  <rect x="895" y="414" width="170" height="64" rx="14" class="stage"/>
+  <text x="920" y="440" class="dh">SSO + ABAC</text>
+  <text x="920" y="463" class="dp">identity control</text>
+
+  <line x1="300" y1="360" x2="335" y2="360" class="line"/>
+  <line x1="565" y1="360" x2="600" y2="360" class="line"/>
+  <line x1="830" y1="360" x2="865" y2="360" class="line"/>
+  <text x="100" y="632" class="p">Cross-cutting from day one: IAM roles, tags, budgets, CloudWatch, CloudTrail, secrets, backup restore tests, and infrastructure snapshots.</text>
+</svg>

@@ -3,23 +3,23 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Starting With AWS: A Practical Cloud Architecture Playbook | Digambar Ghosalkar</title>
-  <meta name="description" content="An architect-level AWS Cloud article on starting with a resilient baseline, scaling with containers and serverless, using AWS Organizations, IAM Identity Center, SCPs, ABAC, secrets, CDN, API Gateway, and infrastructure documentation.">
+  <title>Starting With AWS: How to Grow Cloud Architecture Safely | Digambar Ghosalkar</title>
+  <meta name="description" content="An architect-level AWS Cloud article on where to start, when to add Fargate, serverless, Organizations, IAM Identity Center, SCPs, ABAC, secrets, CDN, API Gateway, and infrastructure documentation as the platform grows.">
   <meta name="author" content="Digambar Ghosalkar">
   <meta name="robots" content="index,follow">
   <meta name="keywords" content="AWS cloud architecture, AWS architect, AWS Organizations, SCP, ABAC, IAM Identity Center, AWS SSO, Fargate, ECS, Lambda, SNS, SQS, API Gateway, CloudFront, Secrets Manager, infrastructure documentation">
   <link rel="canonical" href="https://article.digambarghosalkar.com/starting-with-aws-cloud-architecture/">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="Digambar Ghosalkar">
-  <meta property="og:title" content="Starting With AWS: A Practical Cloud Architecture Playbook">
-  <meta property="og:description" content="A practical AWS architecture path from a small resilient workload to containers, serverless, multi-account governance, identity guardrails, secrets, CDN, API Gateway, and documentation.">
+  <meta property="og:title" content="Starting With AWS: How to Grow Cloud Architecture Safely">
+  <meta property="og:description" content="A practical AWS architecture path for deciding where to start and which services to plug in as traffic, team size, risk, and governance needs grow.">
   <meta property="og:url" content="https://article.digambarghosalkar.com/starting-with-aws-cloud-architecture/">
   <meta property="og:image" content="https://article.digambarghosalkar.com/assets/articles/covers/aws-cloud-architecture-room.png">
   <meta property="og:image:width" content="1672">
   <meta property="og:image:height" content="941">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Starting With AWS: A Practical Cloud Architecture Playbook">
-  <meta name="twitter:description" content="An architect-level AWS Cloud guide covering resilient starts, Fargate, serverless, OUs, IAM, SCPs, ABAC, secrets, CDN, API Gateway, and infrastructure snapshots.">
+  <meta name="twitter:title" content="Starting With AWS: How to Grow Cloud Architecture Safely">
+  <meta name="twitter:description" content="An architect-level AWS Cloud guide for plugging in Fargate, serverless, OUs, IAM, SCPs, ABAC, secrets, CDN, API Gateway, and snapshots when the platform needs them.">
   <meta name="twitter:image" content="https://article.digambarghosalkar.com/assets/articles/covers/aws-cloud-architecture-room.png">
   <meta name="theme-color" content="#f7f5ef">
   <link rel="icon" type="image/svg+xml" href="../assets/icon.svg?v=dg-20260718-2">
@@ -91,7 +91,7 @@
     <article>
       <header class="article-hero">
         <p class="label article-label">AWS cloud architecture</p>
-        <h1 class="h1 article-title">Starting With AWS: A Practical Cloud Architecture Playbook</h1>
+        <h1 class="h1 article-title">Starting With AWS: How to Grow Cloud Architecture Safely</h1>
         <p class="t1 article-lede">
           Good AWS architecture is not about launching every service on day one. It is about knowing where you are, choosing the smallest reliable baseline, and then adding containers, serverless, governance, identity, secrets, CDN, API controls, and documentation when the workload is ready for them.
         </p>
@@ -128,6 +128,9 @@ Auto Scaling group with measured minimum, desired, and burst capacity
 IAM roles for services, no long-lived keys on servers
 Single database tier with backups, encryption, and replication or standby design
 CloudWatch alarms for health, latency, saturation, and cost signals</code></pre>
+            <figure class="article-figure diagram">
+              <img alt="AWS maturity decision curve showing how baseline resilience grows into containers, serverless, governance, edge controls, and documentation" height="720" src="../assets/articles/covers/aws-maturity-decision-curve.svg" width="1280">
+            </figure>
           </section>
 
           <section class="article-section">
@@ -139,13 +142,30 @@ CloudWatch alarms for health, latency, saturation, and cost signals</code></pre>
             <p class="t2">
               When the boundaries are real, containers become a strong next step. ECS with Fargate is a good fit when teams want container isolation and scaling without managing EC2 capacity. It lets teams focus on task definitions, service health, networking, deployment strategy, logs, and IAM roles instead of cluster patching and instance capacity management.
             </p>
+            <p class="t2">
+              The key is to plug in options only when they remove a real constraint. If scaling is the problem, tune Auto Scaling and capacity first. If release independence is the problem, split services and use Fargate. If the workload is bursty or asynchronous, add queues and Lambda. If teams are multiplying, solve account structure and identity before adding more production access.
+            </p>
             <figure class="article-figure photo">
               <img alt="Professional cloud architecture room showing resilient AWS cloud design, governance, serverless, containers, identity guardrails, and API edge planning" height="941" src="../assets/articles/covers/aws-cloud-architecture-room.png" width="1672">
             </figure>
           </section>
 
           <section class="article-section">
-            <p class="label article-section-label">03 · Organize accounts before growth becomes sprawl</p>
+            <p class="label article-section-label">03 · Plug-in decision map</p>
+            <h2 class="h2">Add the next AWS option when the pressure point is clear</h2>
+            <p class="t2">
+              Growing AWS well is a sequence of pressure-based decisions. A small product needs resilience and visibility. A growing product needs release isolation and deployment discipline. A busy product needs asynchronous workflows and edge controls. A multi-team platform needs account boundaries, identity, secrets, policy guardrails, and cost accountability.
+            </p>
+            <p class="t2">
+              This is the mental model I use: do not ask "which AWS service should we use?" first. Ask "what pressure are we solving?" Then choose the smallest service addition that reduces that pressure without creating unnecessary ownership, cost, or support complexity.
+            </p>
+            <figure class="article-figure diagram">
+              <img alt="AWS plug-in options map showing foundation, compute scaling, decoupling, and governance decisions as the platform grows" height="720" src="../assets/articles/covers/aws-plugin-options-map.svg" width="1280">
+            </figure>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">04 · Organize accounts before growth becomes sprawl</p>
             <h2 class="h2">Use OUs, budgets, SCPs, RBAC, and ABAC as architecture controls</h2>
             <p class="t2">
               As the environment grows, a single AWS account becomes a risk and a bottleneck. Move toward AWS Organizations with separate OUs for Dev and Prod. Dev should have strict budgets, sandbox boundaries, and room to experiment safely. Prod should have tighter access, protected networking, restricted administrative actions, and explicit change control.
@@ -162,7 +182,7 @@ CloudWatch alarms for health, latency, saturation, and cost signals</code></pre>
           </section>
 
           <section class="article-section">
-            <p class="label article-section-label">04 · Use serverless for the right opportunities</p>
+            <p class="label article-section-label">05 · Use serverless for the right opportunities</p>
             <h2 class="h2">Lambda, SNS, and SQS are strongest when the workflow is event-driven</h2>
             <p class="t2">
               Serverless is powerful when work is event-based, intermittent, asynchronous, or easy to split into small responsibilities. Lambda can process events without keeping servers warm. SNS can fan out notifications. SQS can buffer work and protect downstream services from spikes. Step Functions can coordinate workflows when the process has multiple states and failure paths.
@@ -173,7 +193,7 @@ CloudWatch alarms for health, latency, saturation, and cost signals</code></pre>
           </section>
 
           <section class="article-section">
-            <p class="label article-section-label">05 · Protect secrets and borrowed access</p>
+            <p class="label article-section-label">06 · Protect secrets and borrowed access</p>
             <h2 class="h2">Hardcoded credentials are architecture debt</h2>
             <p class="t2">
               Secrets should not live inside scripts, AMIs, containers, repositories, or utility configuration files. Use AWS Secrets Manager, Parameter Store, or a vault-backed pattern to retrieve sensitive values at runtime. Rotate secrets where possible, scope them to the workload, and log access without exposing values.
@@ -188,7 +208,7 @@ CloudWatch alarms for health, latency, saturation, and cost signals</code></pre>
           </section>
 
           <section class="article-section">
-            <p class="label article-section-label">06 · Control CDN and API entry points</p>
+            <p class="label article-section-label">07 · Control CDN and API entry points</p>
             <h2 class="h2">The public edge should be boring, observable, and intentional</h2>
             <p class="t2">
               CloudFront, Route 53, WAF, ACM certificates, and API Gateway are not just performance pieces. They are control points. They decide what becomes public, how traffic is shaped, where TLS terminates, how APIs are throttled, and how abuse is blocked before it reaches the application.
@@ -199,7 +219,7 @@ CloudWatch alarms for health, latency, saturation, and cost signals</code></pre>
           </section>
 
           <section class="article-section">
-            <p class="label article-section-label">07 · Snapshot and document infrastructure</p>
+            <p class="label article-section-label">08 · Snapshot and document infrastructure</p>
             <h2 class="h2">Documentation should describe the real environment, not the launch plan</h2>
             <p class="t2">
               Infrastructure documentation is useful only when it reflects the current state. Build a recurring snapshot process that captures accounts, VPCs, subnets, security groups, load balancers, compute services, databases, IAM roles, permission sets, secrets, CDN distributions, API Gateway routes, budgets, alarms, and owners.
@@ -210,7 +230,7 @@ CloudWatch alarms for health, latency, saturation, and cost signals</code></pre>
           </section>
 
           <section class="article-section">
-            <p class="label article-section-label">08 · Additional architect checks</p>
+            <p class="label article-section-label">09 · Additional architect checks</p>
             <h2 class="h2">Add these decisions before the platform gets too comfortable</h2>
             <ul class="t2">
               <li>Define tagging standards for owner, environment, cost center, data classification, application, and lifecycle.</li>
@@ -224,7 +244,7 @@ CloudWatch alarms for health, latency, saturation, and cost signals</code></pre>
           </section>
 
           <section class="article-section">
-            <p class="label article-section-label">09 · Utility links</p>
+            <p class="label article-section-label">10 · Utility links</p>
             <h2 class="h2">References for building the playbook</h2>
             <ul class="t2 article-resource-list">
               <li><a href="https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html" rel="noopener noreferrer" target="_blank">AWS Well-Architected Framework</a><span>Use as the review model for reliability, security, operational excellence, performance, cost, and sustainability decisions.</span></li>
