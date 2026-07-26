@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-labelledby="title desc">
+  <title id="title">AWS multi-account organization model</title>
+  <desc id="desc">A clean AWS Organizations model with management, security, log archive, network, identity, production, non-production, sandbox, and policy staging areas.</desc>
+  <rect width="1280" height="720" fill="#f7f5ef"/>
+  <text x="72" y="82" fill="#081012" font-family="Inter, Arial, sans-serif" font-size="38" font-weight="800">Start with account separation</text>
+  <text x="74" y="122" fill="#56615c" font-family="Inter, Arial, sans-serif" font-size="20">A secure AWS environment should not run every workload from one large account.</text>
+  <g font-family="Inter, Arial, sans-serif">
+    <rect x="500" y="162" width="280" height="82" rx="22" fill="#081012"/>
+    <text x="640" y="213" text-anchor="middle" fill="#f7f5ef" font-size="26" font-weight="800">Management account</text>
+    <path d="M640 244 V300 M230 300 H1050" stroke="#b9ad94" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <g transform="translate(68 318)">
+      <rect width="210" height="128" rx="20" fill="#fff" stroke="#d7d0c1"/>
+      <text x="105" y="46" text-anchor="middle" fill="#081012" font-size="22" font-weight="800">Security</text>
+      <text x="105" y="82" text-anchor="middle" fill="#56615c" font-size="16">Security tooling</text>
+      <text x="105" y="106" text-anchor="middle" fill="#56615c" font-size="16">Log archive</text>
+    </g>
+    <g transform="translate(302 318)">
+      <rect width="210" height="128" rx="20" fill="#fffaf0" stroke="#d7d0c1"/>
+      <text x="105" y="46" text-anchor="middle" fill="#081012" font-size="22" font-weight="800">Infrastructure</text>
+      <text x="105" y="82" text-anchor="middle" fill="#56615c" font-size="16">Network</text>
+      <text x="105" y="106" text-anchor="middle" fill="#56615c" font-size="16">Identity + shared</text>
+    </g>
+    <g transform="translate(536 318)">
+      <rect width="210" height="128" rx="20" fill="#fff3e8" stroke="#d7d0c1"/>
+      <text x="105" y="46" text-anchor="middle" fill="#081012" font-size="22" font-weight="800">Production</text>
+      <text x="105" y="82" text-anchor="middle" fill="#56615c" font-size="16">Customer apps</text>
+      <text x="105" y="106" text-anchor="middle" fill="#56615c" font-size="16">Data platforms</text>
+    </g>
+    <g transform="translate(770 318)">
+      <rect width="210" height="128" rx="20" fill="#edf5ff" stroke="#d7d0c1"/>
+      <text x="105" y="46" text-anchor="middle" fill="#081012" font-size="22" font-weight="800">Non-production</text>
+      <text x="105" y="82" text-anchor="middle" fill="#56615c" font-size="16">Dev</text>
+      <text x="105" y="106" text-anchor="middle" fill="#56615c" font-size="16">Test + QA</text>
+    </g>
+    <g transform="translate(1004 318)">
+      <rect width="210" height="128" rx="20" fill="#eef8f5" stroke="#d7d0c1"/>
+      <text x="105" y="46" text-anchor="middle" fill="#081012" font-size="22" font-weight="800">Sandbox</text>
+      <text x="105" y="82" text-anchor="middle" fill="#56615c" font-size="16">Budget limits</text>
+      <text x="105" y="106" text-anchor="middle" fill="#56615c" font-size="16">Experiment safely</text>
+    </g>
+    <rect x="432" y="510" width="416" height="88" rx="22" fill="#2a211d"/>
+    <text x="640" y="546" text-anchor="middle" fill="#fff" font-size="24" font-weight="800">Policy Staging OU</text>
+    <text x="640" y="576" text-anchor="middle" fill="#f4d6b2" font-size="17">Test SCPs before broad enforcement</text>
+  </g>
+</svg>

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-labelledby="title desc">
+  <title id="title">AWS IAM Identity Center SSO flow</title>
+  <desc id="desc">An enterprise SSO flow from employee through identity provider, MFA, IAM Identity Center, permission set, and temporary AWS role session.</desc>
+  <rect width="1280" height="720" fill="#f7f5ef"/>
+  <text x="72" y="82" fill="#081012" font-family="Inter, Arial, sans-serif" font-size="38" font-weight="800">Workforce access should be federated</text>
+  <text x="74" y="122" fill="#56615c" font-family="Inter, Arial, sans-serif" font-size="20">SSO gives central onboarding, MFA, group assignment, temporary credentials, and faster revocation.</text>
+  <g font-family="Inter, Arial, sans-serif">
+    <g transform="translate(76 236)"><rect width="160" height="120" rx="22" fill="#fff" stroke="#d7d0c1"/><text x="80" y="52" text-anchor="middle" fill="#081012" font-size="22" font-weight="800">Employee</text><text x="80" y="84" text-anchor="middle" fill="#56615c" font-size="16">User request</text></g>
+    <g transform="translate(276 236)"><rect width="180" height="120" rx="22" fill="#edf5ff" stroke="#d7d0c1"/><text x="90" y="48" text-anchor="middle" fill="#081012" font-size="22" font-weight="800">IdP</text><text x="90" y="78" text-anchor="middle" fill="#56615c" font-size="16">Entra / Okta</text><text x="90" y="100" text-anchor="middle" fill="#56615c" font-size="16">SAML + SCIM</text></g>
+    <g transform="translate(496 236)"><rect width="180" height="120" rx="22" fill="#fff3e8" stroke="#d7d0c1"/><text x="90" y="48" text-anchor="middle" fill="#081012" font-size="22" font-weight="800">MFA + CA</text><text x="90" y="80" text-anchor="middle" fill="#56615c" font-size="16">Risk controls</text></g>
+    <g transform="translate(716 236)"><rect width="210" height="120" rx="22" fill="#eef8f5" stroke="#d7d0c1"/><text x="105" y="48" text-anchor="middle" fill="#081012" font-size="22" font-weight="800">Identity Center</text><text x="105" y="80" text-anchor="middle" fill="#56615c" font-size="16">Groups + assignments</text></g>
+    <g transform="translate(966 236)"><rect width="220" height="120" rx="22" fill="#081012"/><text x="110" y="48" text-anchor="middle" fill="#fff" font-size="22" font-weight="800">AWS session</text><text x="110" y="80" text-anchor="middle" fill="#d6c8a8" font-size="16">Temporary role creds</text></g>
+    <path d="M236 296 H276 M456 296 H496 M676 296 H716 M926 296 H966" stroke="#b9ad94" stroke-width="5" stroke-linecap="round"/>
+    <rect x="236" y="446" width="808" height="98" rx="24" fill="#2a211d"/>
+    <text x="640" y="486" text-anchor="middle" fill="#fff" font-size="25" font-weight="800">Assign permission sets to groups, not directly to individuals</text>
+    <text x="640" y="518" text-anchor="middle" fill="#f4d6b2" font-size="18">Direct assignments should be exceptional, documented, and time-limited.</text>
+  </g>
+</svg>

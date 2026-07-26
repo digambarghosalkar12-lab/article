@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-labelledby="title desc">
+  <title id="title">AWS identity monitoring and response loop</title>
+  <desc id="desc">A monitoring and incident response loop using CloudTrail, Config, GuardDuty, Security Hub, Access Analyzer, Macie, Inspector, EventBridge, and remediation.</desc>
+  <rect width="1280" height="720" fill="#f7f5ef"/>
+  <text x="72" y="82" fill="#081012" font-family="Inter, Arial, sans-serif" font-size="38" font-weight="800">Access must be recorded and reviewable</text>
+  <text x="74" y="122" fill="#56615c" font-family="Inter, Arial, sans-serif" font-size="20">Identity governance is continuous: detect, investigate, remediate, and improve guardrails.</text>
+  <g font-family="Inter, Arial, sans-serif">
+    <circle cx="640" cy="378" r="190" fill="#fffaf0" stroke="#d7d0c1" stroke-width="2"/>
+    <circle cx="640" cy="378" r="84" fill="#081012"/>
+    <text x="640" y="370" text-anchor="middle" fill="#f7f5ef" font-size="25" font-weight="800">Security</text>
+    <text x="640" y="404" text-anchor="middle" fill="#d6c8a8" font-size="18">automation loop</text>
+    <g transform="translate(100 302)"><rect width="220" height="112" rx="22" fill="#edf5ff" stroke="#d7d0c1"/><text x="110" y="46" text-anchor="middle" fill="#081012" font-size="22" font-weight="800">CloudTrail</text><text x="110" y="78" text-anchor="middle" fill="#56615c" font-size="16">Who did what</text></g>
+    <g transform="translate(234 520)"><rect width="220" height="112" rx="22" fill="#eef8f5" stroke="#d7d0c1"/><text x="110" y="46" text-anchor="middle" fill="#081012" font-size="22" font-weight="800">Config</text><text x="110" y="78" text-anchor="middle" fill="#56615c" font-size="16">Drift + history</text></g>
+    <g transform="translate(530 574)"><rect width="220" height="112" rx="22" fill="#fff3e8" stroke="#d7d0c1"/><text x="110" y="46" text-anchor="middle" fill="#081012" font-size="22" font-weight="800">GuardDuty</text><text x="110" y="78" text-anchor="middle" fill="#56615c" font-size="16">Threat detection</text></g>
+    <g transform="translate(826 520)"><rect width="220" height="112" rx="22" fill="#fff" stroke="#d7d0c1"/><text x="110" y="46" text-anchor="middle" fill="#081012" font-size="22" font-weight="800">Security Hub</text><text x="110" y="78" text-anchor="middle" fill="#56615c" font-size="16">Findings + posture</text></g>
+    <g transform="translate(960 302)"><rect width="220" height="112" rx="22" fill="#edf5ff" stroke="#d7d0c1"/><text x="110" y="46" text-anchor="middle" fill="#081012" font-size="22" font-weight="800">Analyzer</text><text x="110" y="78" text-anchor="middle" fill="#56615c" font-size="16">External access</text></g>
+    <g transform="translate(530 162)"><rect width="220" height="112" rx="22" fill="#fff" stroke="#d7d0c1"/><text x="110" y="46" text-anchor="middle" fill="#081012" font-size="22" font-weight="800">EventBridge</text><text x="110" y="78" text-anchor="middle" fill="#56615c" font-size="16">Trigger response</text></g>
+  </g>
+</svg>
