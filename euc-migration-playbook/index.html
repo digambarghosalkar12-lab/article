@@ -3,36 +3,254 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>EUC Migration Playbook | Digambar Ghosalkar</title>
-  <meta name="description" content="Coming soon article on enterprise EUC migration planning, readiness, enrollment, communications, and support.">
+  <title>EUC Migration Playbook: Local-First macOS MDM Migration | Digambar Ghosalkar</title>
+  <meta name="description" content="A practical EUC migration article on moving macOS devices from an old Jamf MDM to a new MDM using a local daemon, profiles binary checks, Swift Dialog, FileVault key transfer, bootstrap token escrow, and user state validation.">
+  <meta name="author" content="Digambar Ghosalkar">
   <meta name="robots" content="index,follow">
+  <meta name="keywords" content="EUC migration, macOS MDM migration, Jamf migration, Intune migration, Swift Dialog, FileVault key escrow, bootstrap token escrow, profiles binary, LaunchDaemon, Secure Token, temporary admin rights">
   <link rel="canonical" href="https://article.digambarghosalkar.com/euc-migration-playbook/">
-  <link rel="icon" type="image/svg+xml" href="../assets/icon.svg">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Digambar Ghosalkar">
+  <meta property="og:title" content="EUC Migration Playbook: Local-First macOS MDM Migration">
+  <meta property="og:description" content="How a macOS migration script can remove old MDM, monitor new enrollment locally, transfer FileVault recovery keys, re-escrow bootstrap tokens, and keep the user experience controlled.">
+  <meta property="og:url" content="https://article.digambarghosalkar.com/euc-migration-playbook/">
+  <meta property="og:image" content="https://article.digambarghosalkar.com/assets/articles/covers/euc-migration-playbook.svg">
+  <meta property="og:image:width" content="900">
+  <meta property="og:image:height" content="900">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="EUC Migration Playbook: Local-First macOS MDM Migration">
+  <meta name="twitter:description" content="A practical architecture for macOS MDM migration using local assets, launchd monitoring, Swift Dialog, FileVault key handoff, and bootstrap token escrow.">
+  <meta name="twitter:image" content="https://article.digambarghosalkar.com/assets/articles/covers/euc-migration-playbook.svg">
+  <meta name="theme-color" content="#f7f5ef">
+  <link rel="icon" type="image/svg+xml" href="../assets/icon.svg?v=dg-20260718-2">
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png?v=dg-20260718-2">
+  <link rel="shortcut icon" href="../favicon.ico?v=dg-20260718-2">
+  <link rel="apple-touch-icon" sizes="180x180" href="../assets/apple-touch-icon.png?v=dg-20260718-2">
   <link rel="stylesheet" href="../styles/colors.css">
   <link rel="stylesheet" href="../styles/fonts.css">
   <link rel="stylesheet" href="../styles/typography.css">
   <link rel="stylesheet" href="../styles/globals.css">
-  <link rel="stylesheet" href="../styles/detail-pages.css?v=coming-soon-3">
+  <style>
+    body { background: #f7f5ef; color: var(--color-dark); min-height: 100vh; }
+    .article-page { box-sizing: border-box; min-height: 100vh; padding: calc(40 * 100vw / var(--page-width)); }
+    .article-nav { align-items: center; display: flex; justify-content: space-between; margin-bottom: calc(90 * 100vw / var(--page-width)); }
+    .article-nav a, .article-back { color: inherit; text-decoration: none; }
+    .article-hero, .article-content, .article-section, .article-aside, .article-aside dl { display: grid; }
+    .article-hero { gap: calc(32 * 100vw / var(--page-width)); }
+    .article-label, .article-meta, .article-section-label, .article-aside dt { color: #6d786f; text-transform: uppercase; }
+    .article-title, .article-lede, .article-section h2, .article-section p, .article-section ul, .article-section pre, .article-figure { margin: 0; }
+    .article-title { max-width: calc(1100 * 100vw / var(--page-width)); }
+    .article-lede { max-width: calc(900 * 100vw / var(--page-width)); }
+    .article-cover, .article-figure { background: transparent; display: block; overflow: hidden; width: 100%; }
+    .article-cover { aspect-ratio: 1 / 1; margin-top: calc(42 * 100vw / var(--page-width)); max-width: calc(760 * 100vw / var(--page-width)); }
+    .article-cover img, .article-figure img { display: block; height: 100%; object-fit: contain; object-position: center; width: 100%; }
+    .article-layout { display: grid; gap: calc(60 * 100vw / var(--page-width)); margin-top: calc(80 * 100vw / var(--page-width)); }
+    .article-aside { border-top: 1px solid rgba(8,16,18,.22); gap: calc(18 * 100vw / var(--page-width)); padding-top: calc(20 * 100vw / var(--page-width)); }
+    .article-aside dl { gap: calc(14 * 100vw / var(--page-width)); margin: 0; }
+    .article-aside div { border-top: 1px solid rgba(8,16,18,.12); display: grid; gap: calc(6 * 100vw / var(--page-width)); padding-top: calc(14 * 100vw / var(--page-width)); }
+    .article-aside dd { margin: 0; }
+    .article-content { gap: calc(56 * 100vw / var(--page-width)); }
+    .article-section { border-top: 1px solid rgba(8,16,18,.22); gap: calc(20 * 100vw / var(--page-width)); padding-top: calc(28 * 100vw / var(--page-width)); }
+    .article-section p, .article-section li { color: #3b4642; }
+    .article-section ul { display: grid; gap: calc(12 * 100vw / var(--page-width)); list-style: none; padding: 0; }
+    .article-section li { border-top: 1px solid rgba(8,16,18,.12); padding-top: calc(12 * 100vw / var(--page-width)); }
+    .article-code { background: #081012; color: #f7f5ef; overflow-x: auto; padding: calc(22 * 100vw / var(--page-width)); }
+    .article-code code { font-family: Menlo, Consolas, monospace; font-size: calc(14 * 100vw / var(--page-width)); line-height: 1.6; }
+    .article-callout { background: #e9e4d9; display: grid; gap: calc(12 * 100vw / var(--page-width)); padding: calc(24 * 100vw / var(--page-width)); }
+    .article-figure.diagram { aspect-ratio: 16 / 9; border: 1px solid rgba(8,16,18,.12); margin-top: calc(8 * 100vw / var(--page-width)); }
+    .article-resource-list li { display: grid; gap: calc(6 * 100vw / var(--page-width)); }
+    .article-resource-list a { color: #123230; font-weight: 700; text-decoration-color: rgba(209,160,95,.7); text-decoration-thickness: .12em; text-underline-offset: .18em; }
+    .article-resource-list span { color: #5d6862; }
+    .article-footer { border-top: 1px solid rgba(8,16,18,.22); margin-top: calc(70 * 100vw / var(--page-width)); padding-top: calc(26 * 100vw / var(--page-width)); }
+    code { background: rgba(8,16,18,.08); padding: .1em .3em; }
+    @media only screen and (min-width: 768px) {
+      .article-page { padding: calc(64 * 100vw / var(--page-width)) calc(136 * 100vw / var(--page-width)); }
+      .article-nav { margin-bottom: calc(136 * 100vw / var(--page-width)); }
+      .article-layout { grid-template-columns: minmax(220px, .34fr) minmax(0, .86fr); }
+      .article-aside { align-self: start; position: sticky; top: calc(42 * 100vw / var(--page-width)); }
+      .article-code code { font-size: calc(15 * 100vw / var(--page-width)); }
+    }
+    @media only screen and (max-width: 767px) {
+      .article-page { padding: 38px 22px; }
+      .article-nav { margin-bottom: 92px; }
+      .article-cover { max-width: none; }
+      .article-code { padding: 18px; }
+      .article-code code { font-size: 12px; }
+    }
+  </style>
 </head>
-<body class="placeholder-body">
-  <header id="header" class="detail-header">
-    <a href="/">Digambar Ghosalkar Articles</a>
-    <nav aria-label="Article navigation">
-      <a href="https://digambarghosalkar.com/">Articles</a>
-      <a href="https://digambarghosalkar.com/">Portfolio</a>
+<body>
+  <main class="article-page">
+    <nav class="article-nav" aria-label="Article navigation">
+      <a class="t6 font-romie" href="../index.html">articles</a>
+      <a class="t6 font-romie" href="https://digambarghosalkar.com/">home</a>
     </nav>
-  </header>
-  <main id="main" data-container="main-content" class="placeholder-page">
-    <article class="placeholder-hero" aria-labelledby="page-title">
-      <div>
-        <p class="placeholder-kicker">Article</p>
-        <h1 id="page-title" class="placeholder-title">EUC Migration Playbook</h1>
+
+    <article>
+      <header class="article-hero">
+        <p class="label article-label">EUC migration</p>
+        <h1 class="h1 article-title">EUC Migration Playbook: Local-First macOS MDM Migration</h1>
+        <p class="t1 article-lede">
+          A macOS MDM migration is not just unenroll here and enroll there. The safer design is local-first: prepare the assets on the Mac, remove the old MDM in a controlled way, monitor the new enrollment independently, preserve encryption recovery, and repair user state before the device is considered migrated.
+        </p>
+        <p class="t2 article-meta">Project article · macOS · Jamf · MDM migration · Swift Dialog · FileVault · bootstrap token</p>
+        <figure class="article-cover">
+          <img alt="EUC Migration Playbook square cover with migration lanes and device markers" height="900" src="../assets/articles/covers/euc-migration-playbook.svg" width="900">
+        </figure>
+      </header>
+
+      <div class="article-layout">
+        <aside class="article-aside">
+          <p class="label article-section-label">Article index</p>
+          <dl class="t2">
+            <div><dt>Problem</dt><dd>Move managed Macs from an old MDM to a new MDM without depending on the old server after migration starts.</dd></div>
+            <div><dt>Approach</dt><dd>Local LaunchDaemon, staged assets, profiles binary checks, Swift Dialog guidance, and state-driven validation.</dd></div>
+            <div><dt>Security</dt><dd>Temporary admin rights, FileVault recovery key handoff, bootstrap token re-escrow, Secure Token and local user checks.</dd></div>
+          </dl>
+        </aside>
+
+        <div class="article-content">
+          <section class="article-section">
+            <p class="label article-section-label">01 · Why</p>
+            <h2 class="h2">The migration must survive without the old MDM</h2>
+            <p class="t2">
+              The core design decision is independence. Before migration begins, the Mac receives everything it needs locally: scripts, configuration, Swift Dialog assets, launchd items, enrollment triggers, API configuration, validation logic, and recovery paths. Once the old MDM is removed, the workflow should not be waiting for the old Jamf server to rescue it.
+            </p>
+            <p class="t2">
+              That matters because the riskiest moment is the middle of the bridge. The old management channel is being removed, the new management channel may still be enrolling, and the user may need clear instructions. A local daemon keeps watching the device state during that gap.
+            </p>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">02 · Architecture</p>
+            <h2 class="h2">A script that removes old MDM and keeps monitoring new enrollment</h2>
+            <p class="t2">
+              The migration script removes the old MDM profile when the device is ready, then continues to run as a local daemon. It monitors whether the new MDM enrollment has started, whether the expected management profiles appear, and whether the device reaches a stable enrolled state.
+            </p>
+            <pre class="article-code"><code>Pre-stage local assets
+Install LaunchDaemon and migration scripts
+Show guided UI with Swift Dialog
+Collect user/admin state
+Retrieve old Jamf FileVault recovery key through API
+Remove old MDM profile
+Start / guide new MDM enrollment
+Monitor profiles binary until new profiles appear
+Re-escrow bootstrap token
+Validate FileVault, Secure Token, admin rights, and user state
+Report migrated / needs attention</code></pre>
+            <figure class="article-figure diagram">
+              <img alt="Local-first EUC migration architecture showing staged assets, local daemon monitoring, MDM handoff, Swift Dialog guidance, and validation" height="720" src="../assets/articles/covers/euc-migration-architecture.svg" width="1280">
+            </figure>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">03 · Enrollment validation</p>
+            <h2 class="h2">Using the profiles binary as the local source of truth</h2>
+            <p class="t2">
+              On macOS, the workflow can use the <code>profiles</code> binary to inspect enrollment and profile state. The script checks whether old management artifacts are gone, whether new MDM profiles are present, and whether enrollment is progressing. This gives the daemon a local signal even when server-side inventory has not updated yet.
+            </p>
+            <ul class="t2">
+              <li>Check for the old MDM profile before removal.</li>
+              <li>Verify the new MDM enrollment profile after the user starts enrollment.</li>
+              <li>Continue monitoring profile state until the Mac is managed by the new MDM.</li>
+              <li>Use local validation before declaring the migration complete.</li>
+            </ul>
+            <figure class="article-figure diagram">
+              <img alt="EUC migration state graph showing readiness, old MDM removal, enrollment, security repair, completion, and retry monitoring" height="720" src="../assets/articles/covers/euc-migration-state-machine.svg" width="1280">
+            </figure>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">04 · User experience</p>
+            <h2 class="h2">Swift Dialog keeps the user inside the process</h2>
+            <p class="t2">
+              Swift Dialog gives the migration a controlled user interface. Instead of leaving the user with a terminal window or silent background activity, the workflow can explain what is happening, ask for authentication when needed, show progress, and guide the user into the enrollment step.
+            </p>
+            <p class="t2">
+              The same flow can grant temporary admin rights when the migration requires user-assisted enrollment or profile approval. Those rights should be time-bound, logged, and removed after the migration reaches the required state.
+            </p>
+            <div class="article-callout">
+              <p class="label article-section-label">Operator note</p>
+              <p class="t2">
+                The user should never feel abandoned during the MDM gap. If the new enrollment is not complete, the daemon keeps checking and the UI can keep giving the user a clear next step.
+              </p>
+            </div>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">05 · FileVault</p>
+            <h2 class="h2">Transfer recovery key ownership before the old path disappears</h2>
+            <p class="t2">
+              FileVault is one of the most important migration risks. Before removing the old management channel, the workflow uses API access to the old Jamf MDM to retrieve the existing FileVault personal recovery key. The migration can then update or escrow that recovery information into the new management platform.
+            </p>
+            <p class="t2">
+              The script should not assume encryption is healthy just because FileVault is enabled. It evaluates the local user, Secure Token state, FileVault enablement, and whether the expected recovery information can be escrowed after the new MDM takes ownership.
+            </p>
+            <figure class="article-figure diagram">
+              <img alt="Security handoff graph showing Jamf FileVault recovery key retrieval, new MDM escrow, profiles bootstrap token escrow, and user state validation" height="720" src="../assets/articles/covers/euc-migration-security-flow.svg" width="1280">
+            </figure>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">06 · Bootstrap token</p>
+            <h2 class="h2">Re-escrow bootstrap token after new enrollment</h2>
+            <p class="t2">
+              After the device enrolls into the new MDM, the script uses the macOS <code>profiles</code> binary to re-escrow the bootstrap token. That step is important for modern macOS management because bootstrap token supports account, Secure Token, software update, and authorization workflows that enterprise teams depend on.
+            </p>
+            <pre class="article-code"><code>profiles status -type bootstraptoken
+profiles install -type bootstraptoken
+profiles status -type enrollment</code></pre>
+            <p class="t2">
+              The daemon can retry and validate this state locally instead of assuming the first enrollment attempt completed every downstream security requirement.
+            </p>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">07 · Local user state</p>
+            <h2 class="h2">Secure Token, admin rights, and FileVault are evaluated per user</h2>
+            <p class="t2">
+              A migration can look successful at the device level while still leaving the primary user in a bad state. The script therefore evaluates local users and updates the state needed for the migration to be operationally complete.
+            </p>
+            <ul class="t2">
+              <li>Identify the active or primary local user.</li>
+              <li>Check whether the user has Secure Token.</li>
+              <li>Check whether the user has the needed admin rights during migration.</li>
+              <li>Check whether FileVault is enabled and associated with the correct user state.</li>
+              <li>If something is missing, prompt the user through the UI and collect the required authentication safely.</li>
+            </ul>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">08 · Utility links</p>
+            <h2 class="h2">Tools and references that support the workflow</h2>
+            <p class="t2">
+              These references are useful when turning the playbook into production runbooks, scripts, and operator checks.
+            </p>
+            <ul class="t2 article-resource-list">
+              <li><a href="https://github.com/swiftDialog/swiftDialog" rel="noopener noreferrer" target="_blank">swiftDialog on GitHub</a><span>Build the guided macOS user experience for migration prompts, progress, and required actions.</span></li>
+              <li><a href="https://swiftdialog.app/" rel="noopener noreferrer" target="_blank">swiftDialog documentation</a><span>Reference command syntax, UI patterns, progress behavior, and supported controls.</span></li>
+              <li><a href="https://support.apple.com/guide/deployment/use-secure-and-bootstrap-tokens-dep24dbdcf9e/web" rel="noopener noreferrer" target="_blank">Apple secure and bootstrap token guidance</a><span>Understand why Secure Token and bootstrap token escrow matter during modern macOS management.</span></li>
+              <li><a href="https://learn.jamf.com/r/en-US/jamf-pro-documentation-11.24.0/Viewing_the_FileVault_Recovery_Key_for_a_Computer" rel="noopener noreferrer" target="_blank">Jamf FileVault recovery key documentation</a><span>Validate how recovery keys are viewed and operationally handled in Jamf Pro.</span></li>
+              <li><a href="https://support.jamf.com/en/articles/11016729-how-to-export-filevault-recovery-keys-via-the-jamf-pro-portal" rel="noopener noreferrer" target="_blank">Jamf FileVault API export guide</a><span>Useful API reference for recovery-key handoff planning before old MDM removal.</span></li>
+            </ul>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">09 · Why local-first works</p>
+            <h2 class="h2">The migration is driven by state, not hope</h2>
+            <p class="t2">
+              The strongest part of this design is that the script is not simply firing commands and assuming success. It is evaluating state. It asks: is the old MDM removed, is the new MDM present, is FileVault recoverable, is bootstrap token escrowed, does the local user have the right token and rights, and is the Mac actually manageable again?
+            </p>
+            <p class="t2">
+              That makes the migration safer for enterprise EUC teams. Devices can move between MDM platforms with less manual chasing, fewer stranded Macs, and clearer recovery when a user pauses, misses a prompt, loses network, or starts enrollment later than expected.
+            </p>
+          </section>
+        </div>
       </div>
-      <div class="placeholder-copy">
-        <p class="t1">This article page is ready for the full write-up. The index card already points here.</p>
-        <div class="placeholder-actions"><a href="https://digambarghosalkar.com/">Back to Articles</a></div>
-      </div>
-      <div class="placeholder-state"><span>Coming soon</span><span>EUC</span></div>
+
+      <footer class="article-footer">
+        <a class="article-back t1 font-romie" href="../index.html">Back to articles</a>
+      </footer>
     </article>
   </main>
 </body>

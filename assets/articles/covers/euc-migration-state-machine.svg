@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-labelledby="title desc">
+  <title id="title">EUC migration state machine</title>
+  <desc id="desc">State machine for macOS MDM migration validation using profiles, FileVault, bootstrap token, and local user checks.</desc>
+  <rect width="1280" height="720" fill="#081012"/>
+  <style>
+    .title{font:700 34px Arial,Helvetica,sans-serif;fill:#f7f5ef}
+    .sub{font:400 18px Arial,Helvetica,sans-serif;fill:#c9c3b6}
+    .box{fill:#123230;stroke:#d1a05f;stroke-width:3}
+    .ok{fill:#d1a05f}
+    .txt{font:700 22px Arial,Helvetica,sans-serif;fill:#f7f5ef}
+    .small{font:400 17px Arial,Helvetica,sans-serif;fill:#e9e4d9}
+    .dark{fill:#081012}
+    .line{fill:none;stroke:#d1a05f;stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
+  </style>
+  <text x="60" y="62" class="title">Migration validation state machine</text>
+  <text x="60" y="96" class="sub">The daemon advances only when local state proves the device is ready.</text>
+
+  <rect x="70" y="170" width="220" height="116" rx="14" class="box"/>
+  <text x="100" y="214" class="txt">Ready</text>
+  <text x="100" y="247" class="small">assets staged locally</text>
+
+  <rect x="370" y="170" width="220" height="116" rx="14" class="box"/>
+  <text x="400" y="214" class="txt">Old MDM</text>
+  <text x="400" y="247" class="small">removed safely</text>
+
+  <rect x="670" y="170" width="220" height="116" rx="14" class="box"/>
+  <text x="700" y="214" class="txt">Enroll</text>
+  <text x="700" y="247" class="small">new MDM profile seen</text>
+
+  <rect x="970" y="170" width="220" height="116" rx="14" class="box"/>
+  <text x="1000" y="214" class="txt">Secure</text>
+  <text x="1000" y="247" class="small">keys and tokens escrowed</text>
+
+  <rect x="370" y="440" width="220" height="116" rx="14" class="box"/>
+  <text x="400" y="484" class="txt">User state</text>
+  <text x="400" y="517" class="small">Secure Token, admin, FV</text>
+
+  <rect x="670" y="440" width="220" height="116" rx="14" class="ok"/>
+  <text x="700" y="484" class="dark" style="font:700 22px Arial">Complete</text>
+  <text x="700" y="517" class="dark" style="font:400 17px Arial">managed and recoverable</text>
+
+  <path d="M290 228h80M590 228h80M890 228h80M1080 286v110c0 56-44 102-100 102h-90M590 498h80" class="line"/>
+  <path d="M480 440V320c0-53 43-96 96-96h94" class="line" opacity=".45"/>
+  <text x="90" y="642" class="small">If any state fails, the daemon stays active, prompts the user when needed, and retries validation.</text>
+</svg>
