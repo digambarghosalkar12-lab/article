@@ -3,36 +3,274 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Defender Rollout Field Notes | Digambar Ghosalkar</title>
-  <meta name="description" content="Coming soon article on Microsoft Defender rollout planning, deployment rings, exclusions, alert ownership, and operations.">
+  <title>Microsoft Defender Onboarding: A Smarter Security Strategy | Digambar Ghosalkar</title>
+  <meta name="description" content="A practical Microsoft Defender onboarding article covering investigation, validation, remediation, protection, vulnerability management, AIR, advanced hunting, custom detection, automation, and enterprise integrations.">
+  <meta name="author" content="Digambar Ghosalkar">
   <meta name="robots" content="index,follow">
+  <meta name="keywords" content="Microsoft Defender onboarding, Microsoft Defender XDR, Defender for Endpoint, Defender for Office 365, Defender for Identity, Defender for Cloud Apps, Defender Vulnerability Management, AIR, Advanced Hunting, KQL, security automation">
   <link rel="canonical" href="https://article.digambarghosalkar.com/defender-rollout-field-notes/">
-  <link rel="icon" type="image/svg+xml" href="../assets/icon.svg">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Digambar Ghosalkar">
+  <meta property="og:title" content="Microsoft Defender Onboarding: A Smarter Security Strategy">
+  <meta property="og:description" content="How to think about Defender as a security lifecycle across investigation, validation, remediation, protection, hunting, vulnerability management, automation, and integrations.">
+  <meta property="og:url" content="https://article.digambarghosalkar.com/defender-rollout-field-notes/">
+  <meta property="og:image" content="https://article.digambarghosalkar.com/assets/articles/covers/defender-onboarding-hero.png">
+  <meta property="og:image:width" content="1672">
+  <meta property="og:image:height" content="941">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Microsoft Defender Onboarding: A Smarter Security Strategy">
+  <meta name="twitter:description" content="A practical Defender onboarding lifecycle for modern enterprise security operations.">
+  <meta name="twitter:image" content="https://article.digambarghosalkar.com/assets/articles/covers/defender-onboarding-hero.png">
+  <meta name="theme-color" content="#f7f5ef">
+  <link rel="icon" type="image/svg+xml" href="../assets/icon.svg?v=dg-20260718-2">
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png?v=dg-20260718-2">
+  <link rel="shortcut icon" href="../favicon.ico?v=dg-20260718-2">
+  <link rel="apple-touch-icon" sizes="180x180" href="../assets/apple-touch-icon.png?v=dg-20260718-2">
   <link rel="stylesheet" href="../styles/colors.css">
   <link rel="stylesheet" href="../styles/fonts.css">
   <link rel="stylesheet" href="../styles/typography.css">
   <link rel="stylesheet" href="../styles/globals.css">
-  <link rel="stylesheet" href="../styles/detail-pages.css?v=coming-soon-3">
+  <style>
+    body { background: #f7f5ef; color: var(--color-dark); min-height: 100vh; }
+    .article-page { box-sizing: border-box; min-height: 100vh; padding: calc(40 * 100vw / var(--page-width)); }
+    .article-nav { align-items: center; display: flex; justify-content: space-between; margin-bottom: calc(90 * 100vw / var(--page-width)); }
+    .article-nav a, .article-back { color: inherit; text-decoration: none; }
+    .article-hero, .article-content, .article-section, .article-aside, .article-aside dl { display: grid; }
+    .article-hero { gap: calc(32 * 100vw / var(--page-width)); }
+    .article-label, .article-meta, .article-section-label, .article-aside dt { color: #6d786f; text-transform: uppercase; }
+    .article-title, .article-lede, .article-section h2, .article-section p, .article-section ul, .article-section pre, .article-figure { margin: 0; }
+    .article-title { max-width: calc(1120 * 100vw / var(--page-width)); }
+    .article-lede { max-width: calc(920 * 100vw / var(--page-width)); }
+    .article-cover, .article-figure { background: transparent; display: block; overflow: hidden; width: 100%; }
+    .article-cover { aspect-ratio: 1672 / 941; margin-top: calc(42 * 100vw / var(--page-width)); max-width: calc(1040 * 100vw / var(--page-width)); }
+    .article-cover img, .article-figure img { display: block; height: 100%; object-fit: contain; object-position: center; width: 100%; }
+    .article-layout { display: grid; gap: calc(60 * 100vw / var(--page-width)); margin-top: calc(80 * 100vw / var(--page-width)); }
+    .article-aside { border-top: 1px solid rgba(8,16,18,.22); gap: calc(18 * 100vw / var(--page-width)); padding-top: calc(20 * 100vw / var(--page-width)); }
+    .article-aside dl { gap: calc(14 * 100vw / var(--page-width)); margin: 0; }
+    .article-aside div { border-top: 1px solid rgba(8,16,18,.12); display: grid; gap: calc(6 * 100vw / var(--page-width)); padding-top: calc(14 * 100vw / var(--page-width)); }
+    .article-aside dd { margin: 0; }
+    .article-content { gap: calc(56 * 100vw / var(--page-width)); }
+    .article-section { border-top: 1px solid rgba(8,16,18,.22); gap: calc(20 * 100vw / var(--page-width)); padding-top: calc(28 * 100vw / var(--page-width)); }
+    .article-section p, .article-section li { color: #3b4642; }
+    .article-section ul { display: grid; gap: calc(12 * 100vw / var(--page-width)); list-style: none; padding: 0; }
+    .article-section li { border-top: 1px solid rgba(8,16,18,.12); padding-top: calc(12 * 100vw / var(--page-width)); }
+    .article-figure.diagram { aspect-ratio: 16 / 9; border: 1px solid rgba(8,16,18,.12); margin-top: calc(8 * 100vw / var(--page-width)); }
+    .article-code { background: #081012; color: #f7f5ef; overflow-x: auto; padding: calc(22 * 100vw / var(--page-width)); }
+    .article-code code { font-family: Menlo, Consolas, monospace; font-size: calc(14 * 100vw / var(--page-width)); line-height: 1.6; }
+    .article-callout { background: #e9e4d9; display: grid; gap: calc(12 * 100vw / var(--page-width)); padding: calc(24 * 100vw / var(--page-width)); }
+    .article-footer { border-top: 1px solid rgba(8,16,18,.22); margin-top: calc(70 * 100vw / var(--page-width)); padding-top: calc(26 * 100vw / var(--page-width)); }
+    code { background: rgba(8,16,18,.08); padding: .1em .3em; }
+    @media only screen and (min-width: 768px) {
+      .article-page { padding: calc(64 * 100vw / var(--page-width)) calc(136 * 100vw / var(--page-width)); }
+      .article-nav { margin-bottom: calc(136 * 100vw / var(--page-width)); }
+      .article-layout { grid-template-columns: minmax(220px, .34fr) minmax(0, .86fr); }
+      .article-aside { align-self: start; position: sticky; top: calc(42 * 100vw / var(--page-width)); }
+      .article-code code { font-size: calc(15 * 100vw / var(--page-width)); }
+    }
+    @media only screen and (max-width: 767px) {
+      .article-page { padding: 38px 22px; }
+      .article-nav { margin-bottom: 92px; }
+      .article-cover { max-width: none; }
+      .article-code { padding: 18px; }
+      .article-code code { font-size: 12px; }
+    }
+  </style>
 </head>
-<body class="placeholder-body">
-  <header id="header" class="detail-header">
-    <a href="/">Digambar Ghosalkar Articles</a>
-    <nav aria-label="Article navigation">
-      <a href="https://digambarghosalkar.com/">Articles</a>
-      <a href="https://digambarghosalkar.com/">Portfolio</a>
+<body>
+  <main class="article-page">
+    <nav class="article-nav" aria-label="Article navigation">
+      <a class="t6 font-romie" href="../index.html">articles</a>
+      <a class="t6 font-romie" href="https://digambarghosalkar.com/">home</a>
     </nav>
-  </header>
-  <main id="main" data-container="main-content" class="placeholder-page">
-    <article class="placeholder-hero" aria-labelledby="page-title">
-      <div>
-        <p class="placeholder-kicker">Article</p>
-        <h1 id="page-title" class="placeholder-title">Defender Rollout Field Notes</h1>
+
+    <article>
+      <header class="article-hero">
+        <p class="label article-label">Microsoft Defender onboarding</p>
+        <h1 class="h1 article-title">Microsoft Defender Onboarding: A Smarter Security Strategy</h1>
+        <p class="t1 article-lede">
+          Defender onboarding is not only about installing endpoint protection. The real value appears when Defender becomes a connected security lifecycle: collect telemetry, validate what matters, respond quickly, and harden the environment before the next attack begins.
+        </p>
+        <p class="t2 article-meta">Project article · Defender XDR · Endpoint security · AIR · Advanced Hunting · Vulnerability management · Automation</p>
+        <figure class="article-cover">
+          <img alt="Enterprise security team reviewing Microsoft Defender onboarding and endpoint security posture" height="941" src="../assets/articles/covers/defender-onboarding-hero.png" width="1672">
+        </figure>
+      </header>
+
+      <div class="article-layout">
+        <aside class="article-aside">
+          <p class="label article-section-label">Article index</p>
+          <dl class="t2">
+            <div><dt>Lifecycle</dt><dd>Investigation, validation, remediation, and protection become one operating loop.</dd></div>
+            <div><dt>Platform</dt><dd>Endpoint, identity, email, cloud apps, vulnerability management, and Sentinel integrations work together.</dd></div>
+            <div><dt>Operations</dt><dd>Automation, Advanced Hunting, custom detections, and integrations reduce response time.</dd></div>
+          </dl>
+        </aside>
+
+        <div class="article-content">
+          <section class="article-section">
+            <p class="label article-section-label">01 · Why Defender</p>
+            <h2 class="h2">Modern security needs more than antivirus</h2>
+            <p class="t2">
+              Organizations now defend against ransomware, phishing, identity theft, zero-day vulnerabilities, insider threats, cloud attacks, and coordinated campaigns that change every day. Traditional antivirus can still be useful, but it is no longer enough by itself.
+            </p>
+            <p class="t2">
+              The Defender evaluation should therefore ask a wider question: can the platform provide end-to-end visibility, correlate signals, automate investigation, reduce manual effort, and continuously improve protection across endpoints, identities, email, cloud applications, and hybrid infrastructure?
+            </p>
+            <p class="t2">
+              A simple way to explain the onboarding model is the four-color lifecycle: blue for investigation, red for validation, green for remediation, and yellow for protection. The concept image below captures that story in a friendly way before we translate it into enterprise operating steps.
+            </p>
+            <figure class="article-figure diagram">
+              <img alt="Friendly four-stage Microsoft Defender lifecycle concept showing investigation, validation, remediation, and protection" height="756" src="../assets/articles/covers/defender-lifecycle-concept.png" width="1251">
+            </figure>
+            <figure class="article-figure diagram">
+              <img alt="Microsoft Defender lifecycle diagram showing investigation, validation, remediation, and protection" height="720" src="../assets/articles/covers/defender-security-lifecycle.svg" width="1280">
+            </figure>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">02 · Platform scope</p>
+            <h2 class="h2">Defender works best as an integrated ecosystem</h2>
+            <p class="t2">
+              Modern enterprises run across Windows, macOS, Linux, mobile devices, Microsoft 365, Azure, SaaS applications, and cloud infrastructure. Defender becomes stronger when these signals are connected instead of managed as disconnected point tools.
+            </p>
+            <ul class="t2">
+              <li>Microsoft Defender for Endpoint for endpoint detection, response, device inventory, and attack surface controls.</li>
+              <li>Microsoft Defender XDR to correlate endpoint, identity, email, and cloud alerts into unified incidents.</li>
+              <li>Defender for Office 365 for phishing, malicious attachments, unsafe URLs, and email response actions.</li>
+              <li>Defender for Identity and Defender for Cloud Apps for identity risk and SaaS activity visibility.</li>
+              <li>Defender Vulnerability Management and Defender for Cloud to reduce exposure across devices and cloud workloads.</li>
+              <li>Microsoft Sentinel integration for SIEM, SOAR, automation, hunting, and incident orchestration.</li>
+            </ul>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">03 · Investigation</p>
+            <h2 class="h2">Detect and analyze the full activity story</h2>
+            <p class="t2">
+              Investigation starts with telemetry. Defender collects signals from process execution, registry changes, files, network connections, PowerShell and script activity, USB usage, browser events, installed applications, device inventory, user authentication, email, and cloud application access.
+            </p>
+            <p class="t2">
+              The value is not simply collecting more logs. The value is reconstructing the attack timeline so analysts can see what happened before the alert, what the user did, which device was affected, whether identity activity changed, and whether the attack touched email or cloud services.
+            </p>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">04 · Validation</p>
+            <h2 class="h2">Prioritize real threats and reduce false positives</h2>
+            <p class="t2">
+              Not every suspicious event is a real incident. Defender validates activity using Microsoft threat intelligence, AI, machine learning, behavioral analytics, historical patterns, MITRE ATT&CK mapping, known indicators of compromise, device reputation, user risk, asset criticality, and exposure score.
+            </p>
+            <p class="t2">
+              This is where Defender XDR becomes useful operationally. Instead of creating separate alerts across endpoint, identity, email, and cloud tools, it can correlate signals into an incident so security teams understand scope and priority faster.
+            </p>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">05 · Remediation</p>
+            <h2 class="h2">Contain quickly and recover consistently</h2>
+            <p class="t2">
+              Once a threat is confirmed, response must be fast. Defender can support automated or analyst-driven containment across endpoints, identities, email, network controls, and cloud applications.
+            </p>
+            <pre class="article-code"><code>Typical Defender response actions
+Isolate compromised endpoints
+Quarantine malicious files and kill malicious processes
+Start antivirus scans and collect investigation packages
+Disable compromised accounts and revoke active sessions
+Trigger Conditional Access policies
+Remove phishing emails and malicious attachments
+Block senders, URLs, domains, IP addresses, and hashes
+Disable malicious OAuth applications and risky sharing links</code></pre>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">06 · Protection</p>
+            <h2 class="h2">Harden before the next incident starts</h2>
+            <p class="t2">
+              The best Defender strategy is not waiting for the next alert. Protection means reducing the paths attackers commonly use: malware execution, credential theft, Office macro abuse, malicious child processes, vulnerable software, risky browser behavior, unmanaged USB use, and weak endpoint posture.
+            </p>
+            <ul class="t2">
+              <li>Next-generation antivirus, EDR, and XDR for layered detection and response.</li>
+              <li>Attack Surface Reduction rules to block common exploitation techniques.</li>
+              <li>Device Control, USB protection, web protection, network protection, SmartScreen, and firewall management.</li>
+              <li>Tamper Protection, Credential Guard, Exploit Protection, application control, and BitLocker recommendations.</li>
+              <li>Secure Score and Exposure Score to measure posture and prioritize hardening.</li>
+            </ul>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">07 · Vulnerability management</p>
+            <h2 class="h2">Reduce exposure before attackers use it</h2>
+            <p class="t2">
+              Defender Vulnerability Management helps identify missing operating system patches, vulnerable software, unsupported operating systems, browser vulnerabilities, security misconfigurations, and high-risk applications. The important part is prioritization: teams should fix what is exploitable and business-critical first.
+            </p>
+            <p class="t2">
+              This turns vulnerability management into an operational workflow rather than a static report. Security, EUC, application owners, and infrastructure teams can align remediation around risk, exposure, and business impact.
+            </p>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">08 · AIR and hunting</p>
+            <h2 class="h2">Automate investigation, then hunt beyond alerts</h2>
+            <p class="t2">
+              Automated Investigation and Response helps collect forensic evidence, analyze processes, inspect registry changes, review files, analyze network connections, identify persistence, determine root cause, and recommend or execute remediation. That improves consistency and reduces the amount of manual triage required for every alert.
+            </p>
+            <p class="t2">
+              Advanced Hunting adds the proactive layer. Analysts can use KQL to hunt for suspicious PowerShell, credential theft, lateral movement, registry persistence, browser attacks, USB activity, file modifications, email events, and network activity before those patterns become major incidents.
+            </p>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">09 · Custom detection</p>
+            <h2 class="h2">Tune Defender to the business, not only the defaults</h2>
+            <p class="t2">
+              Every environment has its own risk patterns. Custom detection rules let teams create KQL-based detections for encoded PowerShell, unauthorized remote access tools, privilege escalation, excessive failed logins, suspicious USB use, sensitive file access, Tor connections, cryptocurrency mining, mass file encryption, registry persistence, and unauthorized software installation.
+            </p>
+            <div class="article-callout">
+              <p class="label article-section-label">Operator note</p>
+              <p class="t2">Good custom detection should have an owner, a response action, a false-positive review path, and a retirement plan when the risk changes.</p>
+            </div>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">10 · Automation and integrations</p>
+            <h2 class="h2">Response improves when Defender connects to the operating model</h2>
+            <p class="t2">
+              Defender can integrate with Microsoft Sentinel, Logic Apps, Power Automate, ServiceNow, Jira, Microsoft Teams, Graph API, Intune, Jamf Pro, Entra ID, Microsoft 365, Azure, Defender for Cloud, and Defender for Cloud Apps.
+            </p>
+            <p class="t2">
+              These integrations make onboarding more valuable because alerts can become action: create incidents, notify SOC teams, isolate devices, collect evidence, disable accounts, revoke sessions, block malicious infrastructure, launch remediation scripts, and trigger custom playbooks.
+            </p>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">11 · Global intelligence</p>
+            <h2 class="h2">Defender improves as Microsoft sees new threats globally</h2>
+            <p class="t2">
+              Microsoft continuously analyzes security signals across Windows, Microsoft 365, Azure, Defender, Edge, cloud services, and enterprise environments. When new ransomware, phishing, zero-day, or nation-state activity appears, Microsoft can distribute updated behavioral detections, IOCs, signatures, URL blocks, IP blocks, domain blocks, and rules through the cloud.
+            </p>
+            <p class="t2">
+              That makes Defender more than a local endpoint agent. It becomes part of a global threat response system that helps organizations adapt as new attack patterns emerge.
+            </p>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">12 · Onboarding checklist</p>
+            <h2 class="h2">Make onboarding measurable from day one</h2>
+            <ul class="t2">
+              <li>Confirm device onboarding coverage across Windows, macOS, Linux, and mobile scope.</li>
+              <li>Define alert ownership, severity routing, escalation paths, and response SLAs.</li>
+              <li>Enable baseline policies for AV, EDR, tamper protection, ASR, web protection, and network protection.</li>
+              <li>Connect identity, email, cloud apps, vulnerability management, and SIEM/SOAR workflows.</li>
+              <li>Define custom detections, Advanced Hunting queries, and automation playbooks for high-risk scenarios.</li>
+              <li>Track Secure Score, Exposure Score, unresolved incidents, vulnerable software, and response time trends.</li>
+            </ul>
+          </section>
+        </div>
       </div>
-      <div class="placeholder-copy">
-        <p class="t1">This article page is ready for the full write-up. The index card already points here.</p>
-        <div class="placeholder-actions"><a href="https://digambarghosalkar.com/">Back to Articles</a></div>
-      </div>
-      <div class="placeholder-state"><span>Coming soon</span><span>Security</span></div>
+
+      <footer class="article-footer">
+        <a class="article-back t1 font-romie" href="../index.html">Back to articles</a>
+      </footer>
     </article>
   </main>
 </body>

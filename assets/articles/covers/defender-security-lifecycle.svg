@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-labelledby="title desc">
+  <title id="title">Microsoft Defender security lifecycle</title>
+  <desc id="desc">A four-stage Defender lifecycle: investigation, validation, remediation, and protection.</desc>
+  <rect width="1280" height="720" fill="#f7f5ef"/>
+  <defs>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="12" stdDeviation="14" flood-color="#081012" flood-opacity=".1"/>
+    </filter>
+  </defs>
+  <style>
+    .title{font:700 34px Arial,Helvetica,sans-serif;fill:#081012}
+    .sub{font:400 18px Arial,Helvetica,sans-serif;fill:#59645d}
+    .card{fill:#fffaf0;stroke-width:3;filter:url(#shadow)}
+    .h{font:700 22px Arial,Helvetica,sans-serif}
+    .p{font:400 15px Arial,Helvetica,sans-serif;fill:#3b4642}
+    .icon{fill:none;stroke-width:7;stroke-linecap:round;stroke-linejoin:round}
+    .blue{stroke:#2f6df6;color:#2f6df6;fill:#2f6df6}
+    .red{stroke:#dd2016;color:#dd2016;fill:#dd2016}
+    .green{stroke:#12a15d;color:#12a15d;fill:#12a15d}
+    .yellow{stroke:#f4ad00;color:#f4ad00;fill:#f4ad00}
+  </style>
+  <text x="60" y="62" class="title">Defender onboarding lifecycle</text>
+  <text x="60" y="96" class="sub">Onboarding is successful when telemetry, validation, response, and hardening become one operating loop.</text>
+
+  <rect x="58" y="155" width="270" height="430" rx="22" class="card" stroke="#2f6df6"/>
+  <circle cx="193" cy="248" r="58" fill="#eaf1ff" stroke="#2f6df6" stroke-width="5"/>
+  <circle cx="178" cy="238" r="28" class="icon blue"/>
+  <line x1="199" y1="259" x2="226" y2="286" class="icon blue"/>
+  <text x="193" y="362" text-anchor="middle" class="h" fill="#2f6df6">Investigation</text>
+  <text x="92" y="405" class="p">Collect endpoint, identity,</text>
+  <text x="92" y="429" class="p">email, cloud, browser,</text>
+  <text x="92" y="453" class="p">network, and device signals.</text>
+  <text x="92" y="505" class="p">Goal: see the full attack</text>
+  <text x="92" y="529" class="p">timeline, not isolated alerts.</text>
+
+  <rect x="363" y="155" width="270" height="430" rx="22" class="card" stroke="#dd2016"/>
+  <circle cx="498" cy="248" r="58" fill="#fff0ee" stroke="#dd2016" stroke-width="5"/>
+  <path d="M470 248l18 18 40-45" class="icon red"/>
+  <line x1="470" y1="286" x2="526" y2="286" class="icon red"/>
+  <text x="498" y="362" text-anchor="middle" class="h" fill="#dd2016">Validation</text>
+  <text x="397" y="405" class="p">Use threat intelligence, AI,</text>
+  <text x="397" y="429" class="p">asset criticality, behavior,</text>
+  <text x="397" y="453" class="p">and IOC correlation.</text>
+  <text x="397" y="505" class="p">Goal: prioritize real threats</text>
+  <text x="397" y="529" class="p">and reduce false positives.</text>
+
+  <rect x="668" y="155" width="270" height="430" rx="22" class="card" stroke="#12a15d"/>
+  <circle cx="803" cy="248" r="58" fill="#eaf8f1" stroke="#12a15d" stroke-width="5"/>
+  <path d="M777 276l53-53" class="icon green"/>
+  <circle cx="823" cy="230" r="17" fill="#eaf8f1" stroke="#12a15d" stroke-width="7"/>
+  <path d="M783 270l-12 18" class="icon green"/>
+  <text x="803" y="362" text-anchor="middle" class="h" fill="#12a15d">Remediation</text>
+  <text x="702" y="405" class="p">Isolate devices, quarantine</text>
+  <text x="702" y="429" class="p">files, revoke sessions,</text>
+  <text x="702" y="453" class="p">remove email and block IOCs.</text>
+  <text x="702" y="505" class="p">Goal: contain quickly and</text>
+  <text x="702" y="529" class="p">recover consistently.</text>
+
+  <rect x="973" y="155" width="270" height="430" rx="22" class="card" stroke="#f4ad00"/>
+  <circle cx="1108" cy="248" r="58" fill="#fff7df" stroke="#f4ad00" stroke-width="5"/>
+  <path d="M1108 202l42 18v32c0 32-19 55-42 67-23-12-42-35-42-67v-32z" class="icon yellow"/>
+  <path d="M1087 254l15 15 29-37" class="icon yellow"/>
+  <text x="1108" y="362" text-anchor="middle" class="h" fill="#f4ad00">Protection</text>
+  <text x="1007" y="405" class="p">Harden with ASR rules,</text>
+  <text x="1007" y="429" class="p">vulnerability management,</text>
+  <text x="1007" y="453" class="p">patching, and secure score.</text>
+  <text x="1007" y="505" class="p">Goal: reduce exposure before</text>
+  <text x="1007" y="529" class="p">the next incident starts.</text>
+</svg>
