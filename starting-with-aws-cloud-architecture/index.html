@@ -93,7 +93,7 @@
         <p class="label article-label">AWS cloud architecture</p>
         <h1 class="h1 article-title">Starting With AWS: How to Grow Cloud Architecture Safely</h1>
         <p class="t1 article-lede">
-          Good AWS architecture is not about launching every service on day one. It is about knowing where you are, choosing the smallest reliable baseline, and then adding containers, serverless, governance, identity, secrets, CDN, API controls, and documentation when the workload is ready for them.
+          AWS should grow like a business grows. Start with a small, reliable foundation, observe where pressure appears, and then add the next service only when it solves a real scaling, security, cost, or operating problem. This is the story of moving from a small workload to a mature cloud organization without overbuilding too early.
         </p>
         <p class="t2 article-meta">Project article · AWS · Cloud architecture · IAM · Organizations · Fargate · Serverless · API Gateway · CloudFront</p>
         <figure class="article-cover wide">
@@ -105,9 +105,9 @@
         <aside class="article-aside">
           <p class="label article-section-label">Article index</p>
           <dl class="t2">
-            <div><dt>Start</dt><dd>Two Availability Zones, load balancer, Auto Scaling, simple replicated database, and IAM from the first deployment.</dd></div>
-            <div><dt>Scale</dt><dd>Use containers, Fargate, serverless, queues, CDN, and API Gateway when the workload demands isolation and speed.</dd></div>
-            <div><dt>Govern</dt><dd>Separate Dev and Prod with OUs, budgets, SCPs, IAM Identity Center, RBAC, ABAC, and secrets controls.</dd></div>
+            <div><dt>Small</dt><dd>Start with a resilient baseline: two Availability Zones, load balancer, Auto Scaling, IAM roles, monitoring, and recoverable data.</dd></div>
+            <div><dt>Growing</dt><dd>Plug in Fargate, Lambda, SQS, SNS, CDN, API Gateway, and better deployment patterns only when pressure makes the need clear.</dd></div>
+            <div><dt>Large</dt><dd>Mature into a cloud organization with OUs, budgets, SCPs, Identity Center, ABAC, secrets, logging, documentation, and platform ownership.</dd></div>
           </dl>
         </aside>
 
@@ -128,13 +128,33 @@ Auto Scaling group with measured minimum, desired, and burst capacity
 IAM roles for services, no long-lived keys on servers
 Single database tier with backups, encryption, and replication or standby design
 CloudWatch alarms for health, latency, saturation, and cost signals</code></pre>
+            <p class="t2">
+              This first stage is not basic because it is careless. It is basic because it is focused. You want enough architecture to survive common failure, recover data, observe health, and avoid bad security habits. You do not yet need a maze of accounts, services, and pipelines if one small team is still proving the product.
+            </p>
             <figure class="article-figure diagram">
               <img alt="AWS maturity decision curve showing how baseline resilience grows into containers, serverless, governance, edge controls, and documentation" height="720" src="../assets/articles/covers/aws-maturity-decision-curve.svg" width="1280">
             </figure>
           </section>
 
           <section class="article-section">
-            <p class="label article-section-label">02 · Scale deliberately</p>
+            <p class="label article-section-label">02 · The small-scale story</p>
+            <h2 class="h2">A small AWS environment should be easy to understand</h2>
+            <p class="t2">
+              Imagine a young product with a small team. The goal is not to copy a large enterprise landing zone on day one. The goal is to run safely, learn quickly, and avoid decisions that will be painful to undo. Start with one production account, a clear network, a small compute layer, a database, a backup routine, and a few alarms that someone actually watches.
+            </p>
+            <p class="t2">
+              In this stage, growth should be slow and intentional. Add a second Availability Zone before adding a second platform. Add IAM roles before adding secret-sharing practices. Add cost alarms before the first surprise bill. Add restore testing before talking about disaster recovery. The best small setup is one that a new engineer can draw on a whiteboard in ten minutes.
+            </p>
+            <ul class="t2">
+              <li>Keep the VPC design simple: public entry, private workloads, private data stores, and minimal routing surprises.</li>
+              <li>Use managed services where they reduce operational work, but avoid using a service just because it is available.</li>
+              <li>Keep deployment simple until release frequency or rollback risk justifies more advanced pipelines.</li>
+              <li>Use tags from the beginning so cost, ownership, and environment are never a mystery later.</li>
+            </ul>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">03 · Scale deliberately</p>
             <h2 class="h2">Microservices are useful when boundaries are real</h2>
             <p class="t2">
               Microservices should not be used just because the team wants a modern diagram. They become useful when parts of the system have different release cycles, scaling patterns, data ownership, compliance requirements, or failure domains. If every service changes together and shares the same database, the architecture may still be a distributed monolith with more operational cost.
@@ -151,7 +171,7 @@ CloudWatch alarms for health, latency, saturation, and cost signals</code></pre>
           </section>
 
           <section class="article-section">
-            <p class="label article-section-label">03 · Plug-in decision map</p>
+            <p class="label article-section-label">04 · Plug-in decision map</p>
             <h2 class="h2">Add the next AWS option when the pressure point is clear</h2>
             <p class="t2">
               Growing AWS well is a sequence of pressure-based decisions. A small product needs resilience and visibility. A growing product needs release isolation and deployment discipline. A busy product needs asynchronous workflows and edge controls. A multi-team platform needs account boundaries, identity, secrets, policy guardrails, and cost accountability.
@@ -165,7 +185,46 @@ CloudWatch alarms for health, latency, saturation, and cost signals</code></pre>
           </section>
 
           <section class="article-section">
-            <p class="label article-section-label">04 · Organize accounts before growth becomes sprawl</p>
+            <p class="label article-section-label">05 · When to plug in more AWS utilities</p>
+            <h2 class="h2">Use pressure signals, not service excitement</h2>
+            <p class="t2">
+              The healthiest AWS environments grow by signals. When traffic becomes unpredictable, improve Auto Scaling and caching. When releases block each other, consider containers and separate deployment units. When workloads wait on each other, introduce SQS. When one event needs to notify many systems, add SNS. When short tasks do not need a running server, use Lambda.
+            </p>
+            <p class="t2">
+              As external traffic grows, CloudFront and WAF become part of the application boundary. As APIs become product interfaces, API Gateway can help with throttling, authentication patterns, custom domains, and request control. As teams grow, Organizations, OUs, IAM Identity Center, SCPs, and permission sets become more important than another compute service.
+            </p>
+            <ul class="t2">
+              <li>Use CloudFront when latency, static delivery, origin protection, or global access becomes important.</li>
+              <li>Use API Gateway when APIs need controlled exposure, throttling, routing, authorization patterns, and clear ownership.</li>
+              <li>Use Fargate when services need independent deployment and scaling without managing server capacity.</li>
+              <li>Use Lambda when the work is event-driven, short-lived, intermittent, or better handled as a reaction than a service.</li>
+              <li>Use SQS when producers and consumers should not fail or scale together.</li>
+              <li>Use Secrets Manager or a vault pattern when credentials are being copied into code, scripts, pipelines, or shared files.</li>
+            </ul>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">06 · When migration becomes the right decision</p>
+            <h2 class="h2">Migrate when the current shape is limiting the business</h2>
+            <p class="t2">
+              Migration is not only moving from on-premises to AWS. It can also mean moving from EC2 to containers, from a shared database to service-owned data, from one AWS account to a multi-account model, or from manual deployments to infrastructure as code. The trigger should be a repeated constraint, not a fashionable target state.
+            </p>
+            <p class="t2">
+              Good migration timing usually appears through symptoms: deployments are risky, costs are unclear, teams are blocking each other, scaling is manual, audits take too long, secrets are hardcoded, or production access is too broad. When the same pain repeats, the architecture is telling you where the next migration should happen.
+            </p>
+            <pre class="article-code"><code>Migration triggers
+Manual scaling is becoming frequent or risky
+Release windows are slowing product teams
+One account has too many workloads and too many admins
+Security reviews find repeated credential or access issues
+Database recovery is unclear or untested
+Public APIs need throttling, auth, logging, and edge protection
+Costs cannot be mapped to owners or products
+Documentation no longer matches the real environment</code></pre>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">07 · Organize accounts before growth becomes sprawl</p>
             <h2 class="h2">Use OUs, budgets, SCPs, RBAC, and ABAC as architecture controls</h2>
             <p class="t2">
               As the environment grows, a single AWS account becomes a risk and a bottleneck. Move toward AWS Organizations with separate OUs for Dev and Prod. Dev should have strict budgets, sandbox boundaries, and room to experiment safely. Prod should have tighter access, protected networking, restricted administrative actions, and explicit change control.
@@ -182,7 +241,7 @@ CloudWatch alarms for health, latency, saturation, and cost signals</code></pre>
           </section>
 
           <section class="article-section">
-            <p class="label article-section-label">05 · Use serverless for the right opportunities</p>
+            <p class="label article-section-label">08 · Use serverless for the right opportunities</p>
             <h2 class="h2">Lambda, SNS, and SQS are strongest when the workflow is event-driven</h2>
             <p class="t2">
               Serverless is powerful when work is event-based, intermittent, asynchronous, or easy to split into small responsibilities. Lambda can process events without keeping servers warm. SNS can fan out notifications. SQS can buffer work and protect downstream services from spikes. Step Functions can coordinate workflows when the process has multiple states and failure paths.
@@ -193,7 +252,25 @@ CloudWatch alarms for health, latency, saturation, and cost signals</code></pre>
           </section>
 
           <section class="article-section">
-            <p class="label article-section-label">06 · Protect secrets and borrowed access</p>
+            <p class="label article-section-label">09 · Secure as you grow</p>
+            <h2 class="h2">Security should mature in layers, not as a late project</h2>
+            <p class="t2">
+              In the small stage, security starts with IAM roles, MFA, no long-lived keys on servers, private subnets for workloads, encrypted storage, and basic logging. In the growing stage, add centralized identity, permission sets, secrets management, structured tagging, CloudTrail protection, vulnerability ownership, and stronger network boundaries. In the large stage, security becomes an operating model with guardrails, detection, response, exceptions, and audit evidence.
+            </p>
+            <p class="t2">
+              The important principle is that teams should not need to choose between delivery and security. Good cloud security gives teams approved paths: approved roles, approved network patterns, approved secret retrieval, approved deployment pipelines, and clear break-glass access when something goes wrong.
+            </p>
+            <ul class="t2">
+              <li>Identity: use SSO/federation, MFA, least privilege, permission sets, and short-lived sessions.</li>
+              <li>Data: encrypt storage, test restore, classify data, and limit who can read production data.</li>
+              <li>Network: keep private workloads private, control inbound paths, and protect public edges with WAF/CDN/API controls.</li>
+              <li>Detection: centralize CloudTrail, logs, alerts, and ownership for investigation.</li>
+              <li>Secrets: remove hardcoded values and rotate credentials through managed secret patterns.</li>
+            </ul>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">10 · Protect secrets and borrowed access</p>
             <h2 class="h2">Hardcoded credentials are architecture debt</h2>
             <p class="t2">
               Secrets should not live inside scripts, AMIs, containers, repositories, or utility configuration files. Use AWS Secrets Manager, Parameter Store, or a vault-backed pattern to retrieve sensitive values at runtime. Rotate secrets where possible, scope them to the workload, and log access without exposing values.
@@ -208,7 +285,7 @@ CloudWatch alarms for health, latency, saturation, and cost signals</code></pre>
           </section>
 
           <section class="article-section">
-            <p class="label article-section-label">07 · Control CDN and API entry points</p>
+            <p class="label article-section-label">11 · Control CDN and API entry points</p>
             <h2 class="h2">The public edge should be boring, observable, and intentional</h2>
             <p class="t2">
               CloudFront, Route 53, WAF, ACM certificates, and API Gateway are not just performance pieces. They are control points. They decide what becomes public, how traffic is shaped, where TLS terminates, how APIs are throttled, and how abuse is blocked before it reaches the application.
@@ -219,7 +296,7 @@ CloudWatch alarms for health, latency, saturation, and cost signals</code></pre>
           </section>
 
           <section class="article-section">
-            <p class="label article-section-label">08 · Snapshot and document infrastructure</p>
+            <p class="label article-section-label">12 · Snapshot and document infrastructure</p>
             <h2 class="h2">Documentation should describe the real environment, not the launch plan</h2>
             <p class="t2">
               Infrastructure documentation is useful only when it reflects the current state. Build a recurring snapshot process that captures accounts, VPCs, subnets, security groups, load balancers, compute services, databases, IAM roles, permission sets, secrets, CDN distributions, API Gateway routes, budgets, alarms, and owners.
@@ -230,7 +307,25 @@ CloudWatch alarms for health, latency, saturation, and cost signals</code></pre>
           </section>
 
           <section class="article-section">
-            <p class="label article-section-label">09 · Additional architect checks</p>
+            <p class="label article-section-label">13 · Large-scale cloud organization</p>
+            <h2 class="h2">At large scale, cloud becomes an operating system for the business</h2>
+            <p class="t2">
+              A large AWS organization is not just many accounts. It is a platform with rules, reusable patterns, ownership, and a rhythm for change. Prod and Dev are separated. Shared services are clear. Security has guardrails. Finance can see cost. Engineering can deploy without asking for admin access. Operations can investigate incidents because logs, diagrams, owners, and runbooks exist.
+            </p>
+            <p class="t2">
+              This is where cloud architecture becomes governance plus enablement. The platform team should make the safe path the easy path: account vending, standard VPC patterns, baseline logging, approved CI/CD templates, Secrets Manager integration, tagging policy, budget alerts, backup policy, and documentation snapshots.
+            </p>
+            <ul class="t2">
+              <li>Use OUs to separate lifecycle and risk: Sandbox, Dev, Test, Prod, Security, Log Archive, Shared Services.</li>
+              <li>Use SCPs to prevent dangerous actions, such as disabling logs, removing security baselines, or using unapproved regions.</li>
+              <li>Use permission sets and ABAC so access follows role, team, environment, and ownership attributes.</li>
+              <li>Use budgets, anomaly detection, and cost tags so each workload has financial accountability.</li>
+              <li>Use standard landing-zone patterns so new accounts do not start from an empty, insecure baseline.</li>
+            </ul>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">14 · Best practices</p>
             <h2 class="h2">Add these decisions before the platform gets too comfortable</h2>
             <ul class="t2">
               <li>Define tagging standards for owner, environment, cost center, data classification, application, and lifecycle.</li>
@@ -244,7 +339,7 @@ CloudWatch alarms for health, latency, saturation, and cost signals</code></pre>
           </section>
 
           <section class="article-section">
-            <p class="label article-section-label">10 · Utility links</p>
+            <p class="label article-section-label">15 · Utility links</p>
             <h2 class="h2">References for building the playbook</h2>
             <ul class="t2 article-resource-list">
               <li><a href="https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html" rel="noopener noreferrer" target="_blank">AWS Well-Architected Framework</a><span>Use as the review model for reliability, security, operational excellence, performance, cost, and sustainability decisions.</span></li>
