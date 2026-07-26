@@ -14,13 +14,13 @@
   <meta property="og:title" content="EUC Migration Playbook: Local-First macOS MDM Migration">
   <meta property="og:description" content="How a macOS migration script can remove old MDM, monitor new enrollment locally, transfer FileVault recovery keys, re-escrow bootstrap tokens, and keep the user experience controlled.">
   <meta property="og:url" content="https://article.digambarghosalkar.com/euc-migration-playbook/">
-  <meta property="og:image" content="https://article.digambarghosalkar.com/assets/articles/covers/euc-migration-playbook.svg">
-  <meta property="og:image:width" content="900">
-  <meta property="og:image:height" content="900">
+  <meta property="og:image" content="https://article.digambarghosalkar.com/assets/articles/covers/euc-migration-operations-room.png">
+  <meta property="og:image:width" content="1672">
+  <meta property="og:image:height" content="941">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="EUC Migration Playbook: Local-First macOS MDM Migration">
   <meta name="twitter:description" content="A practical architecture for macOS MDM migration using local assets, launchd monitoring, Swift Dialog, FileVault key handoff, and bootstrap token escrow.">
-  <meta name="twitter:image" content="https://article.digambarghosalkar.com/assets/articles/covers/euc-migration-playbook.svg">
+  <meta name="twitter:image" content="https://article.digambarghosalkar.com/assets/articles/covers/euc-migration-operations-room.png">
   <meta name="theme-color" content="#f7f5ef">
   <link rel="icon" type="image/svg+xml" href="../assets/icon.svg?v=dg-20260718-2">
   <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png?v=dg-20260718-2">
@@ -43,6 +43,7 @@
     .article-lede { max-width: calc(900 * 100vw / var(--page-width)); }
     .article-cover, .article-figure { background: transparent; display: block; overflow: hidden; width: 100%; }
     .article-cover { aspect-ratio: 1 / 1; margin-top: calc(42 * 100vw / var(--page-width)); max-width: calc(760 * 100vw / var(--page-width)); }
+    .article-cover.wide { aspect-ratio: 1672 / 941; max-width: calc(1040 * 100vw / var(--page-width)); }
     .article-cover img, .article-figure img { display: block; height: 100%; object-fit: contain; object-position: center; width: 100%; }
     .article-layout { display: grid; gap: calc(60 * 100vw / var(--page-width)); margin-top: calc(80 * 100vw / var(--page-width)); }
     .article-aside { border-top: 1px solid rgba(8,16,18,.22); gap: calc(18 * 100vw / var(--page-width)); padding-top: calc(20 * 100vw / var(--page-width)); }
@@ -58,6 +59,7 @@
     .article-code code { font-family: Menlo, Consolas, monospace; font-size: calc(14 * 100vw / var(--page-width)); line-height: 1.6; }
     .article-callout { background: #e9e4d9; display: grid; gap: calc(12 * 100vw / var(--page-width)); padding: calc(24 * 100vw / var(--page-width)); }
     .article-figure.diagram { aspect-ratio: 16 / 9; border: 1px solid rgba(8,16,18,.12); margin-top: calc(8 * 100vw / var(--page-width)); }
+    .article-figure.photo { aspect-ratio: 1672 / 941; border: 0; margin-top: calc(8 * 100vw / var(--page-width)); }
     .article-resource-list li { display: grid; gap: calc(6 * 100vw / var(--page-width)); }
     .article-resource-list a { color: #123230; font-weight: 700; text-decoration-color: rgba(209,160,95,.7); text-decoration-thickness: .12em; text-underline-offset: .18em; }
     .article-resource-list span { color: #5d6862; }
@@ -94,8 +96,8 @@
           A macOS MDM migration is not just unenroll here and enroll there. The safer design is local-first: prepare the assets on the Mac, remove the old MDM in a controlled way, monitor the new enrollment independently, preserve encryption recovery, and repair user state before the device is considered migrated.
         </p>
         <p class="t2 article-meta">Project article · macOS · Jamf · MDM migration · Swift Dialog · FileVault · bootstrap token</p>
-        <figure class="article-cover">
-          <img alt="EUC Migration Playbook square cover with migration lanes and device markers" height="900" src="../assets/articles/covers/euc-migration-playbook.svg" width="900">
+        <figure class="article-cover wide">
+          <img alt="Professional enterprise IT operations room showing secure macOS MDM migration monitoring and device management progress" height="941" src="../assets/articles/covers/euc-migration-operations-room.png" width="1672">
         </figure>
       </header>
 
@@ -138,8 +140,8 @@ Monitor profiles binary until new profiles appear
 Re-escrow bootstrap token
 Validate FileVault, Secure Token, admin rights, and user state
 Report migrated / needs attention</code></pre>
-            <figure class="article-figure diagram">
-              <img alt="Local-first EUC migration architecture showing staged assets, local daemon monitoring, MDM handoff, Swift Dialog guidance, and validation" height="720" src="../assets/articles/covers/euc-migration-architecture.svg" width="1280">
+            <figure class="article-figure photo">
+              <img alt="Professional enterprise IT operations room showing local-first macOS endpoint migration monitoring, secure handoff, and device management progress" height="941" src="../assets/articles/covers/euc-migration-operations-room.png" width="1672">
             </figure>
           </section>
 
@@ -155,9 +157,6 @@ Report migrated / needs attention</code></pre>
               <li>Continue monitoring profile state until the Mac is managed by the new MDM.</li>
               <li>Use local validation before declaring the migration complete.</li>
             </ul>
-            <figure class="article-figure diagram">
-              <img alt="EUC migration state graph showing readiness, old MDM removal, enrollment, security repair, completion, and retry monitoring" height="720" src="../assets/articles/covers/euc-migration-state-machine.svg" width="1280">
-            </figure>
           </section>
 
           <section class="article-section">
@@ -186,9 +185,6 @@ Report migrated / needs attention</code></pre>
             <p class="t2">
               The script should not assume encryption is healthy just because FileVault is enabled. It evaluates the local user, Secure Token state, FileVault enablement, and whether the expected recovery information can be escrowed after the new MDM takes ownership.
             </p>
-            <figure class="article-figure diagram">
-              <img alt="Security handoff graph showing Jamf FileVault recovery key retrieval, new MDM escrow, profiles bootstrap token escrow, and user state validation" height="720" src="../assets/articles/covers/euc-migration-security-flow.svg" width="1280">
-            </figure>
           </section>
 
           <section class="article-section">
