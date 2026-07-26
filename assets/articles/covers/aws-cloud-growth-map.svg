@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-labelledby="title desc">
+  <title id="title">AWS cloud growth architecture map</title>
+  <desc id="desc">Diagram showing AWS architecture growth from a small resilient workload to containers, serverless, CDN, API Gateway, and documented infrastructure.</desc>
+  <rect width="1280" height="720" fill="#f7f5ef"/>
+  <defs>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="14" stdDeviation="16" flood-color="#081012" flood-opacity=".12"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0 0 10 5 0 10z" fill="#123230"/>
+    </marker>
+  </defs>
+  <style>
+    .title{font:700 34px Arial,Helvetica,sans-serif;fill:#081012}
+    .sub{font:400 18px Arial,Helvetica,sans-serif;fill:#59645d}
+    .box{fill:#fffaf0;stroke:#123230;stroke-width:2.5;filter:url(#shadow)}
+    .gold{fill:#d1a05f;stroke:#123230;stroke-width:2.5;filter:url(#shadow)}
+    .dark{fill:#123230;filter:url(#shadow)}
+    .h{font:700 20px Arial,Helvetica,sans-serif;fill:#081012}
+    .p{font:400 15px Arial,Helvetica,sans-serif;fill:#3b4642}
+    .whiteH{font:700 20px Arial,Helvetica,sans-serif;fill:#f7f5ef}
+    .whiteP{font:400 15px Arial,Helvetica,sans-serif;fill:#e9e4d9}
+    .line{fill:none;stroke:#123230;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;marker-end:url(#arrow)}
+  </style>
+  <text x="60" y="62" class="title">AWS architecture grows by workload maturity</text>
+  <text x="60" y="96" class="sub">Start with resilient basics, then evolve compute, integration, edge, and documentation as the product matures.</text>
+
+  <rect x="60" y="158" width="280" height="150" rx="18" class="box"/>
+  <text x="92" y="205" class="h">Start small</text>
+  <text x="92" y="238" class="p">Load balancer, Auto Scaling,</text>
+  <text x="92" y="262" class="p">two Availability Zones, IAM,</text>
+  <text x="92" y="286" class="p">and replicated database.</text>
+
+  <rect x="400" y="158" width="280" height="150" rx="18" class="box"/>
+  <text x="432" y="205" class="h">Scale compute</text>
+  <text x="432" y="238" class="p">Move repeatable services to</text>
+  <text x="432" y="262" class="p">containers on ECS Fargate</text>
+  <text x="432" y="286" class="p">when deployments need speed.</text>
+
+  <rect x="740" y="158" width="280" height="150" rx="18" class="box"/>
+  <text x="772" y="205" class="h">Decouple</text>
+  <text x="772" y="238" class="p">Use Lambda, SNS, and SQS</text>
+  <text x="772" y="262" class="p">for event work, queues, and</text>
+  <text x="772" y="286" class="p">bursty workflows.</text>
+
+  <rect x="225" y="448" width="300" height="150" rx="18" class="gold"/>
+  <text x="257" y="495" class="h">Control the edge</text>
+  <text x="257" y="528" class="p">CloudFront, WAF, Route 53,</text>
+  <text x="257" y="552" class="p">and API Gateway protect and</text>
+  <text x="257" y="576" class="p">shape external access.</text>
+
+  <rect x="720" y="448" width="300" height="150" rx="18" class="dark"/>
+  <text x="752" y="495" class="whiteH">Document reality</text>
+  <text x="752" y="528" class="whiteP">Snapshot accounts, network,</text>
+  <text x="752" y="552" class="whiteP">IAM, data stores, costs, and</text>
+  <text x="752" y="576" class="whiteP">change ownership.</text>
+
+  <path d="M340 233h58" class="line"/>
+  <path d="M680 233h58" class="line"/>
+  <path d="M880 308v70c0 40-33 73-73 73H525" class="line"/>
+  <path d="M525 523h193" class="line"/>
+</svg>

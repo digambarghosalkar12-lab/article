@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-labelledby="title desc">
+  <title id="title">AWS cloud governance map</title>
+  <desc id="desc">Diagram showing AWS Organizations, OUs, SCPs, IAM Identity Center, ABAC, RBAC, budget controls, secrets, and production guardrails.</desc>
+  <rect width="1280" height="720" fill="#081012"/>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0 0 10 5 0 10z" fill="#d1a05f"/>
+    </marker>
+  </defs>
+  <style>
+    .title{font:700 34px Arial,Helvetica,sans-serif;fill:#f7f5ef}
+    .sub{font:400 18px Arial,Helvetica,sans-serif;fill:#c9c3b6}
+    .box{fill:#123230;stroke:#d1a05f;stroke-width:2.5}
+    .gold{fill:#d1a05f;stroke:#f7f5ef;stroke-width:2.5}
+    .h{font:700 20px Arial,Helvetica,sans-serif;fill:#f7f5ef}
+    .p{font:400 15px Arial,Helvetica,sans-serif;fill:#e9e4d9}
+    .darkH{font:700 20px Arial,Helvetica,sans-serif;fill:#081012}
+    .darkP{font:400 15px Arial,Helvetica,sans-serif;fill:#081012}
+    .line{fill:none;stroke:#d1a05f;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;marker-end:url(#arrow)}
+  </style>
+  <text x="60" y="62" class="title">Governance becomes the architecture control plane</text>
+  <text x="60" y="96" class="sub">Accounts, identity, policies, budgets, and secrets must mature before workload sprawl becomes expensive.</text>
+
+  <rect x="60" y="160" width="290" height="150" rx="18" class="box"/>
+  <text x="92" y="207" class="h">AWS Organizations</text>
+  <text x="92" y="240" class="p">Separate Dev and Prod OUs,</text>
+  <text x="92" y="264" class="p">centralize account creation,</text>
+  <text x="92" y="288" class="p">and define ownership.</text>
+
+  <rect x="495" y="160" width="290" height="150" rx="18" class="gold"/>
+  <text x="527" y="207" class="darkH">Guardrails</text>
+  <text x="527" y="240" class="darkP">SCPs limit maximum actions,</text>
+  <text x="527" y="264" class="darkP">budgets control Dev, and</text>
+  <text x="527" y="288" class="darkP">Prod access stays restricted.</text>
+
+  <rect x="930" y="160" width="290" height="150" rx="18" class="box"/>
+  <text x="962" y="207" class="h">Identity plane</text>
+  <text x="962" y="240" class="p">IAM Identity Center, SSO,</text>
+  <text x="962" y="264" class="p">federation, RBAC groups,</text>
+  <text x="962" y="288" class="p">and ABAC tags.</text>
+
+  <rect x="280" y="455" width="290" height="150" rx="18" class="box"/>
+  <text x="312" y="502" class="h">Secrets and access</text>
+  <text x="312" y="535" class="p">Use Secrets Manager or vault</text>
+  <text x="312" y="559" class="p">patterns. Avoid hardcoding</text>
+  <text x="312" y="583" class="p">tokens in code or utilities.</text>
+
+  <rect x="710" y="455" width="290" height="150" rx="18" class="box"/>
+  <text x="742" y="502" class="h">Audit and snapshot</text>
+  <text x="742" y="535" class="p">Document IAM, network, APIs,</text>
+  <text x="742" y="559" class="p">data, CDN, cost, logging,</text>
+  <text x="742" y="583" class="p">and risk acceptance.</text>
+
+  <path d="M350 235h143" class="line"/>
+  <path d="M785 235h143" class="line"/>
+  <path d="M640 310v68c0 42-34 76-76 76h-3" class="line"/>
+  <path d="M785 310v68c0 42 34 76 76 76h4" class="line"/>
+</svg>
