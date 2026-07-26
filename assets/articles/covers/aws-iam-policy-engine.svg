@@ -31,10 +31,11 @@
       <text x="80" y="92" text-anchor="middle" fill="#56615c" font-size="17">Bucket/KMS</text>
     </g>
     <path d="M198 370 H1082" stroke="#b9ad94" stroke-width="5" stroke-linecap="round"/>
-    <rect x="360" y="432" width="560" height="106" rx="24" fill="#081012"/>
-    <text x="640" y="474" text-anchor="middle" fill="#f7f5ef" font-size="29" font-weight="800">Allowed only if every required layer allows</text>
-    <text x="640" y="512" text-anchor="middle" fill="#d6c8a8" font-size="19">Any explicit deny wins over an allow</text>
-    <rect x="450" y="582" width="380" height="52" rx="18" fill="#b42318"/>
+    <rect x="300" y="418" width="680" height="128" rx="24" fill="#081012"/>
+    <text x="640" y="466" text-anchor="middle" fill="#f7f5ef" font-size="27" font-weight="800">Allowed only when every</text>
+    <text x="640" y="500" text-anchor="middle" fill="#f7f5ef" font-size="27" font-weight="800">required layer allows</text>
+    <text x="640" y="528" text-anchor="middle" fill="#d6c8a8" font-size="17">Any explicit deny wins over an allow.</text>
+    <rect x="438" y="586" width="404" height="56" rx="18" fill="#b42318"/>
     <text x="640" y="616" text-anchor="middle" fill="#fff" font-size="22" font-weight="800">Explicit deny = stop at the door</text>
   </g>
 </svg>

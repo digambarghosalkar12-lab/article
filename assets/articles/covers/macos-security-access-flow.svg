@@ -39,5 +39,6 @@
     </g>
   </g>
   <path d="M350 337 H390 M650 337 H690 M910 292 H950 M910 392 H950" fill="none" stroke="#cdbf9e" stroke-width="5" stroke-linecap="round"/>
-  <text x="640" y="606" text-anchor="middle" fill="#081012" font-family="Inter, Arial, sans-serif" font-size="25" font-weight="800">Compliance is not a report only. It becomes the gate to email, files, Teams, and apps.</text>
+  <text x="640" y="592" text-anchor="middle" fill="#081012" font-family="Inter, Arial, sans-serif" font-size="25" font-weight="800">Compliance is not a report only.</text>
+  <text x="640" y="628" text-anchor="middle" fill="#081012" font-family="Inter, Arial, sans-serif" font-size="25" font-weight="800">It becomes the gate to email, files, Teams, and apps.</text>
 </svg>

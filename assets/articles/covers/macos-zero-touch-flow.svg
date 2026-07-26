@@ -44,5 +44,6 @@
       <text x="115" y="204" text-anchor="middle" fill="#53635e" font-size="17">Defender + Self Service</text>
     </g>
   </g>
-  <text x="640" y="596" text-anchor="middle" fill="#081012" font-family="Inter, Arial, sans-serif" font-size="25" font-weight="800">No imaging queue. No manual build desk. No waiting for IT to touch every Mac.</text>
+  <text x="640" y="586" text-anchor="middle" fill="#081012" font-family="Inter, Arial, sans-serif" font-size="25" font-weight="800">No imaging queue. No manual build desk.</text>
+  <text x="640" y="622" text-anchor="middle" fill="#081012" font-family="Inter, Arial, sans-serif" font-size="25" font-weight="800">No waiting for IT to touch every Mac.</text>
 </svg>

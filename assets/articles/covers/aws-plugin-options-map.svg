@@ -68,5 +68,6 @@
   <line x1="300" y1="360" x2="335" y2="360" class="line"/>
   <line x1="565" y1="360" x2="600" y2="360" class="line"/>
   <line x1="830" y1="360" x2="865" y2="360" class="line"/>
-  <text x="100" y="632" class="p">Cross-cutting from day one: IAM roles, tags, budgets, CloudWatch, CloudTrail, secrets, backup restore tests, and infrastructure snapshots.</text>
+  <text x="100" y="626" class="p">Cross-cutting from day one: IAM roles, tags, budgets, CloudWatch, CloudTrail, secrets,</text>
+  <text x="100" y="650" class="p">backup restore tests, and infrastructure snapshots.</text>
 </svg>
