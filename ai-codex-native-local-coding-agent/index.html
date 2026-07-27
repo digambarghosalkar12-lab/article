@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI Codex: A Native Local-First Coding Agent for macOS | Digambar Ghosalkar</title>
+  <meta name="description" content="A technical project article on AI Codex, a native local-first macOS coding workspace with Ask/Plan/Code routing, local models, visible activity, bounded tools, reversible edits, and a trust-focused architecture.">
+  <meta name="author" content="Digambar Ghosalkar">
+  <meta name="robots" content="index,follow">
+  <meta name="keywords" content="AI Codex, local coding agent, macOS coding app, local-first AI, Ollama, SwiftUI, Python service, coding assistant, reversible edits, Ask Plan Code, local LLM developer tool">
+  <link rel="canonical" href="https://article.digambarghosalkar.com/ai-codex-native-local-coding-agent/">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Digambar Ghosalkar">
+  <meta property="og:title" content="AI Codex: A Native Local-First Coding Agent for macOS">
+  <meta property="og:description" content="How AI Codex turns local models, a native SwiftUI app, visible activity, safe tools, and reversible edits into a trust-focused coding workspace.">
+  <meta property="og:url" content="https://article.digambarghosalkar.com/ai-codex-native-local-coding-agent/">
+  <meta property="og:image" content="https://article.digambarghosalkar.com/assets/articles/covers/ai-codex-5-card.svg">
+  <meta property="og:image:width" content="900">
+  <meta property="og:image:height" content="900">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="AI Codex: A Native Local-First Coding Agent for macOS">
+  <meta name="twitter:description" content="A local-first macOS coding workspace with Ask/Plan/Code routing, visible execution, local models, safety boundaries, and granular undo.">
+  <meta name="twitter:image" content="https://article.digambarghosalkar.com/assets/articles/covers/ai-codex-5-card.svg">
+  <meta name="theme-color" content="#f7f5ef">
+  <link rel="icon" type="image/svg+xml" href="../assets/icon.svg?v=dg-20260718-2">
+  <link rel="stylesheet" href="../styles/colors.css">
+  <link rel="stylesheet" href="../styles/fonts.css">
+  <link rel="stylesheet" href="../styles/typography.css">
+  <link rel="stylesheet" href="../styles/globals.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "AI Codex: A Native Local-First Coding Agent for macOS",
+    "description": "A technical project article on AI Codex, a native local-first macOS coding workspace with Ask/Plan/Code routing, local models, visible activity, bounded tools, reversible edits, and a trust-focused architecture.",
+    "image": "https://article.digambarghosalkar.com/assets/articles/covers/ai-codex-5-card.svg",
+    "author": {
+      "@type": "Person",
+      "name": "Digambar Ghosalkar"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Digambar Ghosalkar"
+    },
+    "datePublished": "2026-07-27",
+    "dateModified": "2026-07-27",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://article.digambarghosalkar.com/ai-codex-native-local-coding-agent/"
+    }
+  }
+  </script>
+  <style>
+    body { background: #f7f5ef; color: var(--color-dark); min-height: 100vh; }
+    .article-page { box-sizing: border-box; min-height: 100vh; padding: calc(40 * 100vw / var(--page-width)); }
+    .article-nav { align-items: center; display: flex; justify-content: space-between; margin-bottom: calc(90 * 100vw / var(--page-width)); }
+    .article-nav a, .article-back, .article-repo-link { color: inherit; text-decoration: none; }
+    .article-repo-link { align-items: center; border: 1px solid rgba(8,16,18,.22); display: inline-flex; gap: .55em; justify-self: start; padding: .72em .9em; transition: border-color .2s ease, transform .2s ease; }
+    .article-repo-link:hover { border-color: rgba(8,16,18,.64); transform: translateY(-2px); }
+    .article-repo-link svg { display: block; height: 1em; width: 1em; }
+    .article-hero, .article-content, .article-section, .article-aside, .article-aside dl { display: grid; }
+    .article-hero { gap: calc(32 * 100vw / var(--page-width)); }
+    .article-label, .article-meta, .article-section-label, .article-aside dt { color: #6d786f; text-transform: uppercase; }
+    .article-title, .article-lede, .article-section h2, .article-section p, .article-section ul, .article-section pre, .article-figure { margin: 0; }
+    .article-title { max-width: calc(1120 * 100vw / var(--page-width)); }
+    .article-lede { max-width: calc(920 * 100vw / var(--page-width)); }
+    .article-cover, .article-figure { background: transparent; display: block; overflow: hidden; width: 100%; }
+    .article-cover { aspect-ratio: 1280 / 420; margin-top: calc(42 * 100vw / var(--page-width)); max-width: calc(1040 * 100vw / var(--page-width)); }
+    .article-cover img, .article-figure img { display: block; height: 100%; object-fit: contain; object-position: center; width: 100%; }
+    .article-layout { display: grid; gap: calc(60 * 100vw / var(--page-width)); margin-top: calc(80 * 100vw / var(--page-width)); }
+    .article-aside { border-top: 1px solid rgba(8,16,18,.22); gap: calc(18 * 100vw / var(--page-width)); padding-top: calc(20 * 100vw / var(--page-width)); }
+    .article-aside dl { gap: calc(14 * 100vw / var(--page-width)); margin: 0; }
+    .article-aside div { border-top: 1px solid rgba(8,16,18,.12); display: grid; gap: calc(6 * 100vw / var(--page-width)); padding-top: calc(14 * 100vw / var(--page-width)); }
+    .article-aside dd { margin: 0; }
+    .article-content { gap: calc(56 * 100vw / var(--page-width)); }
+    .article-section { border-top: 1px solid rgba(8,16,18,.22); gap: calc(20 * 100vw / var(--page-width)); padding-top: calc(28 * 100vw / var(--page-width)); }
+    .article-section p, .article-section li { color: #3b4642; }
+    .article-section ul { display: grid; gap: calc(12 * 100vw / var(--page-width)); list-style: none; padding: 0; }
+    .article-section li { border-top: 1px solid rgba(8,16,18,.12); padding-top: calc(12 * 100vw / var(--page-width)); }
+    .article-figure.diagram { aspect-ratio: 1280 / 720; border: 1px solid rgba(8,16,18,.12); margin-top: calc(8 * 100vw / var(--page-width)); }
+    .article-code { background: #081012; color: #f7f5ef; overflow-x: auto; padding: calc(22 * 100vw / var(--page-width)); }
+    .article-code code { font-family: Menlo, Consolas, monospace; font-size: calc(14 * 100vw / var(--page-width)); line-height: 1.6; }
+    .article-callout { background: #e9e4d9; display: grid; gap: calc(12 * 100vw / var(--page-width)); padding: calc(24 * 100vw / var(--page-width)); }
+    .article-footer { border-top: 1px solid rgba(8,16,18,.22); margin-top: calc(70 * 100vw / var(--page-width)); padding-top: calc(26 * 100vw / var(--page-width)); }
+    code { background: rgba(8,16,18,.08); padding: .1em .3em; }
+    @media only screen and (min-width: 768px) {
+      .article-page { padding: calc(64 * 100vw / var(--page-width)) calc(136 * 100vw / var(--page-width)); }
+      .article-nav { margin-bottom: calc(136 * 100vw / var(--page-width)); }
+      .article-layout { grid-template-columns: minmax(220px, .34fr) minmax(0, .86fr); }
+      .article-aside { align-self: start; position: sticky; top: calc(42 * 100vw / var(--page-width)); }
+      .article-code code { font-size: calc(15 * 100vw / var(--page-width)); }
+    }
+    @media only screen and (max-width: 767px) {
+      .article-page { padding: 38px 22px; }
+      .article-nav { margin-bottom: 92px; }
+      .article-cover { max-width: none; }
+      .article-code { padding: 18px; }
+      .article-code code { font-size: 12px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="article-page">
+    <nav class="article-nav" aria-label="Article navigation">
+      <a class="t6 font-romie" href="../index.html">articles</a>
+      <a class="t6 font-romie" href="https://digambarghosalkar.com/">home</a>
+    </nav>
+
+    <article>
+      <header class="article-hero">
+        <p class="label article-label">Local-first coding agent</p>
+        <h1 class="h1 article-title">AI Codex: A Native Local-First Coding Agent for macOS</h1>
+        <p class="t1 article-lede">
+          AI Codex is an independent open-source macOS coding workspace that explores what a polished local agent can look like: project-aware conversation, Ask/Plan/Code routing, autonomous editing, visible activity, validation, local vision, optional image generation, and granular undo.
+        </p>
+        <p class="t2 article-meta">Project article · macOS · SwiftUI · Python service · Ollama · local models · reversible edits · trust boundary</p>
+        <a class="article-repo-link t2" href="https://github.com/digambarghosalkar12-lab/ai-codex-5" rel="noopener noreferrer" target="_blank" aria-label="Open AI Codex project on GitHub">
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56v-2.16c-3.2.7-3.87-1.38-3.87-1.38-.52-1.33-1.28-1.68-1.28-1.68-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.16 1.18A10.9 10.9 0 0 1 12 6.03c.98 0 1.96.13 2.88.39 2.19-1.49 3.15-1.18 3.15-1.18.63 1.58.24 2.75.12 3.04.74.8 1.18 1.82 1.18 3.08 0 4.41-2.69 5.39-5.25 5.67.42.36.79 1.07.79 2.16v3.16c0 .31.21.68.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
+          View project on GitHub
+        </a>
+        <figure class="article-cover">
+          <img alt="AI Codex banner showing a local-first coding workspace for macOS" height="420" src="../assets/articles/covers/ai-codex-5-banner.svg" width="1280">
+        </figure>
+      </header>
+
+      <div class="article-layout">
+        <aside class="article-aside">
+          <p class="label article-section-label">Article index</p>
+          <dl class="t2">
+            <div><dt>Product goal</dt><dd>Reduce developer friction without hiding model routing, tools, validation, failures, or recovery.</dd></div>
+            <div><dt>Architecture</dt><dd>A native SwiftUI app talks to an authenticated localhost Python service backed by Ollama and optional ComfyUI FLUX.</dd></div>
+            <div><dt>Trust model</dt><dd>Read-only Ask/Plan modes, bounded Code tools, safe file ownership, conflict-aware undo, and fail-closed updates.</dd></div>
+          </dl>
+        </aside>
+
+        <div class="article-content">
+          <section class="article-section">
+            <p class="label article-section-label">01 · Why</p>
+            <h2 class="h2">The hard part is not only generating code</h2>
+            <p class="t2">
+              Modern coding agents can explain repositories, plan migrations, repair tests, and edit across multiple files. The harder product problem is making that capability installable, understandable, recoverable, and trustworthy on a developer's own Mac.
+            </p>
+            <p class="t2">
+              AI Codex approaches that problem as a local-first workspace rather than a loose collection of scripts. It separates a clean conversational Work view from operational detail in Activity, command output in Terminal, and task-owned diffs in Changes.
+            </p>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">02 · One composer</p>
+            <h2 class="h2">Ask, Plan, and Code are behavior boundaries</h2>
+            <p class="t2">
+              Developers should not have to classify every message manually. A question can turn into a plan, and a plan can turn into a change. AI Codex routes requests to Ask, Plan, or Code automatically, but the important detail is that these modes are enforced below the prompt.
+            </p>
+            <ul class="t2">
+              <li><strong>Ask</strong> investigates and discusses the repository without write tools.</li>
+              <li><strong>Plan</strong> develops an implementation plan while staying read-only.</li>
+              <li><strong>Code</strong> can inspect, edit, validate, and report a task-owned diff.</li>
+            </ul>
+          </section>
+
+          <figure class="article-figure diagram">
+            <img alt="AI Codex architecture showing SwiftUI desktop app, authenticated localhost Python service, Ollama models, and ComfyUI FLUX" height="720" src="../assets/articles/covers/ai-codex-5-architecture.svg" width="1280">
+          </figure>
+
+          <section class="article-section">
+            <p class="label article-section-label">03 · Local architecture</p>
+            <h2 class="h2">A native app in front of an owned localhost service</h2>
+            <p class="t2">
+              The SwiftUI application owns the developer experience and macOS permission chain. The user chooses a project explicitly, and the app uses security-scoped access instead of silently reading arbitrary folders.
+            </p>
+            <p class="t2">
+              The Python service owns task state, model routing, repository indexing, typed tools, change tracking, validation, diagnostics, reset, support bundles, and updates. It binds to localhost and requires an authenticated API credential stored in Keychain when available.
+            </p>
+            <pre class="article-code"><code>SwiftUI desktop app
+  -> authenticated localhost Python service
+      -> Ollama coding, vision, and embedding models
+      -> optional ComfyUI FLUX image generation</code></pre>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">04 · Local intelligence</p>
+            <h2 class="h2">Model choice is a routing problem</h2>
+            <p class="t2">
+              AI Codex defines hardware-aware model profiles. Efficient targets 16 GB systems and smaller tasks. Balanced targets 24 GB or larger systems and multi-file work. Maximum targets 48 GB or larger systems and demanding architecture or refactor tasks.
+            </p>
+            <p class="t2">
+              Optional specialist models add more capability: <code>qwen2.5vl:7b</code> for screenshot and image understanding, <code>nomic-embed-text</code> for semantic repository retrieval, and FLUX.1 Schnell FP8 for local image generation through a private ComfyUI runtime.
+            </p>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">05 · Reversible edits</p>
+            <h2 class="h2">Automatic edits need stronger undo, not endless dialogs</h2>
+            <p class="t2">
+              Per-file approval can look safe, but during a coherent multi-file change it often trains users to click through prompts. AI Codex applies routine in-project edits automatically, then strengthens the rollback model around those writes.
+            </p>
+            <p class="t2">
+              Before editing an existing file, the task reads it and records its content hash. Multi-file operations validate paths and baselines before writing. Changes are tracked as task-owned, separate from pre-existing Git work. Undo All, Undo File, and Undo Hunk refuse to overwrite later edits by the developer or another process.
+            </p>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">06 · Safety boundary</p>
+            <h2 class="h2">Safety belongs below the prompt</h2>
+            <p class="t2">
+              A local model can still make unsafe decisions, and repository content can still contain malicious instructions. AI Codex treats prompts as guidance, but authority is enforced in code.
+            </p>
+            <ul class="t2">
+              <li>File paths must remain inside the selected project.</li>
+              <li>Symlink traversal and known credential paths are rejected.</li>
+              <li>Ask and Plan cannot invoke write tools.</li>
+              <li>Model-provided commands never run through a shell string.</li>
+              <li>Validation commands must match an argument-array allowlist.</li>
+              <li>Prompt-injection patterns are surfaced in Activity.</li>
+              <li>Git staging, commits, resets, pushes, deletion, dependency installation, and network actions are separate operation classes.</li>
+            </ul>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">07 · Install and recover</p>
+            <h2 class="h2">Installation and recovery are product features</h2>
+            <p class="t2">
+              The installer creates an isolated Python runtime, installs the CLI, initializes owned storage, runs diagnostics, configures service recovery, builds the native app, and preserves the previous app during replacement.
+            </p>
+            <p class="t2">
+              Recovery is intentionally bounded. Settings and CLI commands expose setup readiness, model inventory, service lifecycle, repair, redacted support bundles, and granular reset targets for cache, logs, runtime, state, and indexes. Developer project files are not reset targets.
+            </p>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">08 · Updates</p>
+            <h2 class="h2">The updater fails closed until a real trust chain exists</h2>
+            <p class="t2">
+              The repository implements a transactional update design, but production distribution is intentionally not preconfigured. A real release needs Developer ID signing, Apple notarization, a permanent offline Ed25519 signing key, and an HTTPS update host.
+            </p>
+            <p class="t2">
+              Before installation, an update must pass manifest signature, key ID, HTTPS, artifact size, SHA-256, archive safety, Developer ID, Gatekeeper, and notarization checks. Failed post-install health checks restore the previous snapshot automatically.
+            </p>
+            <div class="article-callout">
+              <p class="t2">
+                This matters because a local coding agent holds significant authority over source files. Distribution trust should be as deliberate as runtime tool safety.
+              </p>
+            </div>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">09 · Takeaway</p>
+            <h2 class="h2">Trust is the real product feature</h2>
+            <p class="t2">
+              AI Codex is not just an attempt to make a local model write code. It is a study in the surrounding product system: project permission boundaries, clean conversation, visible activity, local context retrieval, reversible edits, validation, service lifecycle, diagnostics, and recoverable failure.
+            </p>
+            <p class="t2">
+              The most useful coding agent is not simply the one that produces the most code. It is the one a developer can understand, correct, recover, and keep working with every day.
+            </p>
+          </section>
+        </div>
+      </div>
+    </article>
+
+    <footer class="article-footer">
+      <a class="t2 article-back" href="../index.html">Back to articles</a>
+    </footer>
+  </main>
+</body>
+</html>
