@@ -45,7 +45,10 @@
     body { background: #f7f5ef; color: var(--color-dark); min-height: 100vh; }
     .article-page { box-sizing: border-box; min-height: 100vh; padding: calc(40 * 100vw / var(--page-width)); }
     .article-nav { align-items: center; display: flex; justify-content: space-between; margin-bottom: calc(90 * 100vw / var(--page-width)); }
-    .article-nav a, .article-back { color: inherit; text-decoration: none; }
+    .article-nav a, .article-back, .article-repo-link { color: inherit; text-decoration: none; }
+    .article-repo-link { align-items: center; border: 1px solid rgba(8,16,18,.22); display: inline-flex; gap: .55em; justify-self: start; padding: .72em .9em; transition: border-color .2s ease, transform .2s ease; }
+    .article-repo-link:hover { border-color: rgba(8,16,18,.64); transform: translateY(-2px); }
+    .article-repo-link svg { display: block; height: 1em; width: 1em; }
     .article-hero, .article-content, .article-section, .article-aside, .article-aside dl { display: grid; }
     .article-hero { gap: calc(32 * 100vw / var(--page-width)); }
     .article-label, .article-meta, .article-section-label, .article-aside dt { color: #6d786f; text-transform: uppercase; }
@@ -103,6 +106,10 @@
           CloudX explores a narrow but important AI platform problem: how to turn a human request and its immediate context into a validated Task Object before any planner, tool, model router, or execution system is allowed to act.
         </p>
         <p class="t2 article-meta">Project article · FastAPI · Ollama · Microsoft Foundry · Amazon Bedrock · structured output · cloud deployment</p>
+        <a class="article-repo-link t2" href="https://github.com/digambarghosalkar12-lab/CloudX-step1-cloud-ready" rel="noopener noreferrer" target="_blank" aria-label="Open CloudX project on GitHub">
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56v-2.16c-3.2.7-3.87-1.38-3.87-1.38-.52-1.33-1.28-1.68-1.28-1.68-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.16 1.18A10.9 10.9 0 0 1 12 6.03c.98 0 1.96.13 2.88.39 2.19-1.49 3.15-1.18 3.15-1.18.63 1.58.24 2.75.12 3.04.74.8 1.18 1.82 1.18 3.08 0 4.41-2.69 5.39-5.25 5.67.42.36.79 1.07.79 2.16v3.16c0 .31.21.68.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
+          View project on GitHub
+        </a>
         <figure class="article-cover">
           <img alt="CloudX banner showing a request envelope entering a provider-neutral request understanding engine and leaving as a Task Object" height="420" src="../assets/articles/covers/cloudx-request-banner.svg" width="1280">
         </figure>
