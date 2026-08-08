@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="900" viewBox="0 0 900 900" role="img" aria-labelledby="title desc">
+  <title id="title">CloudX request understanding</title>
+  <desc id="desc">A request and context pass through CloudX and become a validated Task Object.</desc>
+  <rect width="900" height="900" fill="#102747"/>
+  <circle cx="814" cy="88" r="180" fill="#7657e8" opacity=".18"/>
+  <circle cx="74" cy="850" r="205" fill="#56c2dd" opacity=".11"/>
+
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="72" y="90" fill="#76d9eb" font-size="18" font-weight="700" letter-spacing="4">ENTERPRISE AI ARCHITECTURE</text>
+    <text x="72" y="192" fill="#f7f5ef" font-size="84" font-weight="700" letter-spacing="-2">CloudX</text>
+    <text x="72" y="238" fill="#b7c5d9" font-size="24">Request understanding before execution.</text>
+  </g>
+
+  <g transform="translate(72 338)" font-family="Arial, Helvetica, sans-serif">
+    <rect width="198" height="178" rx="12" fill="#f7f5ef"/>
+    <text x="24" y="42" fill="#6d786f" font-size="15" font-weight="700" letter-spacing="2">INPUT</text>
+    <path d="M24 72h118M24 104h148M24 136h92" stroke="#102747" stroke-width="5" stroke-linecap="round" opacity=".58"/>
+    <text x="24" y="164" fill="#102747" font-size="16">request + context</text>
+  </g>
+
+  <path d="M286 427h64" stroke="#76d9eb" stroke-width="4" stroke-linecap="round"/>
+  <path d="m336 413 14 14-14 14" fill="none" stroke="#76d9eb" stroke-width="4"/>
+
+  <g transform="translate(366 320)" font-family="Arial, Helvetica, sans-serif">
+    <rect width="224" height="214" rx="107" fill="#59c4de"/>
+    <circle cx="112" cy="107" r="73" fill="none" stroke="#102747" stroke-width="2" opacity=".18"/>
+    <text x="112" y="96" fill="#102747" font-size="18" font-weight="700" letter-spacing="3" text-anchor="middle">UNDERSTAND</text>
+    <text x="112" y="127" fill="#102747" font-size="15" letter-spacing="2" text-anchor="middle">VALIDATE</text>
+  </g>
+
+  <path d="M606 427h64" stroke="#8d6ff1" stroke-width="4" stroke-linecap="round"/>
+  <path d="m656 413 14 14-14 14" fill="none" stroke="#8d6ff1" stroke-width="4"/>
+
+  <g transform="translate(686 338)" font-family="Arial, Helvetica, sans-serif">
+    <rect width="142" height="178" rx="12" fill="#f7f5ef"/>
+    <text x="20" y="42" fill="#6d786f" font-size="15" font-weight="700" letter-spacing="2">TASK</text>
+    <path d="M20 72h78M20 100h102M20 128h66" stroke="#102747" stroke-width="5" stroke-linecap="round" opacity=".58"/>
+    <circle cx="112" cy="151" r="10" fill="#54c99b"/>
+  </g>
+
+  <line x1="72" y1="638" x2="828" y2="638" stroke="#f7f5ef" opacity=".18"/>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="72" y="694" fill="#f7f5ef" font-size="27" font-weight="700">ONE CONTRACT. THREE MODEL PATHS.</text>
+    <text x="72" y="748" fill="#b7c5d9" font-size="20" letter-spacing="2">OLLAMA</text>
+    <circle cx="190" cy="741" r="4" fill="#76d9eb"/>
+    <text x="212" y="748" fill="#b7c5d9" font-size="20" letter-spacing="2">FOUNDRY</text>
+    <circle cx="350" cy="741" r="4" fill="#76d9eb"/>
+    <text x="372" y="748" fill="#b7c5d9" font-size="20" letter-spacing="2">BEDROCK</text>
+    <text x="72" y="824" fill="#76d9eb" font-size="16" font-weight="700" letter-spacing="3">LOCAL · AZURE · AWS</text>
+  </g>
+</svg>
