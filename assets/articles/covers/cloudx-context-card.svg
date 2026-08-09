@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="900" viewBox="0 0 900 900" role="img" aria-labelledby="title desc">
+  <title id="title">CloudX Step 2 Context Builder</title>
+  <desc id="desc">A validated TaskObject guides a read-only funnel that produces a bounded ContextPackage.</desc>
+  <rect width="900" height="900" fill="#102747"/>
+  <circle cx="820" cy="90" r="188" fill="#7657e8" opacity=".18"/>
+  <circle cx="40" cy="890" r="220" fill="#56c2dd" opacity=".11"/>
+  <g font-family="Arial,Helvetica,sans-serif">
+    <text x="72" y="88" fill="#76d9eb" font-size="18" font-weight="700" letter-spacing="4">CLOUDX · STEP 2 COMPLETE</text>
+    <text x="72" y="180" fill="#f7f5ef" font-size="70" font-weight="700" letter-spacing="-2">Context Builder</text>
+    <text x="72" y="228" fill="#b7c5d9" font-size="24">The smallest useful evidence package.</text>
+  </g>
+  <g font-family="Arial,Helvetica,sans-serif">
+    <g transform="translate(72 332)"><rect width="210" height="164" rx="12" fill="#f7f5ef"/><text x="24" y="40" fill="#6d786f" font-size="14" font-weight="700" letter-spacing="2">PRESERVED INPUT</text><text x="24" y="84" fill="#102747" font-size="21" font-weight="700">TaskObject</text><path d="M24 112h132M24 132h94" stroke="#526271" stroke-width="4" stroke-linecap="round" opacity=".55"/></g>
+    <path d="M300 414h64" stroke="#76d9eb" stroke-width="4"/><path d="m350 400 14 14-14 14" fill="none" stroke="#76d9eb" stroke-width="4"/>
+    <g transform="translate(382 310)"><path d="M0 0h230l-54 208H54z" fill="#59c4de"/><text x="115" y="68" text-anchor="middle" fill="#102747" font-size="17" font-weight="700" letter-spacing="2">READ ONLY</text><text x="115" y="102" text-anchor="middle" fill="#102747" font-size="15">rank · bound · explain</text><path d="M68 132h94M78 156h74" stroke="#102747" stroke-width="3" stroke-linecap="round" opacity=".42"/></g>
+    <path d="M630 414h54" stroke="#8d6ff1" stroke-width="4"/><path d="m670 400 14 14-14 14" fill="none" stroke="#8d6ff1" stroke-width="4"/>
+    <g transform="translate(702 332)"><rect width="126" height="164" rx="12" fill="#f7f5ef"/><text x="18" y="40" fill="#6d786f" font-size="13" font-weight="700" letter-spacing="2">BOUNDED</text><text x="18" y="78" fill="#102747" font-size="18" font-weight="700">Context</text><text x="18" y="100" fill="#102747" font-size="18" font-weight="700">Package</text><circle cx="98" cy="132" r="11" fill="#54c99b"/></g>
+    <line x1="72" y1="626" x2="828" y2="626" stroke="#f7f5ef" opacity=".18"/>
+    <text x="72" y="684" fill="#f7f5ef" font-size="26" font-weight="700">EVIDENCE WITHOUT AUTHORITY</text>
+    <text x="72" y="736" fill="#b7c5d9" font-size="18" letter-spacing="2">SAFE PATHS · GIT STATUS · ACTIVE CONTEXT</text>
+    <text x="72" y="774" fill="#b7c5d9" font-size="18" letter-spacing="2">OMISSIONS · TRUNCATION · CONFIDENCE</text>
+    <text x="72" y="838" fill="#76d9eb" font-size="16" font-weight="700" letter-spacing="3">NO MODEL · NO PLAN · NO EXECUTION</text>
+  </g>
+</svg>
