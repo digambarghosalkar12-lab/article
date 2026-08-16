@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MRR: A Meeting-Aware macOS Restart Reminder for Jamf Pro | Digambar Ghosalkar</title>
+  <meta name="description" content="A practical project article on MRR, a configurable Jamf Pro and swiftDialog workflow for restart reminders, meeting-aware deferrals, controlled force restarts, and readable Jamf deployment assets.">
+  <meta name="author" content="Digambar Ghosalkar">
+  <meta name="robots" content="index,follow">
+  <meta name="keywords" content="MRR, macOS Restart Reminder, Jamf Pro, swiftDialog, LaunchDaemon, restart compliance, meeting detection, configuration profile, Mac management">
+  <link rel="canonical" href="https://article.digambarghosalkar.com/macos-restart-reminder-jamf/">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Digambar Ghosalkar">
+  <meta property="og:title" content="MRR: A Meeting-Aware macOS Restart Reminder for Jamf Pro">
+  <meta property="og:description" content="How MRR turns restart compliance into a configurable, meeting-aware Jamf workflow with swiftDialog and launchd.">
+  <meta property="og:url" content="https://article.digambarghosalkar.com/macos-restart-reminder-jamf/">
+  <meta property="og:image" content="https://article.digambarghosalkar.com/assets/articles/covers/macos-restart-reminder-card.svg">
+  <meta property="og:image:width" content="900">
+  <meta property="og:image:height" content="900">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="MRR: A Meeting-Aware macOS Restart Reminder for Jamf Pro">
+  <meta name="twitter:description" content="A configurable macOS restart workflow built for Jamf Pro, swiftDialog, launchd, and real user workdays.">
+  <meta name="twitter:image" content="https://article.digambarghosalkar.com/assets/articles/covers/macos-restart-reminder-card.svg">
+  <meta name="theme-color" content="#f7f5ef">
+  <link rel="icon" type="image/svg+xml" href="../assets/icon.svg">
+  <link rel="stylesheet" href="../styles/colors.css">
+  <link rel="stylesheet" href="../styles/fonts.css">
+  <link rel="stylesheet" href="../styles/typography.css">
+  <link rel="stylesheet" href="../styles/globals.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "MRR: A Meeting-Aware macOS Restart Reminder for Jamf Pro",
+    "description": "A practical project article on a configurable Jamf Pro and swiftDialog workflow for restart reminders, meeting-aware deferrals, and controlled forced restarts.",
+    "image": "https://article.digambarghosalkar.com/assets/articles/covers/macos-restart-reminder-card.svg",
+    "author": { "@type": "Person", "name": "Digambar Ghosalkar" },
+    "publisher": { "@type": "Person", "name": "Digambar Ghosalkar" },
+    "datePublished": "2026-08-16",
+    "dateModified": "2026-08-16",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://article.digambarghosalkar.com/macos-restart-reminder-jamf/"
+    }
+  }
+  </script>
+  <style>
+    body { background: #f7f5ef; color: var(--color-dark); min-height: 100vh; }
+    .article-page { box-sizing: border-box; min-height: 100vh; padding: calc(40 * 100vw / var(--page-width)); }
+    .article-nav { align-items: center; display: flex; justify-content: space-between; margin-bottom: calc(90 * 100vw / var(--page-width)); }
+    .article-nav a, .article-back, .article-repo-link { color: inherit; text-decoration: none; }
+    .article-repo-link { align-items: center; border: 1px solid rgba(8,16,18,.22); display: inline-flex; gap: .55em; justify-self: start; padding: .72em .9em; transition: border-color .2s ease, transform .2s ease; }
+    .article-repo-link:hover { border-color: rgba(8,16,18,.64); transform: translateY(-2px); }
+    .article-repo-link svg { display: block; height: 1em; width: 1em; }
+    .article-hero, .article-content, .article-section, .article-aside, .article-aside dl { display: grid; }
+    .article-hero { gap: calc(32 * 100vw / var(--page-width)); }
+    .article-label, .article-meta, .article-section-label, .article-aside dt { color: #6d786f; text-transform: uppercase; }
+    .article-title, .article-lede, .article-section h2, .article-section p, .article-section ul, .article-section pre, .article-figure { margin: 0; }
+    .article-title { max-width: calc(1080 * 100vw / var(--page-width)); }
+    .article-lede { max-width: calc(900 * 100vw / var(--page-width)); }
+    .article-cover, .article-figure { background: transparent; display: block; overflow: hidden; width: 100%; }
+    .article-cover { aspect-ratio: 1 / 1; margin-top: calc(42 * 100vw / var(--page-width)); max-width: calc(760 * 100vw / var(--page-width)); }
+    .article-cover img, .article-figure img { display: block; height: 100%; object-fit: contain; object-position: center; width: 100%; }
+    .article-layout { display: grid; gap: calc(60 * 100vw / var(--page-width)); margin-top: calc(80 * 100vw / var(--page-width)); }
+    .article-aside { border-top: 1px solid rgba(8,16,18,.22); gap: calc(18 * 100vw / var(--page-width)); padding-top: calc(20 * 100vw / var(--page-width)); }
+    .article-aside dl { gap: calc(14 * 100vw / var(--page-width)); margin: 0; }
+    .article-aside div { border-top: 1px solid rgba(8,16,18,.12); display: grid; gap: calc(6 * 100vw / var(--page-width)); padding-top: calc(14 * 100vw / var(--page-width)); }
+    .article-aside dd { margin: 0; }
+    .article-content { gap: calc(56 * 100vw / var(--page-width)); }
+    .article-section { border-top: 1px solid rgba(8,16,18,.22); gap: calc(20 * 100vw / var(--page-width)); padding-top: calc(28 * 100vw / var(--page-width)); }
+    .article-section p, .article-section li { color: #3b4642; }
+    .article-section ul { display: grid; gap: calc(12 * 100vw / var(--page-width)); list-style: none; padding: 0; }
+    .article-section li { border-top: 1px solid rgba(8,16,18,.12); padding-top: calc(12 * 100vw / var(--page-width)); }
+    .article-code { background: #081012; color: #f7f5ef; overflow-x: auto; padding: calc(22 * 100vw / var(--page-width)); }
+    .article-code code { font-family: Menlo, Consolas, monospace; font-size: calc(14 * 100vw / var(--page-width)); line-height: 1.6; }
+    .article-callout { background: #e9e4d9; display: grid; gap: calc(12 * 100vw / var(--page-width)); padding: calc(24 * 100vw / var(--page-width)); }
+    .article-footer { border-top: 1px solid rgba(8,16,18,.22); margin-top: calc(70 * 100vw / var(--page-width)); padding-top: calc(26 * 100vw / var(--page-width)); }
+    @media only screen and (min-width: 768px) {
+      .article-page { padding: calc(64 * 100vw / var(--page-width)) calc(136 * 100vw / var(--page-width)); }
+      .article-nav { margin-bottom: calc(136 * 100vw / var(--page-width)); }
+      .article-layout { grid-template-columns: minmax(220px, .34fr) minmax(0, .86fr); }
+      .article-aside { align-self: start; position: sticky; top: calc(42 * 100vw / var(--page-width)); }
+      .article-code code { font-size: calc(15 * 100vw / var(--page-width)); }
+    }
+    @media only screen and (max-width: 767px) {
+      .article-page { padding: 38px 22px; }
+      .article-nav { margin-bottom: 92px; }
+      .article-cover { max-width: none; }
+      .article-code { padding: 18px; }
+      .article-code code { font-size: 12px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="article-page">
+    <nav class="article-nav" aria-label="Article navigation">
+      <a class="t6 font-romie" href="../index.html">articles</a>
+      <a class="t6 font-romie" href="https://digambarghosalkar.com/">home</a>
+    </nav>
+
+    <article>
+      <header class="article-hero">
+        <p class="label article-label">Jamf automation · macOS operations</p>
+        <h1 class="h1 article-title">MRR: A Meeting-Aware macOS Restart Reminder for Jamf Pro</h1>
+        <p class="t1 article-lede">
+          MRR—macOS Restart Reminder—is a configuration-driven restart workflow for managed Macs. It combines a lightweight LaunchDaemon, Jamf Pro Custom Settings, and swiftDialog to encourage routine restarts without dropping an avoidable interruption into the middle of a call.
+        </p>
+        <p class="t2 article-meta">Project article · Jamf Pro · swiftDialog · launchd · restart compliance · Aug 16, 2026</p>
+        <a class="article-repo-link t2" href="https://github.com/digambarghosalkar12-lab/jamf-swiftdialog-restart-daemon" rel="noopener noreferrer" target="_blank" aria-label="Open MRR project on GitHub">
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56v-2.16c-3.2.7-3.87-1.38-3.87-1.38-.52-1.33-1.28-1.68-1.28-1.68-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.16 1.18A10.9 10.9 0 0 1 12 6.03c.98 0 1.96.13 2.88.39 2.19-1.49 3.15-1.18 3.15-1.18.63 1.58.24 2.75.12 3.04.74.8 1.18 1.82 1.18 3.08 0 4.41-2.69 5.39-5.25 5.67.42.36.79 1.07.79 2.16v3.16c0 .31.21.68.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
+          View project on GitHub
+        </a>
+        <figure class="article-cover">
+          <img alt="MRR macOS Restart Reminder cover showing a managed Mac, restart cycle, meeting shield, and Jamf controls" height="900" src="/assets/articles/covers/macos-restart-reminder-card.svg" width="900">
+        </figure>
+      </header>
+
+      <div class="article-layout">
+        <aside class="article-aside">
+          <p class="label article-section-label">Article index</p>
+          <dl class="t2">
+            <div><dt>Problem</dt><dd>Long-running Macs need maintenance restarts, but blunt reminders can interrupt meetings or give administrators too little control.</dd></div>
+            <div><dt>Approach</dt><dd>Check every five minutes, read managed preferences, respect active calls, track snoozes, and escalate predictably.</dd></div>
+            <div><dt>Stack</dt><dd>zsh, launchd, Jamf Pro Custom JSON Schema, swiftDialog, plist state, ioreg, and pmset.</dd></div>
+          </dl>
+        </aside>
+
+        <div class="article-content">
+          <section class="article-section">
+            <p class="label article-section-label">01 · Why</p>
+            <h2 class="h2">Restart compliance is a user-experience problem too</h2>
+            <p class="t2">
+              Restarting a Mac clears stale processes, completes some updates, and gives support teams a cleaner operating baseline. The technical action is simple; the timing is not. A reminder that arrives during a customer call creates friction, while a prompt that can be dismissed forever does not improve fleet health.
+            </p>
+            <p class="t2">
+              MRR treats the restart as a small managed workflow rather than a single pop-up. Jamf defines the policy, launchd provides dependable execution, swiftDialog presents the user interface, and a local state file remembers the current boot, used snoozes, and next eligible prompt.
+            </p>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">02 · Architecture</p>
+            <h2 class="h2">One daemon, one controller, and managed intent</h2>
+            <p class="t2">
+              The LaunchDaemon <code>com.mrr.restartreminder</code> starts at load and every five minutes. Its controller runs as root, reads <code>com.mrr.restartreminder</code> from Managed Preferences, calculates full days since the last boot, discovers the console user, and launches swiftDialog inside that user's GUI session.
+            </p>
+            <pre class="article-code"><code>Jamf Custom Settings
+        ↓
+com.mrr.restartreminder preferences
+        ↓
+LaunchDaemon checks every 5 minutes
+        ↓
+uptime + user + snooze + meeting state
+        ↓
+normal reminder → snooze or restart
+        ↓
+forced countdown after snoozes are exhausted</code></pre>
+            <p class="t2">
+              The controller exits quickly when the workflow is disabled, the uptime threshold has not been reached, no interactive user is present, a snooze is still active, or swiftDialog is unavailable. That keeps the recurring job cheap and makes disabling the experience a configuration change rather than a daemon-removal exercise.
+            </p>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">03 · Configuration</p>
+            <h2 class="h2">The profile controls policy and presentation</h2>
+            <p class="t2">
+              The included Custom JSON Schema turns the preference domain into editable Jamf controls. Administrators can set a restart frequency with a one-day minimum, snooze count and interval, countdown duration, button labels, messages, icons, banners, window persistence, and the enabled state.
+            </p>
+            <ul class="t2">
+              <li>Normal and forced windows have independent width and height controls.</li>
+              <li>Title and message fonts can define name, size, weight, and colour through swiftDialog font parameters.</li>
+              <li>Title and message alignment can be set independently to left, centre, or right.</li>
+              <li>Numeric settings are validated again at runtime, so a malformed local plist cannot bypass schema minimums.</li>
+              <li>Boolean values are normalized explicitly instead of depending on shell-specific case modifiers.</li>
+            </ul>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">04 · Meetings</p>
+            <h2 class="h2">Wait for the call, not just the app</h2>
+            <p class="t2">
+              Simply seeing Teams, Zoom, Webex, or FaceTime open is not enough to suppress a reminder; these applications often remain running all day. MRR requires a supported conferencing process plus a stronger activity signal: an active audio-input engine or a conferencing-related power assertion.
+            </p>
+            <p class="t2">
+              When a meeting is detected, the daemon exits and checks again five minutes later. It does not create a long fixed deferral, so the reminder can return soon after the call ends. Focus and Do Not Disturb are intentionally ignored because those modes are not reliable proof of a live meeting.
+            </p>
+            <div class="article-callout">
+              <p class="label article-section-label">Force-restart choice</p>
+              <p class="t2">
+                Forced restart waits for an active meeting by default. Jamf administrators can enable <code>IgnoreMeetingDuringForceRestart</code> when policy requires the countdown to proceed even during a call. Meeting detection remains best-effort because macOS does not expose a stable system-wide meeting-status API.
+              </p>
+            </div>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">05 · Escalation</p>
+            <h2 class="h2">Snooze first, then make the final state explicit</h2>
+            <p class="t2">
+              While snoozes remain, the normal window offers <strong>Restart Now</strong> and a configurable snooze action. Persistent mode keeps the window on top, limits accidental keyboard dismissal, and reopens unexpected closures without spinning forever; repeated dialog failures stop until the next daemon cycle.
+            </p>
+            <p class="t2">
+              Once snoozes are exhausted, a separate forced window shows an unblurred countdown. Restart occurs only when swiftDialog returns the documented Restart-button or timer-expiry code. A crash or unexpected exit is logged and cancels that restart attempt rather than treating a UI failure as permission to reboot.
+            </p>
+            <p class="t2">
+              At the final restart point, MRR tears down the logged-in user's GUI domain, force-kills remaining user processes if required, clears its own logs, and calls the system restart. This is deliberately forceful: the article and interface should make clear that unsaved work can be lost after the final allowance is consumed.
+            </p>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">06 · Deployment</p>
+            <h2 class="h2">Readable Jamf scripts instead of opaque payloads</h2>
+            <p class="t2">
+              The install script is self-contained, but its controller and plist are plain-text <code>cat</code> heredocs. Jamf administrators can audit or tailor them directly without decoding Base64. The installer writes the controller and LaunchDaemon, applies root ownership and expected modes, bootstraps the daemon, enables it, and starts the first check.
+            </p>
+            <pre class="article-code"><code>/usr/local/bin/mrr-restart-reminder
+/Library/LaunchDaemons/com.mrr.restartreminder.plist
+/Library/Application Support/MRRRestartReminder/state.plist
+/var/log/mrr-restart-reminder.log
+
+sudo ./install.sh
+sudo ./uninstall.sh</code></pre>
+            <p class="t2">
+              A separate generator asks for the Jamf install-script, uninstall-script, and schema asset filenames. It displays the expected format, validates each name, and emits a synchronized <code>dist</code> set from the maintained controller, plist, schema, and uninstaller sources.
+            </p>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">07 · Operations</p>
+            <h2 class="h2">Small safeguards make the workflow supportable</h2>
+            <ul class="t2">
+              <li>The state resets when the boot epoch changes, preventing snooze counts from leaking into a new uptime cycle.</li>
+              <li>Managed log locations are restricted to simple filenames under <code>/var/log</code> because the daemon writes as root.</li>
+              <li>Unexpected forced-dialog exit codes never trigger a restart.</li>
+              <li>The uninstaller unloads the job and removes the controller, plist, state, local preferences, and logs; MDM profile scope is removed separately in Jamf.</li>
+              <li>The generated and maintained payloads are syntax-checked and compared during development to prevent installer drift.</li>
+            </ul>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">08 · What this solves</p>
+            <h2 class="h2">A restart policy that fits the shape of a workday</h2>
+            <p class="t2">
+              MRR gives endpoint teams a transparent middle ground between optional reminders and abrupt reboot commands. The fleet gets a defined uptime threshold, bounded deferrals, measurable escalation, and a final enforcement path. Users get clear messages, predictable snoozes, meeting-aware timing, and presentation that can match organizational language and design.
+            </p>
+            <p class="t2">
+              Most importantly, the project stays understandable. It is a shell controller, a plist, a schema, and readable deployment scripts—not a hidden service. That makes the behavior easier to audit, test with a small smart group, adapt to policy, and support when real Macs behave differently from a lab.
+            </p>
+          </section>
+        </div>
+      </div>
+
+      <footer class="article-footer">
+        <a class="article-back t1 font-romie" href="../index.html">Back to articles</a>
+      </footer>
+    </article>
+  </main>
+</body>
+</html>

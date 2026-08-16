@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 900" role="img" aria-labelledby="title desc">
+  <title id="title">MRR macOS Restart Reminder</title>
+  <desc id="desc">Editorial cover showing a managed Mac restart cycle, a meeting shield, and Jamf configuration controls.</desc>
+  <rect width="900" height="900" fill="#f7f5ef"/>
+  <rect x="54" y="54" width="792" height="792" rx="28" fill="#e8e3d8" stroke="#081012" stroke-width="3"/>
+  <text x="102" y="142" fill="#617068" font-family="Arial, sans-serif" font-size="22" letter-spacing="5">MACOS OPERATIONS</text>
+  <text x="98" y="238" fill="#081012" font-family="Georgia, serif" font-size="92" font-weight="700">MRR</text>
+  <text x="102" y="288" fill="#33413c" font-family="Arial, sans-serif" font-size="27">macOS Restart Reminder</text>
+
+  <rect x="102" y="350" width="472" height="302" rx="24" fill="#081012"/>
+  <rect x="126" y="374" width="424" height="224" rx="14" fill="#f7f5ef"/>
+  <circle cx="338" cy="486" r="72" fill="none" stroke="#dc6f48" stroke-width="18" stroke-dasharray="365 88" stroke-linecap="round"/>
+  <path d="M388 425l34 3-13 32" fill="none" stroke="#dc6f48" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M280 628h116M250 652h176" fill="none" stroke="#f7f5ef" stroke-width="12" stroke-linecap="round"/>
+
+  <path d="M662 367l108 42v82c0 81-45 132-108 161-63-29-108-80-108-161v-82z" fill="#c9ddd3" stroke="#081012" stroke-width="3"/>
+  <rect x="610" y="449" width="104" height="70" rx="18" fill="#081012"/>
+  <path d="M714 469l34-19v68l-34-19z" fill="#081012"/>
+  <circle cx="640" cy="484" r="10" fill="#f7f5ef"/>
+  <path d="M620 548h84" stroke="#dc6f48" stroke-width="10" stroke-linecap="round"/>
+
+  <rect x="102" y="704" width="666" height="66" rx="16" fill="#f7f5ef" stroke="#081012" stroke-width="3"/>
+  <circle cx="144" cy="737" r="13" fill="#dc6f48"/>
+  <text x="176" y="746" fill="#081012" font-family="Arial, sans-serif" font-size="24">JAMF  ·  SWIFTDIALOG  ·  LAUNCHD</text>
+</svg>
