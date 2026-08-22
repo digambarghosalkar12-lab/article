@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="900" viewBox="0 0 900 900" role="img" aria-labelledby="title desc">
+  <title id="title">JAMF Sentinel Telemetry Agent</title>
+  <desc id="desc">A managed Mac sends custom script telemetry through a secure gateway to Microsoft Sentinel while stable inventory remains in JAMF.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#07131c"/>
+      <stop offset="1" stop-color="#123b4d"/>
+    </linearGradient>
+    <linearGradient id="flow" x1="0" y1="0" x2="1" y2="0">
+      <stop stop-color="#5eead4"/>
+      <stop offset="1" stop-color="#60a5fa"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+      <path d="M0 0 9 4.5 0 9z" fill="#7dd3fc"/>
+    </marker>
+  </defs>
+  <rect width="900" height="900" rx="42" fill="url(#bg)"/>
+  <g font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif">
+    <text x="64" y="88" fill="#99f6e4" font-size="18" font-weight="700" letter-spacing="3">MACOS · JAMF · SENTINEL</text>
+    <text x="64" y="154" fill="#f8fafc" font-size="48" font-weight="750">Telemetry belongs</text>
+    <text x="64" y="210" fill="#f8fafc" font-size="48" font-weight="750">in a timeline.</text>
+    <text x="64" y="252" fill="#bfd5df" font-size="20">Not in a frequently refreshed inventory field.</text>
+    <g transform="translate(64 330)">
+      <rect width="210" height="178" rx="20" fill="#102a39" stroke="#5eead4"/>
+      <circle cx="105" cy="64" r="35" fill="#173e4f" stroke="#5eead4"/>
+      <rect x="84" y="46" width="42" height="34" rx="4" fill="none" stroke="#ccfbf1" stroke-width="3"/>
+      <path d="M76 86h58" stroke="#ccfbf1" stroke-width="3"/>
+      <text x="105" y="130" fill="#f8fafc" text-anchor="middle" font-size="22" font-weight="700">Managed Mac</text>
+      <text x="105" y="156" fill="#a8c5d2" text-anchor="middle" font-size="15">Multiple script blocks</text>
+    </g>
+    <path d="M290 419h95" stroke="url(#flow)" stroke-width="5" marker-end="url(#arrow)"/>
+    <g transform="translate(406 330)">
+      <rect width="190" height="178" rx="20" fill="#102a39" stroke="#38bdf8"/>
+      <path d="M58 55h74M58 82h74M58 109h50" stroke="#bae6fd" stroke-width="7" stroke-linecap="round"/>
+      <text x="95" y="142" fill="#f8fafc" text-anchor="middle" font-size="21" font-weight="700">Azure gateway</text>
+      <text x="95" y="165" fill="#a8c5d2" text-anchor="middle" font-size="14">mTLS · retry · dedup</text>
+    </g>
+    <path d="M612 419h75" stroke="url(#flow)" stroke-width="5" marker-end="url(#arrow)"/>
+    <g transform="translate(708 330)">
+      <rect width="128" height="178" rx="20" fill="#102a39" stroke="#60a5fa"/>
+      <path d="M33 111 54 82l19 14 27-47" fill="none" stroke="#bfdbfe" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="64" y="142" fill="#f8fafc" text-anchor="middle" font-size="20" font-weight="700">Sentinel</text>
+      <text x="64" y="165" fill="#a8c5d2" text-anchor="middle" font-size="14">KQL + alerts</text>
+    </g>
+    <rect x="64" y="578" width="772" height="184" rx="22" fill="#091b27" stroke="#27495b"/>
+    <text x="96" y="626" fill="#f8fafc" font-size="21" font-weight="700">One lightweight daemon. Independent controls per script.</text>
+    <g fill="#c8dce5" font-size="17">
+      <text x="96" y="670">✓ Device-local schedules and persistent state</text>
+      <text x="96" y="704">✓ Rotating JSONL and durable offline queue</text>
+      <text x="96" y="738">✓ JAMF deployment without Developer ID signing</text>
+    </g>
+    <text x="64" y="840" fill="#7dd3fc" font-size="17" letter-spacing="1.4">JAMF SENTINEL TELEMETRY AGENT</text>
+  </g>
+</svg>

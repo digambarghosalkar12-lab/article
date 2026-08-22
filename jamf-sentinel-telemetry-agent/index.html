@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Move Transient JAMF Data to Microsoft Sentinel | Digambar Ghosalkar</title>
+  <meta name="description" content="How the JAMF Sentinel Telemetry Agent runs multiple independently scheduled macOS scripts, retains local JSONL, and securely sends custom events to Microsoft Sentinel.">
+  <meta name="author" content="Digambar Ghosalkar">
+  <meta name="robots" content="index,follow">
+  <meta name="keywords" content="JAMF Sentinel Telemetry Agent, Jamf Pro, Microsoft Sentinel, macOS LaunchDaemon, Extension Attributes, Azure Function, Defender XDR, custom telemetry">
+  <link rel="canonical" href="https://article.digambarghosalkar.com/jamf-sentinel-telemetry-agent/">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Digambar Ghosalkar">
+  <meta property="og:title" content="Move Transient JAMF Data to Microsoft Sentinel">
+  <meta property="og:description" content="A practical macOS telemetry architecture that keeps stable inventory in JAMF and sends changing custom signals to Sentinel.">
+  <meta property="og:url" content="https://article.digambarghosalkar.com/jamf-sentinel-telemetry-agent/">
+  <meta property="og:image" content="https://article.digambarghosalkar.com/assets/articles/covers/jamf-sentinel-telemetry-agent.svg">
+  <meta property="og:image:width" content="900">
+  <meta property="og:image:height" content="900">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Move Transient JAMF Data to Microsoft Sentinel">
+  <meta name="twitter:description" content="One JAMF-managed daemon, multiple script blocks, local durability, and authenticated delivery to Sentinel.">
+  <meta name="twitter:image" content="https://article.digambarghosalkar.com/assets/articles/covers/jamf-sentinel-telemetry-agent.svg">
+  <meta name="theme-color" content="#f7f5ef">
+  <link rel="icon" type="image/svg+xml" href="../assets/icon.svg">
+  <link rel="stylesheet" href="../styles/colors.css">
+  <link rel="stylesheet" href="../styles/fonts.css">
+  <link rel="stylesheet" href="../styles/typography.css">
+  <link rel="stylesheet" href="../styles/globals.css">
+  <style>
+    body { background:#f7f5ef; color:var(--color-dark); min-height:100vh; }
+    .article-page { box-sizing:border-box; min-height:100vh; padding:calc(40 * 100vw / var(--page-width)); }
+    .article-nav { align-items:center; display:flex; justify-content:space-between; margin-bottom:calc(90 * 100vw / var(--page-width)); }
+    .article-nav a,.article-back { color:inherit; text-decoration:none; }
+    .article-repo-link { align-items:center; border:1px solid rgba(8,16,18,.22); color:var(--color-dark); display:inline-flex; gap:.55em; justify-self:start; padding:.72em .9em; text-decoration:none; transition:border-color .2s ease,transform .2s ease; }
+    .article-repo-link:hover { border-color:rgba(8,16,18,.64); transform:translateY(-2px); }
+    .article-hero { display:grid; gap:calc(32 * 100vw / var(--page-width)); }
+    .article-label,.article-meta,.article-section-label { color:#6d786f; text-transform:uppercase; }
+    .article-title,.article-lede,.article-section h2,.article-section h3,.article-section p,.article-section ul,.article-section ol,.article-section pre,.article-figure { margin:0; }
+    .article-title { max-width:calc(1080 * 100vw / var(--page-width)); }
+    .article-lede { max-width:calc(920 * 100vw / var(--page-width)); }
+    .article-cover,.article-figure { background:transparent; display:block; overflow:hidden; width:100%; }
+    .article-cover { aspect-ratio:1/1; margin-top:calc(42 * 100vw / var(--page-width)); max-width:calc(760 * 100vw / var(--page-width)); }
+    .article-cover img,.article-figure img { display:block; height:100%; object-fit:contain; object-position:center; width:100%; }
+    .article-layout { display:grid; gap:calc(60 * 100vw / var(--page-width)); margin-top:calc(80 * 100vw / var(--page-width)); }
+    .article-aside { border-top:1px solid rgba(8,16,18,.22); display:grid; gap:calc(18 * 100vw / var(--page-width)); padding-top:calc(20 * 100vw / var(--page-width)); }
+    .article-aside dl { display:grid; gap:calc(14 * 100vw / var(--page-width)); margin:0; }
+    .article-aside div { border-top:1px solid rgba(8,16,18,.12); display:grid; gap:calc(6 * 100vw / var(--page-width)); padding-top:calc(14 * 100vw / var(--page-width)); }
+    .article-aside dt { color:#6d786f; text-transform:uppercase; }
+    .article-aside dd { margin:0; }
+    .article-content { display:grid; gap:calc(56 * 100vw / var(--page-width)); }
+    .article-section { border-top:1px solid rgba(8,16,18,.22); display:grid; gap:calc(20 * 100vw / var(--page-width)); padding-top:calc(28 * 100vw / var(--page-width)); }
+    .article-section p,.article-section li { color:#3b4642; }
+    .article-section ul,.article-section ol { display:grid; gap:calc(12 * 100vw / var(--page-width)); padding-left:1.2em; }
+    .article-section li { padding-left:.3em; }
+    .article-code { background:#081012; color:#f7f5ef; overflow-x:auto; padding:calc(22 * 100vw / var(--page-width)); }
+    .article-code code { font-family:Menlo,Consolas,monospace; font-size:calc(14 * 100vw / var(--page-width)); line-height:1.6; }
+    .article-figure.diagram { aspect-ratio:1280/720; }
+    .article-callout { background:#e9e4d9; display:grid; gap:calc(12 * 100vw / var(--page-width)); padding:calc(24 * 100vw / var(--page-width)); }
+    .article-callout p { margin:0; }
+    .article-footer { border-top:1px solid rgba(8,16,18,.22); margin-top:calc(70 * 100vw / var(--page-width)); padding-top:calc(26 * 100vw / var(--page-width)); }
+    @media only screen and (min-width:768px) {
+      .article-page { padding:calc(64 * 100vw / var(--page-width)) calc(136 * 100vw / var(--page-width)); }
+      .article-nav { margin-bottom:calc(136 * 100vw / var(--page-width)); }
+      .article-layout { grid-template-columns:minmax(220px,.34fr) minmax(0,.86fr); }
+      .article-aside { align-self:start; position:sticky; top:calc(42 * 100vw / var(--page-width)); }
+      .article-code code { font-size:calc(15 * 100vw / var(--page-width)); }
+    }
+    @media only screen and (max-width:767px) {
+      .article-page { padding:38px 22px; }
+      .article-nav { margin-bottom:92px; }
+      .article-title { font-size:52px; line-height:.98; }
+      .article-cover { margin-top:38px; max-width:100%; }
+      .article-layout { margin-top:70px; }
+      .article-figure.diagram { aspect-ratio:auto; }
+      .article-figure.diagram img { height:auto; }
+    }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"TechArticle",
+    "headline":"Move Transient JAMF Data to Microsoft Sentinel",
+    "description":"How the JAMF Sentinel Telemetry Agent collects custom macOS signals without repeatedly loading transient values into JAMF Extension Attributes.",
+    "author":{"@type":"Person","name":"Digambar Ghosalkar"},
+    "datePublished":"2026-08-22",
+    "dateModified":"2026-08-22",
+    "image":"https://article.digambarghosalkar.com/assets/articles/covers/jamf-sentinel-telemetry-agent.svg",
+    "mainEntityOfPage":"https://article.digambarghosalkar.com/jamf-sentinel-telemetry-agent/"
+  }
+  </script>
+</head>
+<body>
+  <main class="article-page">
+    <nav class="article-nav" aria-label="Article navigation">
+      <a class="t6 font-romie" href="../index.html">articles</a>
+      <a class="t6 font-romie" href="https://digambarghosalkar.com/">portfolio</a>
+    </nav>
+
+    <article>
+      <header class="article-hero">
+        <p class="label article-label">Endpoint engineering · Jamf Pro · Microsoft Sentinel</p>
+        <h1 class="h1 article-title">Move transient JAMF data to Microsoft Sentinel</h1>
+        <p class="t1 article-lede">JAMF Extension Attributes are excellent for stable inventory facts. They are a poor telemetry database. This project introduces a persistent macOS agent that runs multiple independently controlled scripts, keeps a reliable local history, and sends custom events to Sentinel without forcing frequent JAMF inventory updates.</p>
+        <p class="t2 article-meta">Aug 22, 2026 · Architecture and implementation</p>
+        <a class="article-repo-link t2" href="https://github.com/digambarghosalkar12-lab/JAMF-Sentinel-Telemetry-Agent" rel="noopener noreferrer" target="_blank" aria-label="Open JAMF Sentinel Telemetry Agent on GitHub">Open the project on GitHub <span aria-hidden="true">↗</span></a>
+        <figure class="article-cover">
+          <img alt="A managed Mac sends custom telemetry through an Azure gateway to Microsoft Sentinel" height="900" src="../assets/articles/covers/jamf-sentinel-telemetry-agent.svg" width="900">
+        </figure>
+      </header>
+
+      <div class="article-layout">
+        <aside class="article-aside" aria-label="Article summary">
+          <p class="label article-section-label">Article index</p>
+          <dl>
+            <div><dt class="label">Problem</dt><dd class="t2">Transient values in inventory</dd></div>
+            <div><dt class="label">Endpoint</dt><dd class="t2">Native macOS LaunchDaemon</dd></div>
+            <div><dt class="label">Control</dt><dd class="t2">JAMF configuration profile</dd></div>
+            <div><dt class="label">Delivery</dt><dd class="t2">Azure Function with mTLS</dd></div>
+            <div><dt class="label">Destination</dt><dd class="t2">Microsoft Sentinel</dd></div>
+            <div><dt class="label">Source</dt><dd class="t2">GitHub project and Wiki</dd></div>
+          </dl>
+        </aside>
+
+        <div class="article-content">
+          <section class="article-section">
+            <p class="label article-section-label">01 · The design boundary</p>
+            <h2 class="h2">Inventory and telemetry solve different problems</h2>
+            <p class="t2">An Extension Attribute answers a JAMF question: what is the current value I need for inventory, scoping, a smart group, or remediation? Telemetry answers a different question: what happened, when did it happen, how often is it changing, and can the SOC correlate it with other events?</p>
+            <p class="t2">When a temporary measurement is collected through recurring inventory, every sample can trigger endpoint work, network traffic, JAMF application processing, and database activity. The latest value also replaces the history that an investigation may need.</p>
+            <div class="article-callout">
+              <p class="label article-section-label">Practical rule</p>
+              <p class="t2"><strong>Keep stable facts needed by JAMF in Extension Attributes. Send changing operational, diagnostic, compliance, and security signals to Sentinel.</strong></p>
+            </div>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">02 · Architecture</p>
+            <h2 class="h2">JAMF manages intent; the Mac owns execution</h2>
+            <p class="t2">A root LaunchDaemon remains active through <code>launchd</code>. JAMF installs it with one generated policy script and manages its configuration through an Application &amp; Custom Settings profile. No Apple Developer account, Developer ID certificate, notarization flow, or additional runtime is required on managed Macs.</p>
+            <figure class="article-figure diagram">
+              <img alt="JAMF installs and configures a macOS daemon that runs multiple script blocks and sends durable events through Azure to Sentinel" height="720" loading="lazy" src="../assets/articles/covers/jamf-sentinel-telemetry-architecture.svg" width="1280">
+            </figure>
+            <p class="t2">The endpoint writes every event to rotating JSON Lines and, when gateway delivery is enabled, to an atomic spool. The Mac deletes a queued event only after the gateway explicitly acknowledges its event ID.</p>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">03 · Multiple collections</p>
+            <h2 class="h2">One daemon can run many independently controlled scripts</h2>
+            <p class="t2">The profile contains a <code>Scripts</code> array. Every block has a stable identifier and its own enable switch, script, optional SHA-256 allowlist, event code, output contract, redaction patterns, frequency, date range, and weekdays. If several blocks are due together, the daemon runs them serially so their output and process trees cannot interfere.</p>
+            <pre class="article-code"><code>&lt;key&gt;Scripts&lt;/key&gt;
+&lt;array&gt;
+  &lt;dict&gt;
+    &lt;key&gt;Identifier&lt;/key&gt;&lt;string&gt;uptime&lt;/string&gt;
+    &lt;key&gt;Enabled&lt;/key&gt;&lt;true/&gt;
+    &lt;key&gt;EventCode&lt;/key&gt;&lt;string&gt;MAC_UPTIME_SECONDS&lt;/string&gt;
+    &lt;key&gt;OutputFormat&lt;/key&gt;&lt;string&gt;INTEGER&lt;/string&gt;
+    &lt;key&gt;FrequencyMode&lt;/key&gt;&lt;string&gt;INTERVAL&lt;/string&gt;
+    &lt;key&gt;FrequencySeconds&lt;/key&gt;&lt;integer&gt;300&lt;/integer&gt;
+    &lt;key&gt;DaysOfWeek&lt;/key&gt;&lt;array/&gt;
+  &lt;/dict&gt;
+  &lt;dict&gt;
+    &lt;key&gt;Identifier&lt;/key&gt;&lt;string&gt;filevault-status&lt;/string&gt;
+    &lt;!-- Independent script, output and schedule controls --&gt;
+  &lt;/dict&gt;
+&lt;/array&gt;</code></pre>
+            <p class="t2">The state file mirrors this design with a <code>scriptStates</code> object keyed by identifier. A failure or schedule decision for one collection does not overwrite the status of another.</p>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">04 · Local-time schedules</p>
+            <h2 class="h2">A schedule follows the device, not the JAMF server</h2>
+            <p class="t2"><code>StartLocalDateTime</code>, <code>EndLocalDateTime</code>, and <code>DaysOfWeek</code> are evaluated against the Mac's current local timezone and daylight-saving rules. This matters for globally distributed devices: “Monday at 09:00” means Monday at 09:00 for that Mac.</p>
+            <ul class="t2">
+              <li><strong>INTERVAL</strong> waits the block's configured number of seconds after its prior run.</li>
+              <li><strong>ONGOING</strong> begins again after completion and a minimum cooldown.</li>
+              <li>An empty date range and weekday list allow the block to run on any local date.</li>
+              <li>Every execution has a fixed 15-minute production timeout.</li>
+            </ul>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">05 · Output contracts</p>
+            <h2 class="h2">Custom does not mean unstructured</h2>
+            <p class="t2">A block declares one of four formats: JSON, raw string, Boolean, or integer. JSON must be the complete standard-output value. Other formats use numbered tags, allowing a JAMF administrator to decide how many outputs a script must provide.</p>
+            <pre class="article-code"><code>echo '&lt;OUTPUT_1&gt;42&lt;/OUTPUT_1&gt;'
+echo '&lt;OUTPUT_2&gt;true&lt;/OUTPUT_2&gt;'</code></pre>
+            <p class="t2">Missing tags, invalid types, nonzero exits, timeouts, and cancellations become structured telemetry events. Output capture is bounded, secrets can be redacted with per-script regular expressions, and the executed script hash is included in telemetry.</p>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">06 · Two Sentinel paths</p>
+            <h2 class="h2">Defender telemetry and custom telemetry remain separate</h2>
+            <p class="t2">When Microsoft Defender for Endpoint is installed, Defender-native security events should continue through the Defender XDR connector. Defender does not automatically ingest this project's custom JSONL file.</p>
+            <p class="t2">Custom script events use an Azure Function or API gateway. The reference gateway requires a client certificate, validates certificate dates and issuer, claims event IDs in Azure Table Storage for deduplication, and uses managed identity to publish through a direct-ingestion Data Collection Rule. Sentinel receives the records in <code>JamfMacTelemetry_CL</code>, including <code>ScriptIdentifier</code> and <code>ScriptName</code>.</p>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">07 · Reliability and security</p>
+            <h2 class="h2">Assume devices go offline and scripts can fail</h2>
+            <ul class="t2">
+              <li>Atomic state survives daemon and Mac restarts.</li>
+              <li>Rotating JSONL keeps local telemetry readable and bounded.</li>
+              <li>The durable spool has configurable age and size limits.</li>
+              <li>Upload retries use bounded exponential backoff, jitter, and <code>Retry-After</code>.</li>
+              <li>Timeout or profile disablement terminates the complete script process group.</li>
+              <li>Device private keys remain in the macOS System Keychain.</li>
+              <li>No Azure application secret is distributed through JAMF.</li>
+            </ul>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">08 · JAMF deployment</p>
+            <h2 class="h2">The operational path stays deliberately small</h2>
+            <ol class="t2">
+              <li>Run <code>./scripts/generate-assets.sh</code> on a Mac with Xcode Command Line Tools.</li>
+              <li>Upload the generated <code>dist/jamf-deploy.sh</code> as one JAMF script.</li>
+              <li>Create policies that reuse it with <code>install</code>, <code>upgrade</code>, <code>doctor</code>, <code>rollback</code>, <code>uninstall</code>, or <code>purge</code>.</li>
+              <li>Upload the generated version 2 JSON schema to an Application &amp; Custom Settings profile.</li>
+              <li>Add script blocks, begin with the global switch off, and validate on a pilot Mac.</li>
+              <li>Deploy the System Keychain client identity, enable the gateway, and confirm queue drain and Sentinel arrival.</li>
+            </ol>
+            <p class="t2"><code>uninstall</code> preserves logs and state for investigation. <code>purge</code> removes the service and its data, making removal predictable.</p>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">09 · Testing without Azure</p>
+            <h2 class="h2">Most of the system can be proved locally</h2>
+            <p class="t2">The endpoint suite validates multiple scripts, independent state, local-weekday schedules, typed output, redaction, hashing, timeout, rotation, retention, spooling, and cancellation. A second suite creates a temporary certificate authority and localhost HTTPS gateway to test real mutual TLS, throttling, retry, acknowledgement, queue draining, and duplicate suppression.</p>
+            <div class="article-callout">
+              <p class="label article-section-label">What still needs a subscription</p>
+              <p class="t2">Azure deployment, managed-identity token acquisition, DCR ingestion, Sentinel table population, analytics rules, retention, and cost validation require a real non-production Azure environment.</p>
+            </div>
+          </section>
+
+          <section class="article-section">
+            <p class="label article-section-label">10 · Outcome</p>
+            <h2 class="h2">Use JAMF as the control plane, not the event store</h2>
+            <p class="t2">This architecture does not replace JAMF inventory or Extension Attributes. It protects their purpose. JAMF remains responsible for deployment, configuration, scoping, and stable device facts. The local daemon handles reliable execution, while Sentinel becomes the searchable history for rapidly changing signals.</p>
+            <p class="t2">The result is a cleaner boundary: less pressure to force telemetry through inventory, stronger per-script controls, resilient delivery, and data shaped for investigation from the moment it is collected.</p>
+          </section>
+        </div>
+      </div>
+    </article>
+
+    <footer class="article-footer">
+      <a class="article-back t2" href="../index.html">← Back to all articles</a>
+    </footer>
+  </main>
+</body>
+</html>
