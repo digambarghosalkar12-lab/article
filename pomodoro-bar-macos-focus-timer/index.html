@@ -60,6 +60,9 @@
     .article-lede { max-width: calc(900 * 100vw / var(--page-width)); }
     .article-cover { display: block; margin-top: calc(42 * 100vw / var(--page-width)); max-width: calc(680 * 100vw / var(--page-width)); overflow: hidden; width: 100%; }
     .article-cover img { border-radius: 22%; display: block; height: auto; width: 100%; }
+    .article-video { margin: calc(48 * 100vw / var(--page-width)) 0 calc(72 * 100vw / var(--page-width)); width: 100%; }
+    .article-video-frame { aspect-ratio: 912 / 533; background: #111; border: 0; display: block; width: 100%; }
+    .article-video figcaption { color: #6d786f; margin-top: calc(12 * 100vw / var(--page-width)); }
     .article-figure { display: grid; gap: calc(12 * 100vw / var(--page-width)); margin-top: calc(8 * 100vw / var(--page-width)); overflow: hidden; width: 100%; }
     .article-figure img { display: block; height: auto; width: 100%; }
     .article-figure figcaption { color: #6d786f; }
@@ -109,6 +112,10 @@
         </a>
         <figure class="article-cover">
           <img alt="A calm workspace with a Mac, notebook, tomato timer, and Pomodoro indicator in the menu bar" height="1200" src="/assets/articles/covers/pomodoro-bar-productivity-cover.png" width="1200">
+        </figure>
+        <figure class="article-video">
+          <iframe class="article-video-frame" src="https://www.youtube.com/embed/_GCV_c9NdfQ" title="Pomodoro app for macOS" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" loading="lazy" allowfullscreen></iframe>
+          <figcaption class="t2">Watch Pomodoro Bar in action: menu-bar timing, focused work sessions, breaks, and macOS Focus integration.</figcaption>
         </figure>
       </header>
 
