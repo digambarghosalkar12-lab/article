@@ -1,0 +1,120 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Start Coding with a Local LLM: Python, uv, and Ollama | Digambar Ghosalkar</title><meta name="description" content="A beginner-friendly walkthrough of uv, Python environments, requirements, and connecting your first agent to Ollama."><meta name="author" content="Digambar Ghosalkar"><meta name="robots" content="index,follow"><link rel="canonical" href="https://article.digambarghosalkar.com/start-coding-with-ollama/"><meta property="og:type" content="article"><meta property="og:title" content="Start Coding with a Local LLM: Python, uv, and Ollama"><meta property="og:description" content="A beginner-friendly walkthrough of uv, Python environments, requirements, and connecting your first agent to Ollama."><meta property="og:url" content="https://article.digambarghosalkar.com/start-coding-with-ollama/"><meta property="og:image" content="https://article.digambarghosalkar.com/assets/articles/covers/ollama-five-personalities.png"><meta property="og:image:secure_url" content="https://article.digambarghosalkar.com/assets/articles/covers/ollama-five-personalities.png"><meta property="og:image:type" content="image/png"><meta property="og:image:width" content="1536"><meta property="og:image:height" content="1024"><meta property="og:image:alt" content="One local AI model, five personalities: a comedian, toddler, ninja, scientist, and doctor around a laptop."><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Start Coding with a Local LLM: Python, uv, and Ollama"><meta name="twitter:description" content="A beginner-friendly walkthrough of uv, Python environments, requirements, and connecting your first agent to Ollama."><meta name="twitter:image" content="https://article.digambarghosalkar.com/assets/articles/covers/ollama-five-personalities.png"><link rel="icon" href="../assets/icon.svg"><link rel="stylesheet" href="../styles/colors.css"><link rel="stylesheet" href="../styles/fonts.css"><link rel="stylesheet" href="../styles/typography.css"><link rel="stylesheet" href="../styles/globals.css"><script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Start Coding with a Local LLM: Python, uv, and Ollama", "description": "A beginner-friendly walkthrough of uv, Python environments, requirements, and connecting your first agent to Ollama.", "image": "https://article.digambarghosalkar.com/assets/articles/covers/ollama-five-personalities.png", "author": {"@type": "Person", "name": "Digambar Ghosalkar"}, "datePublished": "2026-09-15", "dateModified": "2026-09-15", "mainEntityOfPage": "https://article.digambarghosalkar.com/start-coding-with-ollama/"}</script><style>
+body{background:#f7f5ef;color:var(--color-dark);min-height:100vh}.article-page{box-sizing:border-box;min-height:100vh;padding:calc(40 * 100vw / var(--page-width))}.article-nav{align-items:center;display:flex;justify-content:space-between;margin-bottom:calc(90 * 100vw / var(--page-width))}.article-nav a,.article-back{color:inherit;text-decoration:none}.article-hero,.article-content,.article-section,.article-aside,.article-aside dl{display:grid}.article-hero{gap:calc(32 * 100vw / var(--page-width))}.article-label,.article-meta,.article-section-label,.article-aside dt{color:#6d786f;text-transform:uppercase}.article-title,.article-lede,.article-section h2,.article-section p,.article-section ul,.article-figure{margin:0}.article-title{max-width:calc(1120 * 100vw / var(--page-width))}.article-lede{max-width:calc(920 * 100vw / var(--page-width))}.article-cover,.article-figure{background:transparent;display:block;overflow:hidden;width:100%}.article-cover{aspect-ratio:1280/420;margin-top:calc(42 * 100vw / var(--page-width));max-width:calc(1040 * 100vw / var(--page-width))}.article-cover img,.article-figure img{display:block;height:100%;object-fit:contain;object-position:center;width:100%}.article-layout{display:grid;gap:calc(60 * 100vw / var(--page-width));margin-top:calc(80 * 100vw / var(--page-width))}.article-aside{border-top:1px solid rgba(8,16,18,.22);gap:calc(18 * 100vw / var(--page-width));padding-top:calc(20 * 100vw / var(--page-width))}.article-aside dl{gap:calc(14 * 100vw / var(--page-width));margin:0}.article-aside div{border-top:1px solid rgba(8,16,18,.12);display:grid;gap:calc(6 * 100vw / var(--page-width));padding-top:calc(14 * 100vw / var(--page-width))}.article-aside dd{margin:0}.article-content{gap:calc(56 * 100vw / var(--page-width))}.article-section{border-top:1px solid rgba(8,16,18,.22);gap:calc(20 * 100vw / var(--page-width));padding-top:calc(28 * 100vw / var(--page-width))}.article-section p,.article-section li{color:#3b4642}.article-section ul{display:grid;gap:calc(12 * 100vw / var(--page-width));list-style:none;padding:0}.article-section li{border-top:1px solid rgba(8,16,18,.12);padding-top:calc(12 * 100vw / var(--page-width))}.article-figure.diagram{aspect-ratio:1280/720;border:1px solid rgba(8,16,18,.12);margin-top:calc(8 * 100vw / var(--page-width))}.article-video{aspect-ratio:9/16;background:#081012;border:1px solid rgba(8,16,18,.12);display:block;max-width:420px;width:100%}.article-video iframe{border:0;display:block;height:100%;width:100%}.article-callout{background:#e9e4d9;display:grid;gap:calc(12 * 100vw / var(--page-width));padding:calc(24 * 100vw / var(--page-width))}.article-footer{border-top:1px solid rgba(8,16,18,.22);margin-top:calc(70 * 100vw / var(--page-width));padding-top:calc(26 * 100vw / var(--page-width))}@media only screen and (min-width:768px){.article-page{padding:calc(64 * 100vw / var(--page-width)) calc(136 * 100vw / var(--page-width))}.article-nav{margin-bottom:calc(136 * 100vw / var(--page-width))}.article-layout{grid-template-columns:minmax(220px,.34fr) minmax(0,.86fr)}.article-aside{align-self:start;position:sticky;top:calc(42 * 100vw / var(--page-width))}}@media only screen and (max-width:767px){.article-page{padding:38px 22px}.article-nav{margin-bottom:92px}.article-cover{max-width:none}}
+
+.article-title{line-height:1.02}.article-content{min-width:0}.article-content a{text-decoration:underline;color:inherit;text-underline-offset:3px}.article-content>p{margin:0}.article-content code{font-family:ui-monospace,monospace;font-size:.88em;overflow-wrap:anywhere}pre{max-width:100%;min-width:0;box-sizing:border-box;overflow-x:auto;background:#182621;color:#f7f5ef;padding:22px;border-radius:8px;margin:0;font-size:14px;line-height:1.65}pre code{font-size:inherit!important;white-space:pre;overflow-wrap:normal!important}.table-wrap{overflow-x:auto}table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:14px;border-bottom:1px solid #c8cec8;line-height:1.5}pre:focus-visible,a:focus-visible{outline:3px solid #b88437;outline-offset:4px}.ollama-illustration{margin:20px 0 0;max-width:1100px;width:100%}.ollama-illustration img{display:block;width:100%;height:auto;border-radius:12px}.ollama-illustration figcaption{color:#6d786f;margin-top:16px;line-height:1.5}</style><meta property="og:site_name" content="Digambar Ghosalkar"></head><body><main class="article-page"><nav class="article-nav" aria-label="Article navigation"><a class="t6 font-romie" href="../index.html">articles</a><a class="t6 font-romie" href="https://digambarghosalkar.com/">home</a></nav><article><header class="article-hero"><p class="label article-label">AI engineering · Start here</p><h1 class="h1 article-title">Your first lines of code with a local LLM.</h1><p class="t1 article-lede">Set up a small Python project, connect it to Ollama, and see your own code get an answer.</p><p class="t2 article-meta">September 15, 2026 · Python · uv · Ollama</p><figure class="ollama-illustration"><img src="../assets/articles/covers/ollama-five-personalities.png" width="1536" height="1024" fetchpriority="high" decoding="async" alt="A laptop surrounded by a comedian, toddler, ninja, scientist, and doctor, illustrating one local model answering in five styles."><figcaption class="t2">One model, five personalities. Change the instructions and compare the replies.</figcaption></figure></header><div class="article-layout"><aside class="article-aside"><p class="label article-section-label">Your small workshop</p><dl class="t2"><div><dt>uv</dt><dd>Organises the project and its Python tools.</dd></div><div><dt>Ollama</dt><dd>Runs the language model on your computer.</dd></div><div><dt>Your code</dt><dd>Chooses the model, gives instructions, and asks a question.</dd></div></dl></aside><div class="article-content"><p class="t2">Your first LLM project can be simple: write a question in Python, send it to a model on your computer, and print the answer.</p>
+<p class="t2">Think of this setup as a small workshop. <strong>uv</strong> organises your Python tools. <strong>Ollama</strong> runs the LLM. Your <strong>Python code</strong> tells it what to do.</p>
+<p class="t2">This walkthrough follows my <code>qwen-agent</code> experiment. I used <code>qwen3:14b</code>, but I suggest starting with the smaller <code>qwen3:1.7b</code> for these exercises.</p>
+<section class="article-section"><p class="t1"><strong>1. Get the tools ready</strong></p>
+<p class="t2">Install <a href="https://docs.astral.sh/uv/getting-started/installation/">uv</a> and <a href="https://ollama.com/download">Ollama</a>. Then open your terminal and check:</p>
+<pre tabindex="0" aria-label="bash code"><code>uv --version
+ollama --version</code></pre>
+<p class="t2">Start Ollama, then download the model:</p>
+<pre tabindex="0" aria-label="bash code"><code>ollama pull qwen3:1.7b</code></pre>
+<p class="t2">You only need to download it once. Start small so you can spend more time experimenting. Download time and response speed depend on your computer. If Ollama is not running, use <code>ollama serve</code> in another terminal and leave it open.</p>
+</section>
+<section class="article-section"><p class="t1"><strong>2. Create your project</strong></p>
+<p class="t2">For a new project, run:</p>
+<pre tabindex="0" aria-label="bash code"><code>uv init qwen-agent --python 3.12
+cd qwen-agent</code></pre>
+<p class="t2"><code>uv init</code> creates the project’s starting files. <code>cd</code> moves you into its folder.</p>
+<p class="t2">Already have the project? Open its folder instead of creating it again.</p>
+</section>
+<section class="article-section"><p class="t1"><strong>3. Give the project its own environment</strong></p>
+<pre tabindex="0" aria-label="bash code"><code>uv venv</code></pre>
+<p class="t2">This creates <code>.venv</code>, a separate toolbox for this project. Packages installed here stay separate from those used by your other projects.</p>
+<p class="t2">We will use <code>uv run</code> to run Python, so you do not need to activate the environment manually. <a href="https://docs.astral.sh/uv/guides/projects/">How uv manages projects</a>.</p>
+</section>
+<section class="article-section"><p class="t1"><strong>4. Add the requirements</strong></p>
+<p class="t2">Requirements are ready-made Python packages your code needs:</p>
+<pre tabindex="0" aria-label="bash code"><code>uv add openai-agents rich</code></pre>
+<div class="table-wrap"><table class="t2"><thead><tr><th scope="col">Package</th><th scope="col">Why we use it</th></tr></thead><tbody><tr><td><code>openai-agents</code></td><td>Provides <code>Agent</code> and <code>Runner</code> to define and run our assistant.</td></tr><tr><td><code>rich</code></td><td>Makes the answer easier to read with Markdown formatting. It is optional for the LLM itself.</td></tr></tbody></table></div>
+<p class="t2">uv records these requirements in <code>pyproject.toml</code> and their resolved versions in <code>uv.lock</code>.</p>
+<p class="t2">If you downloaded an existing copy of this project, use <code>uv sync</code> to install its recorded requirements. You do not need a separate <code>requirements.txt</code> for this workflow.</p>
+</section>
+<section class="article-section"><p class="t1"><strong>5. Tell Python where Ollama lives</strong></p>
+<p class="t2">Create or open <code>main.py</code>. Replace its starter contents with the following imports and setup. Add the next code blocks below it as you read:</p>
+<pre tabindex="0" aria-label="python code"><code>from agents import (
+    Agent, Runner, AsyncOpenAI,
+    OpenAIChatCompletionsModel, set_tracing_disabled,
+)
+from rich.console import Console
+from rich.markdown import Markdown
+
+console = Console()
+set_tracing_disabled(True)
+
+ollama_client = AsyncOpenAI(
+    base_url=&quot;http://localhost:11434/v1&quot;,
+    api_key=&quot;ollama&quot;,
+)</code></pre>
+<p class="t2">Think of <code>ollama_client</code> as the delivery service for your questions. <code>base_url</code> is its destination. <code>localhost</code> means your own computer.</p>
+<p class="t2">Although the class is called <code>AsyncOpenAI</code>, this address sends requests to Ollama. The <code>&quot;ollama&quot;</code> key is a placeholder; local Ollama does not require a real OpenAI API key. <a href="https://docs.ollama.com/api/openai-compatibility">Ollama’s compatibility guide</a>.</p>
+<p class="t2">The project also uses <code>set_tracing_disabled(True)</code> to turn off the SDK’s tracing for this local example.</p>
+</section>
+<section class="article-section"><p class="t1"><strong>6. Choose the model</strong></p>
+<pre tabindex="0" aria-label="python code"><code>model = OpenAIChatCompletionsModel(
+    model=&quot;qwen3:1.7b&quot;,
+    openai_client=ollama_client,
+)</code></pre>
+<p class="t2">The connection says <strong>where to send the question</strong>. This block says <strong>which LLM should answer</strong>.</p>
+<p class="t2">To switch models, change <code>&quot;qwen3:1.7b&quot;</code> to another model you have downloaded. Run <code>ollama list</code> to see the exact names.</p>
+<p class="t2">Keep <code>openai_client=ollama_client</code> so the model uses your Ollama connection.</p><div class="table-wrap"><table class="t2"><thead><tr><th scope="col">Model</th><th scope="col">When to try it</th></tr></thead><tbody><tr><td><a href="https://ollama.com/library/qwen3:1.7b">qwen3:1.7b</a></td><td>My suggested starting point. About 1.4 GB to download.</td></tr><tr><td><a href="https://ollama.com/library/qwen3:0.6b">qwen3:0.6b</a></td><td>A smaller option for simple experiments. About 523 MB to download.</td></tr><tr><td><a href="https://ollama.com/library/qwen3:4b">qwen3:4b</a></td><td>Try next if you want to compare a larger model with your first results.</td></tr></tbody></table></div><p class="t2">Download size is not the same as memory needed while running. Small models can miss instructions or give weak answers; keep the first tasks short. To switch, download the new model with <code>ollama pull MODEL_NAME</code>, then put that exact name in <code>model=</code>.</p>
+</section>
+<section class="article-section"><p class="t1"><strong>7. Give the agent a role</strong></p>
+<pre tabindex="0" aria-label="python code"><code>agent = Agent(
+    name=&quot;Local Agent&quot;,
+    instructions=&quot;You are a helpful AI assistant.&quot;,
+    model=model,
+)</code></pre>
+<p class="t2"><code>name</code> is a label. <code>instructions</code> describe how the assistant should respond. <code>model=model</code> connects it to the model chosen above.</p>
+<p class="t2">Start by changing only the instructions:</p>
+<pre tabindex="0" aria-label="python code"><code>instructions=&quot;Explain things to a beginner. Use short sentences and one example.&quot;</code></pre>
+<p class="t2">In my <code>main1.py</code>, several agents share the same model but have different instructions. That lets me compare how the same LLM answers as a comedian or a scientist.</p>
+</section>
+<section class="article-section"><p class="t1"><strong>8. Ask a question and run it</strong></p>
+<p class="t2">Add this final block to send a question and display the answer:</p>
+<pre tabindex="0" aria-label="python code"><code>result = Runner.run_sync(
+    agent,
+    &quot;Explain what an AI agent is in simple terms.&quot;
+)
+
+console.print(Markdown(result.final_output))</code></pre>
+<p class="t2"><code>Runner</code> runs the agent. <code>final_output</code> contains its answer. Keep all four main code blocks in the same file, in the order shown. The instructions-only snippet is an optional edit inside <code>Agent(...)</code>.</p>
+<p class="t2">Run the file from your project folder:</p>
+<pre tabindex="0" aria-label="bash code"><code>uv run python main.py</code></pre>
+<p class="t2">For your first experiment, keep the question the same and change the instructions. Run it again and compare the answers. Then change the question. You are now practising the core skill: changing code, running it, and observing what the LLM does.</p>
+</section><section class="article-section"><p class="t1"><strong>9. My hands-on experiment: one question, five characters</strong></p><p class="t2">In <code>main1.py</code>, I asked the same question about ChatGPT to a Joker, a toddler, a Ninja, a Scientist, and a Doctor. All five used the same model. I changed the instructions for each character.</p><p class="t2">Think of one actor reading the same line in five costumes. The model stays the same; the role changes how it is asked to respond. These are separate replies, with no conversation between the characters.</p><p class="t2">To try it, copy your working <code>main.py</code> to <code>main1.py</code>. Keep the imports, console, tracing setting, <code>ollama_client</code>, and <code>model</code> setup. Replace everything from <code>agent = Agent(...)</code> onward with this simplified version of my experiment:</p><pre tabindex="0" aria-label="python experiment code"><code>from rich.panel import Panel
+
+Joker = Agent(
+    name=&quot;Joker&quot;,
+    instructions=&quot;Explain like a friendly stand-up comedian. Use three short sentences.&quot;,
+    model=model,
+)
+Toddler = Agent(
+    name=&quot;Toddler&quot;,
+    instructions=&quot;Explain with very simple words and a playful example. Use three short sentences.&quot;,
+    model=model,
+)
+Ninja = Agent(
+    name=&quot;Ninja&quot;,
+    instructions=&quot;Explain like a ninja teaching a new recruit. Use three short sentences.&quot;,
+    model=model,
+)
+Scientist = Agent(
+    name=&quot;Scientist&quot;,
+    instructions=&quot;Explain like a scientist teaching a beginner. Use three short sentences.&quot;,
+    model=model,
+)
+Doctor = Agent(
+    name=&quot;Doctor&quot;,
+    instructions=&quot;Explain the technology using a clinic analogy. Use three short sentences.&quot;,
+    model=model,
+)
+
+question = &quot;Tell me something about ChatGPT&quot;
+
+for character in [Joker, Toddler, Ninja, Scientist, Doctor]:
+    result = Runner.run_sync(character, question)
+    console.print(
+        Panel(Markdown(result.final_output), title=character.name)
+    )</code></pre><p class="t2">The <code>for</code> loop asks each character in turn. <code>Panel</code> puts a labelled box around each answer. This makes five model requests, so start with two characters if you want a shorter run.</p><pre tabindex="0" aria-label="bash code"><code>uv run python main1.py</code></pre><p class="t2">Compare the replies: did each follow its role, stay within three sentences, and still explain the topic correctly? A confident character voice does not make an answer more accurate.</p></section><section class="article-section"><p class="t1"><strong>10. Make the experiment your own</strong></p><p class="t2">Keep the same loop and give each character a new job. Try one of these:</p><ul class="t2"><li><strong>A story studio:</strong> ask for a story about a lost robot. Give one agent a funny style, one a mystery style, and one a bedtime-story style.</li><li><strong>A Python classroom:</strong> ask “What is a Python list?” Have one agent use a shopping-basket analogy, one give a tiny code example, and one ask you a quiz question.</li><li><strong>An idea workshop:</strong> describe an imaginary café. Ask a name-maker for three names, a customer for what sounds appealing, and a critic for one improvement.</li><li><strong>A language practice partner:</strong> ask for a short greeting in English, Hindi, or Marathi. Compare the result with language you know and correct any mistakes.</li></ul><p class="t2">For a small coding challenge, replace the fixed question with <code>question = input("Ask your characters: ")</code>. Run the file again and type a new question without editing the code.</p><p class="t2">Then try the exact same question and instructions with a different model. Note how long it takes, whether it follows your instructions, and which answer helps you most. Change one thing at a time so you can see what made the difference.</p></section></div></div></article><footer class="article-footer"><a class="t2 article-back" href="../index.html">Back to articles</a></footer></main></body></html>
